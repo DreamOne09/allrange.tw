@@ -47,7 +47,7 @@ const Footer = () => {
             </div>
 
             <div className="container mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-xs text-gray-600">
-                &copy; {new Date().getFullYear()} AllRange Design. All rights reserved.
+                &copy; {new Date().getFullYear()} AllRange Design. 版權所有.
             </div>
         </footer>
     );

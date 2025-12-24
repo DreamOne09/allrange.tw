@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 import { Camera, PenTool, Layout, MonitorPlay } from 'lucide-react';
 
 const services = [
-    { icon: Layout, label: 'Exhibition', desc: '展場規劃設計' },
-    { icon: Camera, label: 'Space', desc: '空間規劃' },
-    { icon: PenTool, label: 'Graphic', desc: '平面視覺設計' },
-    { icon: MonitorPlay, label: 'Multimedia', desc: '多媒體影音' },
+    { icon: Layout, label: '展場規劃', desc: 'Exhibition Design' },
+    { icon: Camera, label: '空間設計', desc: 'Space Planning' },
+    { icon: PenTool, label: '平面視覺', desc: 'Graphic Design' },
+    { icon: MonitorPlay, label: '多媒體', desc: 'Multimedia' },
 ];
 
 const About = () => {
@@ -23,7 +23,7 @@ const About = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-sm font-bold text-brand-orange uppercase tracking-widest mb-2">Who We Are</h2>
+                    <h2 className="text-sm font-bold text-brand-orange uppercase tracking-widest mb-2">關於我們</h2>
                     <h3 className="text-3xl md:text-5xl font-bold text-white">
                         樂橙設計 = 阿德 (Claire)
                     </h3>
@@ -43,7 +43,7 @@ const About = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10" />
                             <div className="absolute bottom-0 left-0 p-8 z-20">
                                 <p className="text-brand-orange font-bold text-lg">Liu Yide / Claire</p>
-                                <p className="text-white/60 text-sm">Founder & Creative Director</p>
+                                <p className="text-white/60 text-sm">創辦人 暨 創意總監</p>
                             </div>
                             {/* Placeholder text for image */}
                             <div className="w-full h-full flex items-center justify-center bg-[#1a1a1a]">

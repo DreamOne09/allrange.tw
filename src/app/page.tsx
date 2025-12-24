@@ -8,17 +8,17 @@ import Contact from "@/components/sections/Contact";
 export default function Home() {
   return (
     <div className="flex flex-col gap-0">
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">Variation 1: Classic Exhibition</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案一：經典策展 (Infinite Scroll)</div>
       <HeroV1 />
 
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">Variation 2: Modern Bento</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案二：摩登方塊 (Spotlight Reveal)</div>
       <HeroV2 />
 
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">Variation 3: Dynamic Vision</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案三：動態視覺 (3D Carousel)</div>
       <HeroV3 />
 
       <div className="h-20 bg-black border-t border-brand-gray flex items-center justify-center">
-        <p className="text-gray-600 text-[10px] uppercase tracking-widest">End of Hero Variations — Start of Content</p>
+        <p className="text-gray-600 text-[10px] uppercase tracking-widest">Hero 方案展示結束 — 網站內容開始</p>
       </div>
 
       <About />

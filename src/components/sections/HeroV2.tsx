@@ -1,98 +1,106 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import TiltedCard from '../ui/TiltedCard';
+import { useState } from 'react';
+import { ArrowUpRight } from 'lucide-react';
+
+const projects = [
+    {
+        id: 1,
+        title: "台北 101 觀景台博覽會",
+        category: "展場設計",
+        year: "2024",
+        color: "from-brand-orange to-red-900"
+    },
+    {
+        id: 2,
+        title: "Lexus 品牌概念店",
+        category: "空間規劃",
+        year: "2023",
+        color: "from-blue-900 to-black"
+    },
+    {
+        id: 3,
+        title: "故宮博物院 - 數位典藏",
+        category: "多媒體互動",
+        year: "2023",
+        color: "from-emerald-900 to-black"
+    },
+    {
+        id: 4,
+        title: "Nike 旗艦店 - 沉浸式體驗",
+        category: "零售設計",
+        year: "2022",
+        color: "from-purple-900 to-black"
+    }
+];
 
 const HeroV2 = () => {
+    const [activeProject, setActiveProject] = useState(projects[0]);
+
     return (
-        <section className="relative min-h-screen bg-brand-black overflow-hidden flex items-center py-20 border-b border-brand-gray">
-            <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-6 relative z-10">
-                {/* Left Side: Text and CTA */}
-                <div className="lg:col-span-12 xl:col-span-5 flex flex-col justify-center mb-12 xl:mb-0">
+        <section className="relative h-screen bg-brand-black flex items-center overflow-hidden border-b border-white/10">
+            {/* Dynamic Background */}
+            <div className="absolute inset-0 transition-colors duration-700 ease-in-out bg-black">
+                {projects.map((project) => (
+                    <div
+                        key={project.id}
+                        className={`absolute inset-0 bg-gradient-to-br ${project.color} transition-opacity duration-700 ease-in-out ${activeProject.id === project.id ? 'opacity-40' : 'opacity-0'
+                            }`}
+                    />
+                ))}
+                <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
+            </div>
+
+            <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+
+                {/* Left: Dynamic Content */}
+                <div className="hidden lg:block space-y-8">
                     <motion.div
-                        initial={{ opacity: 0, x: -50 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
+                        key={activeProject.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.5 }}
                     >
-                        <h1 className="text-6xl md:text-8xl font-black text-white mb-6 uppercase leading-none italic">
-                            All<br />
-                            <span className="text-brand-orange">Range</span>
-                        </h1>
-                        <p className="text-2xl text-gray-400 mb-8 font-light max-w-md">
-                            Exploring the intersection of exhibition design and spatial identity.
+                        <p className="text-brand-orange text-sm font-bold tracking-[0.3em] uppercase mb-4">
+                            精選作品 / {activeProject.year}
                         </p>
-                        <div className="flex gap-4">
-                            <button className="px-8 py-3 bg-brand-orange text-black font-bold uppercase tracking-tighter hover:bg-white transition-colors">
-                                Get in touch
-                            </button>
-                            <button className="px-8 py-3 border border-gray-700 text-white font-bold uppercase tracking-tighter hover:bg-white hover:text-black transition-colors">
-                                Our Work
-                            </button>
-                        </div>
+                        <h2 className="text-5xl font-black text-white mb-6 leading-tight">
+                            {activeProject.title}
+                        </h2>
+                        <a href="#portfolio" className="inline-flex items-center gap-2 text-white/60 hover:text-white transition-colors group">
+                            <span className="uppercase tracking-widest text-sm">查看案例</span>
+                            <ArrowUpRight size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                        </a>
                     </motion.div>
                 </div>
 
-                {/* Right Side: Bento Grid */}
-                <div className="lg:col-span-12 xl:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {/* Item 1 - Large */}
-                    <motion.div
-                        className="md:col-span-2 md:row-span-2"
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                    >
-                        <TiltedCard
-                            category="Featured"
-                            title="Exhibition Design"
-                            className="h-full min-h-[400px]"
-                        />
-                    </motion.div>
-
-                    {/* Item 2 - Orange Color Block */}
-                    <motion.div
-                        className="bg-brand-orange p-8 flex flex-col justify-end min-h-[200px]"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.2 }}
-                    >
-                        <h4 className="text-black font-black text-4xl leading-tight">10+ YEARS EXPERIENCE</h4>
-                    </motion.div>
-
-                    {/* Item 3 - Small */}
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                    >
-                        <TiltedCard
-                            category="Space"
-                            title="Retail"
-                            className="h-full min-h-[200px]"
-                        />
-                    </motion.div>
-
-                    {/* Item 4 - Wide Bottom */}
-                    <motion.div
-                        className="md:col-span-3 flex bg-brand-gray border border-gray-800 p-6 items-center justify-between"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: 0.4 }}
-                    >
-                        <div className="flex -space-x-2">
-                            {[1, 2, 3, 4].map(i => (
-                                <div key={i} className="w-10 h-10 rounded-full border-2 border-brand-black bg-gray-600 flex items-center justify-center text-[10px] text-white">
-                                    P{i}
-                                </div>
-                            ))}
-                        </div>
-                        <p className="text-sm text-gray-500 uppercase tracking-widest hidden md:block">
-                            Trusted by industry leaders
-                        </p>
-                        <div className="text-brand-orange font-mono text-xl">
-                            01 / 03
-                        </div>
-                    </motion.div>
+                {/* Right: Interactive List */}
+                <div className="flex flex-col">
+                    <p className="text-white/40 mb-8 uppercase tracking-widest text-xs font-bold pl-4 border-l border-white/20">
+                        特色專案
+                    </p>
+                    {projects.map((project) => (
+                        <motion.div
+                            key={project.id}
+                            className="relative border-t border-white/20 py-8 pl-4 cursor-pointer group transition-all duration-300 hover:pl-8 hover:bg-white/5"
+                            onHoverStart={() => setActiveProject(project)}
+                            initial={{ opacity: 0, x: 20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                        >
+                            <div className="flex justify-between items-baseline min-w-0">
+                                <h3 className={`text-2xl md:text-4xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2' : 'text-white/40'
+                                    }`}>
+                                    {project.title}
+                                </h3>
+                                <span className="text-sm text-brand-orange font-mono opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
+                                    {project.category}
+                                </span>
+                            </div>
+                        </motion.div>
+                    ))}
+                    <div className="border-t border-white/20" />
                 </div>
             </div>
         </section>

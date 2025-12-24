@@ -4,19 +4,19 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const categories = [
-    { id: 'all', label: 'All Work' },
-    { id: 'exhibition', label: 'Exhibition' },
-    { id: 'space', label: 'Space' },
-    { id: 'graphic', label: 'Graphic' },
+    { id: 'all', label: '全部作品' },
+    { id: 'exhibition', label: '展場設計' },
+    { id: 'space', label: '空間規劃' },
+    { id: 'graphic', label: '平面視覺' },
 ];
 
 const projects = [
-    { id: 1, title: 'Taipei 101 Exhibition', category: 'exhibition', image: '' },
-    { id: 2, title: 'Aspire Resort Playroom', category: 'space', image: '' },
-    { id: 3, title: 'Chin-Mei Cast Iron', category: 'space', image: '' },
-    { id: 4, title: 'Yulon Motor Yumiao', category: 'exhibition', image: '' },
-    { id: 5, title: 'Brand Identity', category: 'graphic', image: '' },
-    { id: 6, title: 'Xiao Rusong Art', category: 'exhibition', image: '' },
+    { id: 1, title: '台北 101 觀景台博覽會', category: 'exhibition', image: '' },
+    { id: 2, title: '渴望會館 - 遊戲室', category: 'space', image: '' },
+    { id: 3, title: '勤美鑄鐵', category: 'space', image: '' },
+    { id: 4, title: '裕隆汽車 - 育苗', category: 'exhibition', image: '' },
+    { id: 5, title: '品牌視覺識別', category: 'graphic', image: '' },
+    { id: 6, title: '蕭如松藝術節', category: 'exhibition', image: '' },
 ];
 
 const PortfolioGrid = () => {
@@ -33,7 +33,7 @@ const PortfolioGrid = () => {
                 {/* Header & Filter */}
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16">
                     <div>
-                        <h2 className="text-sm font-bold text-brand-orange uppercase tracking-widest mb-2">Portfolio</h2>
+                        <h2 className="text-sm font-bold text-brand-orange uppercase tracking-widest mb-2">精選作品</h2>
                         <h3 className="text-3xl md:text-5xl font-bold text-white">Selected Works</h3>
                     </div>
 
@@ -43,8 +43,8 @@ const PortfolioGrid = () => {
                                 key={cat.id}
                                 onClick={() => setActiveCategory(cat.id)}
                                 className={`px-6 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${activeCategory === cat.id
-                                        ? 'bg-brand-orange text-black'
-                                        : 'bg-white/5 text-gray-400 hover:bg-white/10'
+                                    ? 'bg-brand-orange text-black'
+                                    : 'bg-white/5 text-gray-400 hover:bg-white/10'
                                     }`}
                             >
                                 {cat.label}
