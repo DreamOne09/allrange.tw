@@ -3,8 +3,9 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
+import Image from 'next/image';
 
-import { realProjects } from '@/data/real_projects';
+import { heroSubset } from '@/data/real_projects';
 
 const projects = [
     {
@@ -13,7 +14,7 @@ const projects = [
         category: "展場設計",
         year: "2024",
         color: "from-brand-orange to-red-900",
-        image: realProjects[0].image
+        image: heroSubset[0].image // 0012
     },
     {
         id: 2,
@@ -21,7 +22,7 @@ const projects = [
         category: "空間規劃",
         year: "2023",
         color: "from-blue-900 to-black",
-        image: realProjects[5].image
+        image: heroSubset[3].image // 0015
     },
     {
         id: 3,
@@ -29,7 +30,7 @@ const projects = [
         category: "多媒體互動",
         year: "2023",
         color: "from-emerald-900 to-black",
-        image: realProjects[10].image
+        image: heroSubset[5].image // 0017
     },
     {
         id: 4,
@@ -37,7 +38,7 @@ const projects = [
         category: "零售設計",
         year: "2022",
         color: "from-purple-900 to-black",
-        image: realProjects[15].image
+        image: heroSubset[8].image // 0020
     }
 ];
 
@@ -55,7 +56,13 @@ const HeroV2 = () => {
                             }`}
                     >
                         <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-90 mix-blend-multiply`} />
-                        <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
+                        <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover opacity-40 mix-blend-overlay"
+                            priority={project.id === 1}
+                        />
                     </div>
                 ))}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />

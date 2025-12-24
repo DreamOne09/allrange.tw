@@ -130,3 +130,6 @@ export const heroImages = [
     realProjects[1].image,
     realProjects[6].image,
 ];
+
+// Subset of "RealPic" images (0012-0020) selected by user for Hero sections
+export const heroSubset = realProjects.slice(12, 21);

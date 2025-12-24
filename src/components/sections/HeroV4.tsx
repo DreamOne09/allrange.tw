@@ -3,10 +3,11 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-import { heroImages } from '@/data/real_projects';
+import { heroSubset } from '@/data/real_projects';
+import Image from 'next/image';
 
-// Use the RealPic images
-const images = heroImages;
+// Use the RealPic images (subset 0012-0020)
+const images = heroSubset.map(p => p.image);
 
 // Generate a large set of items for the grid to feel "infinite" and abundant
 const items = Array.from({ length: 24 }).map((_, i) => ({
@@ -84,11 +85,15 @@ const HeroV4 = () => {
                             className={`${item.span} ${item.height} relative rounded-xl overflow-hidden group shadow-lg border border-white/5 bg-zinc-900`}
                         >
                             {/* Image */}
-                            <img
-                                src={item.image}
-                                alt="Portfolio Item"
-                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                            />
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src={item.image}
+                                    alt="Portfolio Item"
+                                    fill
+                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    sizes="(max-width: 768px) 50vw, 20vw"
+                                />
+                            </div>
 
                             {/* Overlay Gradient */}
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />

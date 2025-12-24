@@ -3,14 +3,15 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
-import { realProjects } from '@/data/real_projects';
+import { heroSubset } from '@/data/real_projects';
+import Image from 'next/image';
 
 const cards = [
-    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800', image: realProjects[5].image },
-    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900', image: realProjects[10].image },
-    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800', image: realProjects[11].image },
-    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950', image: realProjects[6].image },
-    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900', image: realProjects[0].image },
+    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800', image: heroSubset[1].image }, // 0013
+    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900', image: heroSubset[4].image }, // 0016
+    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800', image: heroSubset[6].image }, // 0018
+    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950', image: heroSubset[7].image }, // 0019
+    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900', image: heroSubset[2].image }, // 0014
 ];
 
 const Card3D = ({ index, x, onHover }: { index: number, x: any, onHover: () => void }) => {
@@ -83,8 +84,14 @@ const HeroV3 = () => {
                             }}
                             onClick={() => setActiveIndex(index)}
                         >
-                            <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover opacity-60 rounded-2xl" />
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-2xl" />
+                            <Image
+                                src={card.image}
+                                alt={card.title}
+                                fill
+                                className="object-cover opacity-60 rounded-2xl"
+                                sizes="(max-width: 768px) 80vw, 400px"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-2xl z-10" />
                             <div className="relative z-10">
                                 <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-1">{card.subtitle}</p>
                                 <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
@@ -108,7 +115,7 @@ const HeroV3 = () => {
                     →
                 </button>
             </div>
-        </section>
+        </section >
     );
 };
 

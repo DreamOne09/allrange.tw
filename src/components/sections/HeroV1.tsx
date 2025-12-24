@@ -3,25 +3,36 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-import { realProjects } from '@/data/real_projects';
+import { heroSubset } from '@/data/real_projects';
 
-// Distribute real projects into columns
-const items1 = [realProjects[0], realProjects[1], realProjects[2], realProjects[3]].map(p => ({
+// Distribute real projects (subset 0012-0020) into columns
+// We have 9 items (indices 0-8 in subset), perfect for 3 columns x 3 items
+const items1 = [heroSubset[0], heroSubset[1], heroSubset[2]].map(p => ({
     ...p, height: 'h-64'
 }));
 
-const items2 = [realProjects[4], realProjects[5], realProjects[6], realProjects[7]].map(p => ({
+const items2 = [heroSubset[3], heroSubset[4], heroSubset[5]].map(p => ({
     ...p, height: 'h-80'
 }));
 
-const items3 = [realProjects[8], realProjects[9], realProjects[10], realProjects[11]].map(p => ({
+const items3 = [heroSubset[6], heroSubset[7], heroSubset[8]].map(p => ({
     ...p, height: 'h-72'
 }));
+
+import Image from 'next/image';
+
+// ... (imports)
 
 const Card = ({ item }: { item: any }) => (
     <div className={`relative w-full ${item.height} bg-zinc-800/50 rounded-lg overflow-hidden border border-white/5 mx-auto group`}>
         {item.image && (
-            <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+            <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                className="object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500"
+                sizes="(max-width: 768px) 100vw, 33vw"
+            />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
         <div className="absolute bottom-4 left-4">
