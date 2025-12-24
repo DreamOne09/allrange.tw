@@ -85,9 +85,9 @@ const HeroV1 = () => {
 
             {/* Background Moving Columns */}
             <div className="absolute inset-0 flex gap-6 px-4 md:px-0 opacity-60 scale-105 rotate-3 md:pt-40">
-                <Column items={col1} duration={25} />
-                <Column items={col2} duration={35} reversed />
-                <Column items={col3} duration={28} />
+                <Column items={items1} duration={25} />
+                <Column items={items2} duration={35} reversed />
+                <Column items={items3} duration={28} />
             </div>
 
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10 pointer-events-none" />
