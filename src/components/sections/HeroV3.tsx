@@ -94,7 +94,7 @@ const HeroV3 = () => {
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-2xl z-10" />
                             <div className="relative z-10">
                                 <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-1">{card.subtitle}</p>
-                                <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
+                                <h2 className="text-2xl font-bold text-white mb-2">{card.title}</h2>
                             </div>
 
                             {/* Decorative Number */}

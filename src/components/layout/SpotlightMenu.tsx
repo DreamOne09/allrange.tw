@@ -84,6 +84,7 @@ const SpotlightMenu = ({ isOpen, onClose }: SpotlightMenuProps) => {
                     {/* Close Button */}
                     <button
                         onClick={onClose}
+                        aria-label="Close Menu"
                         className="absolute top-8 right-8 z-50 p-2 text-white/50 hover:text-brand-orange transition-colors"
                     >
                         <X size={48} />

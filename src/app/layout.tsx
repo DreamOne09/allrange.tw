@@ -3,6 +3,8 @@ import { Inter, Noto_Sans_TC } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
+import Preloader from "@/components/layout/Preloader";
+import { ThemeProvider } from "@/context/ThemeContext";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,9 +29,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-TW" className="scroll-smooth" suppressHydrationWarning>
+    <html lang="zh-TW" className="scroll-smooth" suppressHydrationWarning style={{ backgroundColor: '#000000' }}>
       <body
         className={`${inter.variable} ${notoSansTC.variable} antialiased font-sans bg-brand-black text-white selection:bg-brand-orange selection:text-black`}
+        style={{ backgroundColor: '#000000' }}
       >
         <ThemeProvider>
           <Preloader />

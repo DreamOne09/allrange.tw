@@ -34,6 +34,7 @@ const Navbar = () => {
                     {/* Menu Trigger */}
                     <button
                         onClick={() => setIsOpen(true)}
+                        aria-label="Open Menu"
                         className="flex items-center gap-3 text-white hover:text-brand-orange transition-colors group"
                     >
                         <span className="hidden md:block text-xs font-bold uppercase tracking-[0.3em] opacity-80 group-hover:opacity-100">

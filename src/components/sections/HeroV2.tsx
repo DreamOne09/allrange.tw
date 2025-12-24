@@ -93,9 +93,9 @@ const HeroV2 = () => {
 
                 {/* Right: Interactive List */}
                 <div className="flex flex-col">
-                    <p className="text-white/40 mb-8 uppercase tracking-widest text-xs font-bold pl-4 border-l border-white/20">
+                    <h3 className="text-white/40 mb-8 uppercase tracking-widest text-xs font-bold pl-4 border-l border-white/20">
                         特色專案
-                    </p>
+                    </h3>
                     {projects.map((project) => (
                         <motion.div
                             key={project.id}
@@ -106,10 +106,10 @@ const HeroV2 = () => {
                             viewport={{ once: true }}
                         >
                             <div className="flex justify-between items-baseline min-w-0">
-                                <h3 className={`text-2xl md:text-4xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2' : 'text-white/40'
+                                <h4 className={`text-2xl md:text-4xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2' : 'text-white/40'
                                     }`}>
                                     {project.title}
-                                </h3>
+                                </h4>
                                 <span className="text-sm text-brand-orange font-mono opacity-0 group-hover:opacity-100 transition-opacity hidden md:block">
                                     {project.category}
                                 </span>
