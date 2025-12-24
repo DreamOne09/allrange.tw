@@ -3,24 +3,20 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-// Placeholder data for the infinite scroll
-const items1 = [
-    { id: 1, title: 'Exhibition A', category: 'Showcase', height: 'h-64', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
-    { id: 2, title: 'Retail Space', category: 'Interior', height: 'h-80', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
-    { id: 3, title: 'Event Stage', category: 'Stage', height: 'h-56', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
-];
+import { realProjects } from '@/data/real_projects';
 
-const items2 = [
-    { id: 4, title: 'Museum', category: 'Culture', height: 'h-72', image: '/allrange.tw/images/placeholders/museum_display_1.png' },
-    { id: 5, title: 'Office', category: 'Workspace', height: 'h-60', image: '/allrange.tw/images/placeholders/office_interior_1.png' },
-    { id: 6, title: 'Branding', category: 'Identity', height: 'h-80', image: '/allrange.tw/images/placeholders/brand_identity_1.png' },
-];
+// Distribute real projects into columns
+const items1 = [realProjects[0], realProjects[1], realProjects[2], realProjects[3]].map(p => ({
+    ...p, height: 'h-64'
+}));
 
-const items3 = [
-    { id: 7, title: 'Pop-up Store', category: 'Retail', height: 'h-56', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
-    { id: 8, title: 'Gallery', category: 'Art', height: 'h-72', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
-    { id: 9, title: 'Concert', category: 'Music', height: 'h-64', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
-];
+const items2 = [realProjects[4], realProjects[5], realProjects[6], realProjects[7]].map(p => ({
+    ...p, height: 'h-80'
+}));
+
+const items3 = [realProjects[8], realProjects[9], realProjects[10], realProjects[11]].map(p => ({
+    ...p, height: 'h-72'
+}));
 
 const Card = ({ item }: { item: any }) => (
     <div className={`relative w-full ${item.height} bg-zinc-800/50 rounded-lg overflow-hidden border border-white/5 mx-auto group`}>

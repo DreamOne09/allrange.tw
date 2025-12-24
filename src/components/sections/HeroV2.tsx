@@ -4,6 +4,8 @@ import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 
+import { realProjects } from '@/data/real_projects';
+
 const projects = [
     {
         id: 1,
@@ -11,7 +13,7 @@ const projects = [
         category: "展場設計",
         year: "2024",
         color: "from-brand-orange to-red-900",
-        image: "/allrange.tw/images/placeholders/exhibition_design_1.png"
+        image: realProjects[0].image
     },
     {
         id: 2,
@@ -19,7 +21,7 @@ const projects = [
         category: "空間規劃",
         year: "2023",
         color: "from-blue-900 to-black",
-        image: "/allrange.tw/images/placeholders/retail_space_1.png"
+        image: realProjects[5].image
     },
     {
         id: 3,
@@ -27,7 +29,7 @@ const projects = [
         category: "多媒體互動",
         year: "2023",
         color: "from-emerald-900 to-black",
-        image: "/allrange.tw/images/placeholders/museum_display_1.png"
+        image: realProjects[10].image
     },
     {
         id: 4,
@@ -35,7 +37,7 @@ const projects = [
         category: "零售設計",
         year: "2022",
         color: "from-purple-900 to-black",
-        image: "/allrange.tw/images/placeholders/event_stage_1.png"
+        image: realProjects[15].image
     }
 ];
 

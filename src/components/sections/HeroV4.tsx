@@ -3,15 +3,10 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-// Use the generated placeholder images
-const images = [
-    '/allrange.tw/images/placeholders/exhibition_design_1.png',
-    '/allrange.tw/images/placeholders/retail_space_1.png',
-    '/allrange.tw/images/placeholders/event_stage_1.png',
-    '/allrange.tw/images/placeholders/museum_display_1.png',
-    '/allrange.tw/images/placeholders/office_interior_1.png',
-    '/allrange.tw/images/placeholders/brand_identity_1.png',
-];
+import { heroImages } from '@/data/real_projects';
+
+// Use the RealPic images
+const images = heroImages;
 
 // Generate a large set of items for the grid to feel "infinite" and abundant
 const items = Array.from({ length: 24 }).map((_, i) => ({

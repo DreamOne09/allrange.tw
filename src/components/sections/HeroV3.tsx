@@ -3,12 +3,14 @@
 import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
+import { realProjects } from '@/data/real_projects';
+
 const cards = [
-    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800', image: '/allrange.tw/images/placeholders/office_interior_1.png' },
-    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900', image: '/allrange.tw/images/placeholders/brand_identity_1.png' },
-    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800', image: '/allrange.tw/images/placeholders/museum_display_1.png' },
-    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
-    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
+    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800', image: realProjects[5].image },
+    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900', image: realProjects[10].image },
+    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800', image: realProjects[11].image },
+    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950', image: realProjects[6].image },
+    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900', image: realProjects[0].image },
 ];
 
 const Card3D = ({ index, x, onHover }: { index: number, x: any, onHover: () => void }) => {
