@@ -4,11 +4,11 @@ import { motion, useMotionValue, useTransform, animate } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 const cards = [
-    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800' },
-    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900' },
-    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800' },
-    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950' },
-    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900' },
+    { id: 1, title: '空間美學', subtitle: '獨特氛圍', bg: 'bg-zinc-800', image: '/allrange.tw/images/placeholders/office_interior_1.png' },
+    { id: 2, title: '品牌策展', subtitle: '核心價值', bg: 'bg-stone-900', image: '/allrange.tw/images/placeholders/brand_identity_1.png' },
+    { id: 3, title: '互動體驗', subtitle: '科技整合', bg: 'bg-neutral-800', image: '/allrange.tw/images/placeholders/museum_display_1.png' },
+    { id: 4, title: '五感設計', subtitle: '細節體驗', bg: 'bg-orange-950', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
+    { id: 5, title: '跨界整合', subtitle: '多元觀點', bg: 'bg-zinc-900', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
 ];
 
 const Card3D = ({ index, x, onHover }: { index: number, x: any, onHover: () => void }) => {
@@ -81,14 +81,11 @@ const HeroV3 = () => {
                             }}
                             onClick={() => setActiveIndex(index)}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/90 rounded-2xl" />
+                            <img src={card.image} alt={card.title} className="absolute inset-0 w-full h-full object-cover opacity-60 rounded-2xl" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent rounded-2xl" />
                             <div className="relative z-10">
-                                <h3 className={`text-4xl font-bold mb-2 transition-colors duration-300 ${isActive ? 'text-white' : 'text-gray-500'}`}>
-                                    {card.title}
-                                </h3>
-                                <p className={`text-sm font-mono tracking-widest uppercase ${isActive ? 'text-brand-orange' : 'text-gray-600'}`}>
-                                    {card.subtitle}
-                                </p>
+                                <p className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-1">{card.subtitle}</p>
+                                <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
                             </div>
 
                             {/* Decorative Number */}

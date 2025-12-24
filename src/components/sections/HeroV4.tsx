@@ -9,6 +9,8 @@ const images = [
     '/allrange.tw/images/placeholders/retail_space_1.png',
     '/allrange.tw/images/placeholders/event_stage_1.png',
     '/allrange.tw/images/placeholders/museum_display_1.png',
+    '/allrange.tw/images/placeholders/office_interior_1.png',
+    '/allrange.tw/images/placeholders/brand_identity_1.png',
 ];
 
 // Generate a large set of items for the grid to feel "infinite" and abundant

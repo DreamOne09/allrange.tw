@@ -4,33 +4,34 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
 // Placeholder data for the infinite scroll
-const col1 = [
-    { id: 1, title: '台北 101 展覽', color: 'bg-zinc-800' },
-    { id: 2, title: '品牌視覺識別', color: 'bg-neutral-800' },
-    { id: 3, title: '商業空間設計', color: 'bg-stone-800' },
-    { id: 4, title: '多媒體互動', color: 'bg-zinc-900' },
+const items1 = [
+    { id: 1, title: 'Exhibition A', category: 'Showcase', height: 'h-64', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
+    { id: 2, title: 'Retail Space', category: 'Interior', height: 'h-80', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
+    { id: 3, title: 'Event Stage', category: 'Stage', height: 'h-56', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
 ];
 
-const col2 = [
-    { id: 5, title: '科技藝術節', color: 'bg-orange-900' }, // Orange accent
-    { id: 6, title: '博物館導覽', color: 'bg-neutral-900' },
-    { id: 7, title: '企業總部', color: 'bg-stone-900' },
-    { id: 8, title: '快閃店企劃', color: 'bg-zinc-800' },
+const items2 = [
+    { id: 4, title: 'Museum', category: 'Culture', height: 'h-72', image: '/allrange.tw/images/placeholders/museum_display_1.png' },
+    { id: 5, title: 'Office', category: 'Workspace', height: 'h-60', image: '/allrange.tw/images/placeholders/office_interior_1.png' },
+    { id: 6, title: 'Branding', category: 'Identity', height: 'h-80', image: '/allrange.tw/images/placeholders/brand_identity_1.png' },
 ];
 
-const col3 = [
-    { id: 9, title: '產品發表會', color: 'bg-stone-800' },
-    { id: 10, title: '文創園區', color: 'bg-neutral-800' },
-    { id: 11, title: '燈光藝術節', color: 'bg-zinc-800' },
-    { id: 12, title: '沉浸式體驗', color: 'bg-orange-950' }, // Dark orange
+const items3 = [
+    { id: 7, title: 'Pop-up Store', category: 'Retail', height: 'h-56', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
+    { id: 8, title: 'Gallery', category: 'Art', height: 'h-72', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
+    { id: 9, title: 'Concert', category: 'Music', height: 'h-64', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
 ];
 
-const Card = ({ item }: { item: { title: string; color: string } }) => (
-    <div className={`w-full aspect-[3/4] ${item.color} rounded-lg flex items-center justify-center relative overflow-hidden group border border-white/5`}>
-        <div className="absolute inset-0 opacity-20 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-brand-orange/40 to-transparent" />
-        <h3 className="text-white font-bold text-xl relative z-10 writing-vertical-rl lg:writing-horizontal-tb tracking-widest uppercase opacity-70 group-hover:opacity-100 transition-opacity">
-            {item.title}
-        </h3>
+const Card = ({ item }: { item: any }) => (
+    <div className={`relative w-full ${item.height} bg-zinc-800/50 rounded-lg overflow-hidden border border-white/5 mx-auto group`}>
+        {item.image && (
+            <img src={item.image} alt={item.title} className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+        <div className="absolute bottom-4 left-4">
+            <p className="text-brand-orange text-xs font-bold uppercase tracking-wider mb-1">{item.category}</p>
+            <p className="text-white font-bold">{item.title}</p>
+        </div>
     </div>
 );
 

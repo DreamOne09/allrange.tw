@@ -10,28 +10,32 @@ const projects = [
         title: "台北 101 觀景台博覽會",
         category: "展場設計",
         year: "2024",
-        color: "from-brand-orange to-red-900"
+        color: "from-brand-orange to-red-900",
+        image: "/allrange.tw/images/placeholders/exhibition_design_1.png"
     },
     {
         id: 2,
         title: "Lexus 品牌概念店",
         category: "空間規劃",
         year: "2023",
-        color: "from-blue-900 to-black"
+        color: "from-blue-900 to-black",
+        image: "/allrange.tw/images/placeholders/retail_space_1.png"
     },
     {
         id: 3,
         title: "故宮博物院 - 數位典藏",
         category: "多媒體互動",
         year: "2023",
-        color: "from-emerald-900 to-black"
+        color: "from-emerald-900 to-black",
+        image: "/allrange.tw/images/placeholders/museum_display_1.png"
     },
     {
         id: 4,
         title: "Nike 旗艦店 - 沉浸式體驗",
         category: "零售設計",
         year: "2022",
-        color: "from-purple-900 to-black"
+        color: "from-purple-900 to-black",
+        image: "/allrange.tw/images/placeholders/event_stage_1.png"
     }
 ];
 
@@ -45,9 +49,12 @@ const HeroV2 = () => {
                 {projects.map((project) => (
                     <div
                         key={project.id}
-                        className={`absolute inset-0 bg-gradient-to-br ${project.color} transition-opacity duration-700 ease-in-out ${activeProject.id === project.id ? 'opacity-40' : 'opacity-0'
+                        className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject.id === project.id ? 'opacity-100' : 'opacity-0'
                             }`}
-                    />
+                    >
+                        <div className={`absolute inset-0 bg-gradient-to-br ${project.color} opacity-90 mix-blend-multiply`} />
+                        <img src={project.image} alt={project.title} className="absolute inset-0 w-full h-full object-cover opacity-40 mix-blend-overlay" />
+                    </div>
                 ))}
                 <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20" />
             </div>
