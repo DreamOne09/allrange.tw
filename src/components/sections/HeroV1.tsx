@@ -3,21 +3,29 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-import { heroSubset } from '@/data/real_projects';
+// import { heroSubset } from '@/data/real_projects';
 
 // Distribute real projects (subset 0012-0020) into columns
 // We have 9 items (indices 0-8 in subset), perfect for 3 columns x 3 items
-const items1 = [heroSubset[0], heroSubset[1], heroSubset[2]].map(p => ({
-    ...p, height: 'h-64'
-}));
+// Restore placeholder images for Hero 1 as requested
+// Using the "Vertical Velocity" style data
+const items1 = [
+    { id: 1, title: 'Exhibition A', category: 'Showcase', height: 'h-64', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
+    { id: 2, title: 'Retail Space', category: 'Interior', height: 'h-80', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
+    { id: 3, title: 'Event Stage', category: 'Stage', height: 'h-56', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
+];
 
-const items2 = [heroSubset[3], heroSubset[4], heroSubset[5]].map(p => ({
-    ...p, height: 'h-80'
-}));
+const items2 = [
+    { id: 4, title: 'Museum', category: 'Culture', height: 'h-72', image: '/allrange.tw/images/placeholders/museum_display_1.png' },
+    { id: 5, title: 'Office', category: 'Workspace', height: 'h-60', image: '/allrange.tw/images/placeholders/office_interior_1.png' },
+    { id: 6, title: 'Branding', category: 'Identity', height: 'h-80', image: '/allrange.tw/images/placeholders/brand_identity_1.png' },
+];
 
-const items3 = [heroSubset[6], heroSubset[7], heroSubset[8]].map(p => ({
-    ...p, height: 'h-72'
-}));
+const items3 = [
+    { id: 7, title: 'Pop-up Store', category: 'Retail', height: 'h-56', image: '/allrange.tw/images/placeholders/retail_space_1.png' },
+    { id: 8, title: 'Gallery', category: 'Art', height: 'h-72', image: '/allrange.tw/images/placeholders/exhibition_design_1.png' },
+    { id: 9, title: 'Concert', category: 'Music', height: 'h-64', image: '/allrange.tw/images/placeholders/event_stage_1.png' },
+];
 
 import Image from 'next/image';
 

@@ -2,83 +2,53 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { Menu } from 'lucide-react';
+import SpotlightMenu from './SpotlightMenu';
 
 const Navbar = () => {
-    const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
+    const { scrollY } = useScroll();
 
-    useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
-
-    const navLinks = [
-        { name: '關於樂橙', href: '#about' },
-        { name: '精選作品', href: '#portfolio' },
-        { name: '聯絡我們', href: '#contact' },
-    ];
+    useMotionValueEvent(scrollY, "change", (latest) => {
+        setScrolled(latest > 50);
+    });
 
     return (
-        <nav
-            className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scrolled ? 'bg-brand-black/80 backdrop-blur-md py-4' : 'bg-transparent py-6'
-                }`}
-        >
-            <div className="container mx-auto px-6 flex justify-between items-center">
-                {/* Logo */}
-                <Link href="/" className="text-2xl font-bold tracking-tighter text-white hover:text-brand-orange transition-colors">
-                    AllRange<span className="text-brand-orange">.</span>
-                </Link>
+        <>
+            <motion.nav
+                className={`fixed top-0 left-0 right-0 z-50 px-6 py-4 md:px-12 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md border-b border-white/10' : 'bg-transparent'
+                    }`}
+                initial={{ y: -100 }}
+                animate={{ y: 0 }}
+                transition={{ duration: 0.5 }}
+            >
+                <div className="container mx-auto flex items-center justify-between">
+                    <Link href="/" className="relative z-50">
+                        <span className="text-2xl font-black text-white tracking-widest">
+                            ALL<span className="text-brand-orange">RANGE</span>
+                        </span>
+                    </Link>
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex space-x-8">
-                    {navLinks.map((link) => (
-                        <Link
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium hover:text-brand-orange transition-colors tracking-wide"
-                        >
-                            {link.name}
-                        </Link>
-                    ))}
-                </div>
-
-                {/* Mobile Menu Button */}
-                <button
-                    className="md:hidden text-white hover:text-brand-orange transition-colors"
-                    onClick={() => setIsOpen(!isOpen)}
-                >
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
-                </button>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        className="absolute top-full left-0 w-full bg-brand-black/95 backdrop-blur-lg border-t border-white/10 p-6 md:hidden flex flex-col space-y-4 shadow-xl"
+                    {/* Menu Trigger */}
+                    <button
+                        onClick={() => setIsOpen(true)}
+                        className="flex items-center gap-3 text-white hover:text-brand-orange transition-colors group"
                     >
-                        {navLinks.map((link) => (
-                            <Link
-                                key={link.name}
-                                href={link.href}
-                                className="text-lg font-medium text-center hover:text-brand-orange transition-colors"
-                                onClick={() => setIsOpen(false)}
-                            >
-                                {link.name}
-                            </Link>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </nav>
+                        <span className="hidden md:block text-xs font-bold uppercase tracking-[0.3em] opacity-80 group-hover:opacity-100">
+                            Menu
+                        </span>
+                        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-brand-orange/10 group-hover:border-brand-orange/50 transition-all">
+                            <Menu size={20} />
+                        </div>
+                    </button>
+
+                </div>
+            </motion.nav>
+
+            <SpotlightMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
+        </>
     );
 };
 
