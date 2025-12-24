@@ -3,36 +3,42 @@
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef } from 'react';
 
-// Generates random-ish heights/colors for a masonry feel
-const items = [
-    { id: 1, span: 'col-span-1', height: 'h-64', color: 'bg-zinc-800' },
-    { id: 2, span: 'col-span-2', height: 'h-64', color: 'bg-stone-900' },
-    { id: 3, span: 'col-span-1', height: 'h-96', color: 'bg-neutral-800' },
-    { id: 4, span: 'col-span-1', height: 'h-64', color: 'bg-orange-950' },
-    { id: 5, span: 'col-span-1', height: 'h-80', color: 'bg-zinc-900' },
-    { id: 6, span: 'col-span-2', height: 'h-72', color: 'bg-brand-orange/20' },
-    { id: 7, span: 'col-span-1', height: 'h-64', color: 'bg-stone-800' },
-    { id: 8, span: 'col-span-1', height: 'h-80', color: 'bg-neutral-900' },
-    { id: 9, span: 'col-span-2', height: 'h-64', color: 'bg-zinc-800' },
+// Use the generated placeholder images
+const images = [
+    '/allrange.tw/images/placeholders/exhibition_design_1.png',
+    '/allrange.tw/images/placeholders/retail_space_1.png',
+    '/allrange.tw/images/placeholders/event_stage_1.png',
+    '/allrange.tw/images/placeholders/museum_display_1.png',
 ];
+
+// Generate a large set of items for the grid to feel "infinite" and abundant
+const items = Array.from({ length: 24 }).map((_, i) => ({
+    id: i,
+    span: i % 5 === 0 ? 'col-span-2' : 'col-span-1', // Random-ish spans
+    height: i % 3 === 0 ? 'h-96' : (i % 2 === 0 ? 'h-64' : 'h-80'), // Varied heights
+    image: images[i % images.length],
+}));
 
 const HeroV4 = () => {
     const containerRef = useRef<HTMLDivElement>(null);
+
+    // Parallax effect for the text
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end start"]
     });
-
-    // Subtle parallax for the whole wall
-    const y = useTransform(scrollYProgress, [0, 1], [0, -100]);
-    const rotate = useTransform(scrollYProgress, [0, 1], [20, 15]); // Slight rotation change
+    const yText = useTransform(scrollYProgress, [0, 1], [0, 100]);
+    const opacityText = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
 
     return (
-        <section ref={containerRef} className="relative min-h-[140vh] bg-black overflow-hidden flex flex-col items-center justify-center perspective-[2000px]">
+        <section ref={containerRef} className="relative min-h-screen bg-black overflow-hidden flex flex-col items-center justify-center perspective-[2000px]">
 
             {/* Overlay Content */}
-            <div className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none">
-                <div className="text-center p-8 bg-black/30 backdrop-blur-sm rounded-3xl border border-white/10">
+            <motion.div
+                style={{ y: yText, opacity: opacityText }}
+                className="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none"
+            >
+                <div className="text-center p-12 bg-black/40 backdrop-blur-md rounded-3xl border border-white/10 shadow-2xl">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -47,43 +53,52 @@ const HeroV4 = () => {
                         <p className="text-white/80 text-lg font-light tracking-wider mb-8">
                             探索我們在不同維度的空間創作
                         </p>
-                        <button className="pointer-events-auto px-8 py-3 bg-white text-black font-bold uppercase tracking-widest hover:bg-brand-orange transition-colors rounded-full">
+                        <button className="pointer-events-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-brand-orange transition-colors rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)]">
                             開始探索
                         </button>
                     </motion.div>
                 </div>
-            </div>
+            </motion.div>
 
-            {/* Tilted Wall */}
-            <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center pointer-events-none">
-                {/* 
-                    We use a fixed position background that gives the illusion of a huge wall 
-                    The transform perspective creates the 3D tilt.
-                    rotateX(20deg) tilts it back
-                    rotateY(-10deg) tilts it sideways
-                    rotateZ(-10deg) gives the diagonal angle
-                 */}
+            {/* Tilted Scrolling Wall */}
+            <div className="fixed top-[-50%] left-[-25%] w-[150%] h-[200%] flex items-center justify-center pointer-events-none perspective-[2000px]">
                 <motion.div
-                    style={{ y, rotateX: 20, rotateY: -10, rotateZ: -5 }}
-                    className="w-[150vw] grid grid-cols-4 gap-6 p-10 opacity-60 origin-center"
+                    style={{
+                        rotateX: 20,
+                        rotateY: -10,
+                        rotateZ: -5,
+                    }}
+                    className="w-full grid grid-cols-4 md:grid-cols-5 gap-4 p-4 opacity-50"
+
+                    // Continuous Scrolling Animation
                     animate={{
-                        rotateZ: [-5, -2, -5], // Gentle sway
+                        y: ["-25%", "0%"]  // Scroll upwards naturally
                     }}
                     transition={{
-                        duration: 20,
+                        duration: 30, // Slow, smooth scroll
                         repeat: Infinity,
-                        ease: "easeInOut"
+                        ease: "linear"
                     }}
                 >
-                    {/* Generative Grid of Cards */}
+                    {/* Double the items to create a seamless loop effect (conceptually) */}
                     {[...items, ...items, ...items].map((item, idx) => (
                         <div
-                            key={idx}
-                            className={`${item.span} ${item.height} ${item.color} rounded-2xl border border-white/10 relative overflow-hidden group shadow-2xl`}
+                            key={`${item.id}-${idx}`}
+                            className={`${item.span} ${item.height} relative rounded-xl overflow-hidden group shadow-lg border border-white/5 bg-zinc-900`}
                         >
-                            <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent" />
-                            <div className="absolute bottom-6 left-6">
-                                <div className="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center text-white/50 text-xs">
+                            {/* Image */}
+                            <img
+                                src={item.image}
+                                alt="Portfolio Item"
+                                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                            />
+
+                            {/* Overlay Gradient */}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+
+                            {/* Decorative Crosshair */}
+                            <div className="absolute bottom-4 left-4">
+                                <div className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center text-white/60 text-[10px]">
                                     +
                                 </div>
                             </div>
@@ -92,9 +107,10 @@ const HeroV4 = () => {
                 </motion.div>
             </div>
 
-            {/* Vignette */}
+            {/* Vignette & Gradients */}
             <div className="absolute inset-0 bg-radial-gradient from-transparent to-black pointer-events-none z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
         </section>
     );
