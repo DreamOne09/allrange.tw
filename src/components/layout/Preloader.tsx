@@ -8,25 +8,34 @@ const Preloader = () => {
     const [progress, setProgress] = useState(0);
 
     useEffect(() => {
-        // Simulate loading time based on "heavy" content
-        // In a real app, this might track actual asset loading, but time-based is smoother for UX
-        const duration = 2500; // 2.5 seconds
-        const startTime = Date.now();
+        // Minimum loading time to prevent flashing (1.5s)
+        const minTimePromise = new Promise(resolve => setTimeout(resolve, 1500));
 
-        const updateProgress = () => {
-            const elapsedTime = Date.now() - startTime;
-            const newProgress = Math.min(100, Math.round((elapsedTime / duration) * 100));
-
-            setProgress(newProgress);
-
-            if (newProgress < 100) {
-                requestAnimationFrame(updateProgress);
+        // Real loading event (waits for all images to load)
+        const loadPromise = new Promise(resolve => {
+            if (document.readyState === 'complete') {
+                resolve(true);
             } else {
-                setTimeout(() => setIsLoading(false), 500);
+                window.addEventListener('load', () => resolve(true));
             }
-        };
+        });
 
-        requestAnimationFrame(updateProgress);
+        // Wait for both: minimum time AND real content loaded
+        Promise.all([minTimePromise, loadPromise]).then(() => {
+            // Animate to 100% quickly if not there
+            setProgress(100);
+            setTimeout(() => setIsLoading(false), 500);
+        });
+
+        // Background progress animation (fake 0-95% so user sees activity)
+        const interval = setInterval(() => {
+            setProgress(prev => {
+                if (prev >= 95) return prev; // Stall at 95% until loaded
+                return prev + 1; // Increment
+            });
+        }, 300); // Slower increment to match potential long load time
+
+        return () => clearInterval(interval);
     }, []);
 
     return (
