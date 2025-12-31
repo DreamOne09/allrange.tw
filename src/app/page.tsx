@@ -1,4 +1,3 @@
-import HeroV1 from "@/components/sections/HeroV1";
 import HeroV2 from "@/components/sections/HeroV2";
 import HeroV3 from "@/components/sections/HeroV3";
 import HeroV4 from "@/components/sections/HeroV4";
@@ -9,16 +8,13 @@ import Contact from "@/components/sections/Contact";
 export default function Home() {
   return (
     <div className="flex flex-col gap-0">
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案一：經典策展 (Infinite Scroll)</div>
-      <HeroV1 />
-
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案二：摩登方塊 (Spotlight Reveal)</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案一：摩登方塊 (Spotlight Reveal)</div>
       <HeroV2 />
 
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案三：動態視覺 (3D Carousel)</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案二：動態視覺 (Combined Perspective)</div>
       <HeroV3 />
 
-      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">方案四：靈感藝廊 (Tilted Wall)</div>
+      <div className="bg-brand-orange text-black font-black text-center py-2 text-xs uppercase tracking-[0.5em] sticky top-0 z-[100]">成功案例：靈感藝廊 (Success Cases)</div>
       <HeroV4 />
 
       <div className="h-20 bg-black border-t border-brand-gray flex items-center justify-center">

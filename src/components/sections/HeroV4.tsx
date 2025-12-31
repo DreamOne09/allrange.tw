@@ -42,7 +42,7 @@ const HeroV4 = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
                     >
-                        <span className="text-brand-orange text-xs font-bold tracking-[0.4em] uppercase mb-4 block">
+                        <span className="text-brand-gold text-xs font-bold tracking-[0.4em] uppercase mb-4 block">
                             Portfolio Gallery
                         </span>
                         <h1 className="text-6xl md:text-8xl font-black text-white leading-none mb-6 text-shadow-lg">
@@ -51,7 +51,7 @@ const HeroV4 = () => {
                         <p className="text-white/80 text-lg font-light tracking-wider mb-8">
                             探索我們在不同維度的空間創作
                         </p>
-                        <button className="pointer-events-auto px-10 py-4 bg-white text-black font-bold uppercase tracking-widest hover:bg-brand-orange transition-colors rounded-full shadow-[0_0_20px_rgba(255,255,255,0.3)]">
+                        <button className="pointer-events-auto px-10 py-4 bg-brand-gold text-black font-bold uppercase tracking-widest hover:bg-white transition-colors rounded-full shadow-[0_0_20px_rgba(248,182,45,0.4)]">
                             開始探索
                         </button>
                     </motion.div>
@@ -84,37 +84,45 @@ const HeroV4 = () => {
                             key={`${item.id}-${idx}`}
                             className={`${item.span} ${item.height} relative rounded-xl overflow-hidden group shadow-lg border border-white/5 bg-zinc-900`}
                         >
-                            {/* Image */}
-                            <div className="relative w-full h-full">
+                            {/* Vivid Image Container */}
+                            <div className="relative w-full h-full group-hover:scale-105 transition-transform duration-700">
                                 <Image
                                     src={item.image}
                                     alt="Portfolio Item"
                                     fill
-                                    className="object-cover transition-transform duration-700 group-hover:scale-110"
+                                    className="object-cover"
                                     sizes="(max-width: 768px) 50vw, 20vw"
                                 />
+                                {/* subtle shine effect on hover */}
+                                <div className="absolute inset-0 bg-gradient-to-tr from-white/0 via-white/0 to-white/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                             </div>
 
-                            {/* Overlay Gradient */}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60" />
+                            {/* Gold Border Glow on Hover */}
+                            <div className="absolute inset-0 border-2 border-transparent group-hover:border-brand-gold/70 transition-colors duration-300 pointer-events-none z-20 rounded-xl" />
 
-                            {/* Decorative Crosshair */}
-                            <div className="absolute bottom-4 left-4">
-                                <div className="w-6 h-6 rounded-full border border-white/40 flex items-center justify-center text-white/60 text-[10px]">
+                            {/* Overlay Gradient (Minimal, just for text at bottom) */}
+                            <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/80 to-transparent opacity-60 group-hover:opacity-90 transition-opacity" />
+
+                            {/* Decorative Crosshair & Text */}
+                            <div className="absolute bottom-3 left-3 flex items-center gap-2">
+                                <div className="w-5 h-5 rounded-full border border-brand-gold flex items-center justify-center text-brand-gold text-[10px]">
                                     +
                                 </div>
+                                <span className="text-[10px] text-white/50 tracking-widest uppercase opacity-0 group-hover:opacity-100 transition-opacity">
+                                    View Case
+                                </span>
                             </div>
                         </div>
                     ))}
                 </motion.div>
-            </div>
+            </div >
 
             {/* Vignette & Gradients */}
-            <div className="absolute inset-0 bg-radial-gradient from-transparent to-black pointer-events-none z-10" />
+            < div className="absolute inset-0 bg-radial-gradient from-transparent to-black pointer-events-none z-10" />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black z-10" />
             <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black z-10" />
 
-        </section>
+        </section >
     );
 };
 

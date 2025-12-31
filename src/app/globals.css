@@ -2,8 +2,14 @@
 
 @theme {
   --color-brand-black: #0a0a0a;
-  --color-brand-orange: #FF8C00;
-  --color-brand-yellow: #FFD700;
+  --color-brand-orange: #f8b62d;
+  /* Primary Gold */
+  --color-brand-gold: #f8b62d;
+  --color-brand-yellow: #f8b62d;
+  --color-brand-gray: #1a1a1a;
+
+  --image-glow: 0 0 20px rgba(248, 182, 45, 0.3);
+  --text-gold-gradient: linear-gradient(135deg, #f8b62d 0%, #fff8e7 50%, #d49511 100%);
   --color-brand-gray: #1a1a1a;
 
   --font-sans: var(--font-inter), var(--font-noto-sans-tc), sans-serif;
@@ -47,9 +53,20 @@ body {
 }
 
 ::selection {
-  background-color: #FF8C00;
-  /* Brand Orange */
+  background-color: #f8b62d;
   color: #000;
+}
+
+.text-gold-gradient {
+  background: linear-gradient(to right, #f8b62d, #ffeeb0, #d49511);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.border-gold-glow {
+  box-shadow: 0 0 15px rgba(248, 182, 45, 0.2);
+  border-color: #f8b62d;
 }
 
 /* Custom Scrollbar */

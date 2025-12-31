@@ -27,7 +27,7 @@ const Navbar = () => {
                 <div className="container mx-auto flex items-center justify-between">
                     <Link href="/" className="relative z-50">
                         <span className="text-2xl font-black text-white tracking-widest">
-                            ALL<span className="text-brand-orange">RANGE</span>
+                            ALL<span className="text-brand-gold">RANGE</span>
                         </span>
                     </Link>
 
@@ -35,12 +35,12 @@ const Navbar = () => {
                     <button
                         onClick={() => setIsOpen(true)}
                         aria-label="Open Menu"
-                        className="flex items-center gap-3 text-white hover:text-brand-orange transition-colors group"
+                        className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors group"
                     >
                         <span className="hidden md:block text-xs font-bold uppercase tracking-[0.3em] opacity-80 group-hover:opacity-100">
                             Menu
                         </span>
-                        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-brand-orange/10 group-hover:border-brand-orange/50 transition-all">
+                        <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-brand-gold/10 group-hover:border-brand-gold/50 transition-all">
                             <Menu size={20} />
                         </div>
                     </button>

@@ -12,8 +12,9 @@ export default {
                 background: "var(--background)",
                 foreground: "var(--foreground)",
                 'brand-black': '#0a0a0a',
-                'brand-orange': '#FF8C00',
-                'brand-yellow': '#FFD700',
+                'brand-orange': '#f8b62d',
+                'brand-gold': '#f8b62d',
+                'brand-yellow': '#f8b62d',
                 'brand-gray': '#1a1a1a',
             },
             fontFamily: {
