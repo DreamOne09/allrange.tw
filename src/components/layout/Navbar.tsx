@@ -31,9 +31,13 @@ const Navbar = () => {
                         </span>
                     </Link>
 
-                    {/* Menu Trigger */}
-                    <button
-                        onClick={() => setIsOpen(true)}
+                    <div className="flex items-center gap-8">
+                       <Link href="/work" className="hidden md:block text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                            Work
+                        </Link>
+                        {/* Menu Trigger */}
+                        <button
+                            onClick={() => setIsOpen(true)}
                         aria-label="Open Menu"
                         className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors group"
                     >

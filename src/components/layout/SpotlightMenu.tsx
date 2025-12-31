@@ -12,28 +12,28 @@ const menuItems = [
         id: 1,
         label: '關於我們',
         eng: 'About',
-        href: '#about',
+        href: '/about',
         image: heroSubset[5]?.image || '/allrange.tw/images/placeholders/office_interior_1.png'
     },
     {
         id: 2,
         label: '精選作品',
         eng: 'Portfolio',
-        href: '/work',  // Linking to the new Work page we will create
+        href: '/work',
         image: heroSubset[0]?.image || '/allrange.tw/images/placeholders/exhibition_design_1.png'
     },
     {
         id: 3,
         label: '服務項目',
         eng: 'Services',
-        href: '#services',
+        href: '/services',
         image: heroSubset[8]?.image || '/allrange.tw/images/placeholders/brand_identity_1.png'
     },
     {
         id: 4,
         label: '聯絡我們',
         eng: 'Contact',
-        href: '#contact',
+        href: '/contact',
         image: heroSubset[3]?.image || '/allrange.tw/images/placeholders/retail_space_1.png'
     },
 ];

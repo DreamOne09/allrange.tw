@@ -80,8 +80,7 @@ const HeroV2 = () => {
                 >
                     <motion.div
                         className="w-full h-full relative"
-                        whileHover={{ rotateY: 5, scale: 1.02 }}
-                        transition={{ type: "spring", stiffness: 100 }}
+                    // Removed hover effects
                     >
                         <AnimatePresence mode="wait">
                             <motion.div
@@ -131,13 +130,13 @@ const HeroV2 = () => {
                             viewport={{ once: true }}
                         >
                             <div className="flex flex-col justify-center min-w-0">
-                                <h4 className={`text-2xl md:text-3xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2 text-gold-gradient' : 'text-white/40'
+                                <h4 className={`text-2xl md:text-3xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2 text-gold-gradient' : 'text-white/60'
                                     }`}>
                                     {project.title}
                                 </h4>
                                 <div className="flex items-center gap-3 mt-2">
-                                    <span className={`h-[1px] w-8 transition-all duration-300 ${activeProject.id === project.id ? 'bg-brand-gold w-16' : 'bg-transparent'}`} />
-                                    <span className="text-sm text-brand-gold/80 font-mono hidden md:block uppercase tracking-wider">
+                                    <span className={`h-[1px] transition-all duration-300 ${activeProject.id === project.id ? 'bg-brand-gold w-16' : 'bg-white/20 w-8'}`} />
+                                    <span className={`text-sm font-mono hidden md:block uppercase tracking-wider ${activeProject.id === project.id ? 'text-brand-gold/80' : 'text-white/40'}`}>
                                         {project.category}
                                     </span>
                                 </div>
