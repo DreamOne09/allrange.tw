@@ -77,10 +77,10 @@ export const realProjects = [
     // 10. 裕隆汽車裕苗活動園區設計專案
     {
         id: 'real-10',
-        title: '裕隆汽車 - 裕苗活動園區',
+        title: '裕隆汽車 - 裕苗山丘 台灣原生林復育中心暨活動園區',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0009.webp',
-        description: 'Event park design for Yulon Motor.'
+        image: '/yulon-main.jpg',
+        description: 'Design plan for Yulon Miao Hill Taiwan Native Forest Restoration Center and Event Park.'
     },
     // 11. 渴望會館兒童遊戲室
     {

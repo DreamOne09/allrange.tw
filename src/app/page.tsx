@@ -6,6 +6,7 @@ import HeroParticle from "@/components/sections/HeroParticle";
 import HeroLiquid from "@/components/sections/HeroLiquid";
 import HeroRive from "@/components/sections/HeroRive"; // Option 3
 import HeroPro from "@/components/sections/HeroPro";   // Option 4
+import SelectedBlock from "@/components/sections/SelectedBlock"; // Restored HeroV2
 
 export default function Home() {
   return (
@@ -18,6 +19,9 @@ export default function Home() {
 
       {/* Pro Code Fallback (Option 4 - Requested) */}
       <HeroPro />
+
+      {/* Selected Block (Restored HeroV2) */}
+      <SelectedBlock />
 
       {/* Previous Options (Hidden but kept) */}
       {/* <HeroParticle /> */}
