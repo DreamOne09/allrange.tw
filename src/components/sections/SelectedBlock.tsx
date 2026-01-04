@@ -14,25 +14,17 @@ import { realProjects, heroSubset } from '@/data/real_projects';
 // User code had: 101, Lexus, Palace, Nike. 
 // I will map these to the best available images in realProjects to ensure no broken images.
 
-// using heroSubset which now contains [101, Yulon]
-const projects = [
-    {
-        id: 1,
-        title: heroSubset[0]?.title || "Project 1",
-        category: heroSubset[0]?.category || "Design",
-        year: "2024",
-        color: "from-brand-orange to-red-900",
-        image: heroSubset[0]?.image || ''
-    },
-    {
-        id: 2,
-        title: heroSubset[1]?.title || "Project 2",
-        category: heroSubset[1]?.category || "Design",
-        year: "2023",
-        color: "from-emerald-900 to-black",
-        image: heroSubset[1]?.image || ''
-    }
-];
+// using heroSubset which now contains [101, Yulon, ITRI]
+const projects = heroSubset.map((project, index) => ({
+    id: index + 1,
+    title: project.title,
+    category: project.category,
+    year: "2023", // Placeholder year or add to data
+    color: index === 0 ? "from-brand-orange to-red-900" :
+        index === 1 ? "from-emerald-900 to-black" :
+            "from-blue-900 to-black",
+    image: project.image
+}));
 
 const SelectedBlock = () => {
     const [activeProject, setActiveProject] = useState(projects[0]);

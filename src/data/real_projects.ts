@@ -1,13 +1,21 @@
 // Map the 21 uploaded RealPic images to categories and titles
 // User can edit this file to correct titles and categories
 
-export const realProjects = [
+export interface Project {
+    id: string;
+    title: string;
+    category: string;
+    image: string;
+    description: string;
+}
+
+export const realProjects: Project[] = [
     // 1. 文建會於 101-89F 觀景台站高高看台灣地方文物展
     {
         id: 'real-01',
-        title: '文建會 - 101觀景台地方文物展',
+        title: '文建會於 101-89F 觀景台站高高看台灣地方文物展',
         category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0000.webp',
+        image: '/101-main.png',
         description: 'Exhibition of local artifacts at Taipei 101 Observatory (89F).'
     },
     // 2. 勤美鑄鐵廠展區設計專案
@@ -18,13 +26,13 @@ export const realProjects = [
         image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0001.webp',
         description: 'Exhibition area design for CMP Iron Works.'
     },
-    // 3. 博鑫醫電
+    // 3. 工研院生醫與醫材研究所
     {
         id: 'real-03',
-        title: '博鑫醫電 (Broadsims)',
+        title: '工研院生醫與醫材研究所 ： 竹北生醫園區',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0002.webp',
-        description: 'Office or exhibition space for Broadsims Medical Electronics.'
+        image: '/itri-main.png',
+        description: 'Design for ITRI Biomedical Technology and Device Research Laboratories at Zhubei Biomedical Science Park.'
     },
     // 4. 吉寶托嬰中心
     {
@@ -101,4 +109,9 @@ export const heroImages = [
 ];
 
 // Subset of images for Hero sections / Menu
-export const heroSubset = realProjects.slice(0, 11);
+// Featured: 101 (real-01), Yulon (real-10), ITRI (real-03)
+export const heroSubset = [
+    realProjects.find(p => p.id === 'real-01'), // 101
+    realProjects.find(p => p.id === 'real-10'), // Yulon
+    realProjects.find(p => p.id === 'real-03'), // ITRI
+].filter(Boolean) as Project[];
