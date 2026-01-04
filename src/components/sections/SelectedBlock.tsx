@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 import Image from 'next/image';
 
-import { realProjects } from '@/data/real_projects';
+import { realProjects, heroSubset } from '@/data/real_projects';
 
 // Mapping user's requested "Old Hero" projects to our available RealProjects
 // 1. 台北 101 => real-01 (Found)
@@ -14,38 +14,23 @@ import { realProjects } from '@/data/real_projects';
 // User code had: 101, Lexus, Palace, Nike. 
 // I will map these to the best available images in realProjects to ensure no broken images.
 
+// using heroSubset which now contains [101, Yulon]
 const projects = [
     {
         id: 1,
-        title: "台北 101 觀景台博覽會",
-        category: "展場設計",
+        title: heroSubset[0]?.title || "Project 1",
+        category: heroSubset[0]?.category || "Design",
         year: "2024",
         color: "from-brand-orange to-red-900",
-        image: realProjects.find(p => p.id === 'real-01')?.image || ''
+        image: heroSubset[0]?.image || ''
     },
     {
         id: 2,
-        title: "勤美鑄鐵廠展區", // Replaced "Lexus" with available data
-        category: "空間規劃",
-        year: "2023",
-        color: "from-blue-900 to-black",
-        image: realProjects.find(p => p.id === 'real-02')?.image || ''
-    },
-    {
-        id: 3,
-        title: "裕隆汽車 - 裕苗山丘", // Replaced "Palace" with available active Yulon project
-        category: "空間規劃", // Changed from Multimedia
+        title: heroSubset[1]?.title || "Project 2",
+        category: heroSubset[1]?.category || "Design",
         year: "2023",
         color: "from-emerald-900 to-black",
-        image: realProjects.find(p => p.id === 'real-10')?.image || ''
-    },
-    {
-        id: 4,
-        title: "渴望會館遊戲室", // Replaced "Nike" with available data
-        category: "空間設計",
-        year: "2022",
-        color: "from-purple-900 to-black",
-        image: realProjects.find(p => p.id === 'real-11')?.image || ''
+        image: heroSubset[1]?.image || ''
     }
 ];
 
