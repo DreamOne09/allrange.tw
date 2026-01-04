@@ -35,7 +35,7 @@ export default function AboutPage() {
                     >
                         {/* Placeholder for Ade's Photo - using a project image as fallback stylistic choice for now */}
                         <Image
-                            src="/images/projects/101/101-main.png"
+                            src="/allrange.tw/images/projects/101/101-main.png"
                             alt="Liu Yide Profile"
                             fill
                             className="object-cover opacity-60 grayscale hover:grayscale-0 transition-all duration-700"

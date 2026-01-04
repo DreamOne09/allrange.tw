@@ -27,13 +27,13 @@ const Preloader = () => {
             setTimeout(() => setIsLoading(false), 500);
         });
 
-        // Background progress animation (fake 0-95% so user sees activity)
+        // Background progress animation (fake 0-99% so user sees activity)
         const interval = setInterval(() => {
             setProgress(prev => {
-                if (prev >= 95) return prev; // Stall at 95% until loaded
+                if (prev >= 99) return prev; // Stall at 99% until loaded
                 return prev + 1; // Increment
             });
-        }, 300); // Slower increment to match potential long load time
+        }, 15); // Faster smooth increment (15ms * 100 = 1.5s approx to full)
 
         return () => clearInterval(interval);
     }, []);
