@@ -58,7 +58,7 @@ const SelectedBlock = () => {
 
                 {/* Left: Dynamic MAIN Visual (3D & Vivid) */}
                 <motion.div
-                    className="relative h-[50vh] md:h-[60vh] w-full rounded-2xl overflow-hidden bg-zinc-900 border border-brand-gold/30 shadow-[0_0_30px_rgba(248,182,45,0.15)]"
+                    className="relative h-[40vh] md:h-[60vh] w-full rounded-2xl overflow-hidden bg-zinc-900 border border-brand-gold/30 shadow-[0_0_30px_rgba(248,182,45,0.15)]"
                     initial={{ opacity: 0, x: -50 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.8 }}
@@ -104,28 +104,28 @@ const SelectedBlock = () => {
                     </motion.div>
                 </motion.div>
 
-                {/* Right: Interactive List */}
-                <div className="flex flex-col pl-0 md:pl-12">
+                <div className="flex flex-col pl-0 md:pl-12 mt-8 md:mt-0">
                     <h3 className="text-brand-gold mb-8 uppercase tracking-[0.3em] text-sm font-bold pl-4 border-l-2 border-brand-gold">
                         Featured Projects
                     </h3>
                     {projects.map((project) => (
                         <motion.div
                             key={project.id}
-                            className="relative border-b border-white/10 py-6 pl-4 cursor-pointer group transition-all duration-300 hover:pl-8 hover:bg-white/5"
+                            className="relative border-b border-white/10 py-6 pl-4 cursor-pointer group transition-all duration-300 hover:pl-8 hover:bg-white/5 active:bg-white/10"
                             onHoverStart={() => setActiveProject(project)}
+                            onClick={() => setActiveProject(project)} // Enable tap on mobile
                             initial={{ opacity: 0, x: 20 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: true }}
                         >
                             <div className="flex flex-col justify-center min-w-0">
-                                <h4 className={`text-2xl md:text-3xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2 text-gold-gradient' : 'text-white/40'
+                                <h4 className={`text-xl md:text-3xl font-bold transition-all duration-300 ${activeProject.id === project.id ? 'text-white translate-x-2 text-gold-gradient' : 'text-white/40'
                                     }`}>
                                     {project.title}
                                 </h4>
                                 <div className="flex items-center gap-3 mt-2">
-                                    <span className={`h-[1px] w-8 transition-all duration-300 ${activeProject.id === project.id ? 'bg-brand-gold w-16' : 'bg-transparent'}`} />
-                                    <span className="text-sm text-brand-gold/80 font-mono hidden md:block uppercase tracking-wider">
+                                    <span className={`h-[1px] w-8 transition-all duration-300 ${activeProject.id === project.id ? 'bg-brand-gold w-12 md:w-16' : 'bg-transparent'}`} />
+                                    <span className="text-xs md:text-sm text-brand-gold/80 font-mono uppercase tracking-wider block">
                                         {project.category}
                                     </span>
                                 </div>
