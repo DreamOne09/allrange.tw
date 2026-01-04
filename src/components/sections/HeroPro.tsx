@@ -141,10 +141,8 @@ export default function HeroPro() {
                             className="absolute top-0 left-0 w-1/2 h-full overflow-hidden origin-right"
                             initial={{ x: -200, opacity: 0 }}
                             animate={{
-                                x: phase === 'invasion' ? -200 : 0, // Enters
-                                opacity: 1,
-                                // Split Logic
                                 x: (phase === 'split' || phase === 'branding') ? -80 : 0,
+                                opacity: 1,
                                 rotateY: (phase === 'split' || phase === 'branding') ? -50 : 0
                             }}
                             transition={{ type: "spring", stiffness: 100, damping: 20 }}
@@ -170,10 +168,8 @@ export default function HeroPro() {
                             className="absolute top-0 right-0 w-1/2 h-full overflow-hidden origin-left"
                             initial={{ x: 200, opacity: 0 }}
                             animate={{
-                                x: phase === 'invasion' ? 200 : 0,
-                                opacity: 1,
-                                // Split Logic
                                 x: (phase === 'split' || phase === 'branding') ? 80 : 0,
+                                opacity: 1,
                                 rotateY: (phase === 'split' || phase === 'branding') ? 50 : 0
                             }}
                             transition={{ type: "spring", stiffness: 100, damping: 20 }}
