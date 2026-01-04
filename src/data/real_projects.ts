@@ -2,134 +2,103 @@
 // User can edit this file to correct titles and categories
 
 export const realProjects = [
-    // Batch 1: Exhibition Design (Assumed)
-    {
-        id: 'real-00',
-        title: 'Future Tech Expo',
-        category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0000.webp',
-        description: 'Immersive technology exhibition design featuring interactive displays.'
-    },
+    // 1. 文建會於 101-89F 觀景台站高高看台灣地方文物展
     {
         id: 'real-01',
-        title: 'Modern Art Gallery',
+        title: '文建會 - 101觀景台地方文物展',
         category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0001.webp',
-        description: 'Clean and minimalist art gallery layout.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0000.webp',
+        description: 'Exhibition of local artifacts at Taipei 101 Observatory (89F).'
     },
+    // 2. 勤美鑄鐵廠展區設計專案
     {
         id: 'real-02',
-        title: 'Cultural Heritage Showcase',
+        title: '勤美鑄鐵廠 - 展區設計',
         category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0002.webp',
-        description: 'Traditional cultural artifacts displayed in a modern setting.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0001.webp',
+        description: 'Exhibition area design for CMP Iron Works.'
     },
+    // 3. 博鑫醫電
     {
         id: 'real-03',
-        title: 'Corporate Vision Hall',
-        category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0003.webp',
-        description: 'Corporate branding and history timeline exhibition.'
+        title: '博鑫醫電 (Broadsims)',
+        category: 'space',
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0002.webp',
+        description: 'Office or exhibition space for Broadsims Medical Electronics.'
     },
+    // 4. 吉寶托嬰中心
     {
         id: 'real-04',
-        title: 'Product Launch Stage',
-        category: 'exhibition',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0004.webp',
-        description: 'Dynamic stage design for new product reveal.'
+        title: '吉寶托嬰中心',
+        category: 'space',
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0003.webp',
+        description: 'Interior design for Ji-Bao Infant Care Center.'
     },
-
-    // Batch 2: Space Planning (Assumed)
+    // 5. 水設室內設計
     {
         id: 'real-05',
-        title: 'Creative Office',
+        title: '水設室內設計',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0005.webp',
-        description: 'Open plan office with collaborative spaces.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0004.webp',
+        description: 'Interior design project.'
     },
+    // 6. 莉蒂亞教育中心
     {
         id: 'real-06',
-        title: 'Luxury Retail Store',
+        title: '莉蒂亞教育中心',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0006.webp',
-        description: 'High-end retail interior with custom fixtures.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0005.webp',
+        description: 'Educational space planning for Lydia Education Center.'
     },
+    // 7. 億鴻系統科技
     {
         id: 'real-07',
-        title: 'Boutique Showroom',
+        title: '億鴻系統科技',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0007.webp',
-        description: 'Intimate showroom design for exclusive products.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0006.webp',
+        description: 'Corporate space for Yi-Hong System Technology.'
     },
+    // 8. 有成精密
     {
         id: 'real-08',
-        title: 'Reception Lobby',
+        title: '有成精密',
         category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0008.webp',
-        description: 'Welcoming and impressive corporate lobby.'
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0007.webp',
+        description: 'Industrial or office space for You-Cheng Precision.'
     },
+    // 9. 新竹市環保局
     {
         id: 'real-09',
-        title: 'VIP Lounge',
-        category: 'space',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0009.webp',
-        description: 'Exclusive lounge area with premium materials.'
+        title: '新竹市環保局',
+        category: 'exhibition',
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0008.webp',
+        description: 'Project for Hsinchu City Environmental Protection Bureau.'
     },
-
-    // Batch 3: Graphic / Multimedia (Assumed)
+    // 10. 裕隆汽車裕苗活動園區設計專案
     {
         id: 'real-10',
-        title: 'Brand Identity System',
-        category: 'graphic',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0010.webp',
-        description: 'Comprehensive visual identity for a tech brand.'
+        title: '裕隆汽車 - 裕苗活動園區',
+        category: 'space',
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0009.webp',
+        description: 'Event park design for Yulon Motor.'
     },
+    // 11. 渴望會館兒童遊戲室
     {
         id: 'real-11',
-        title: 'Interactive Wall',
-        category: 'multimedia',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0011.webp',
-        description: 'Touch-enabled interactive digital wall.'
+        title: '渴望會館 - 兒童遊戲室',
+        category: 'space',
+        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0010.webp',
+        description: 'Children\'s playroom design for Aspire Resort.'
     },
-    {
-        id: 'real-12',
-        title: 'Event Key Visual',
-        category: 'graphic',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0012.webp',
-        description: 'Main visual design for a large scale conference.'
-    },
-    {
-        id: 'real-13',
-        title: 'Digital Signage',
-        category: 'multimedia',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0013.webp',
-        description: 'Dynamic digital signage content.'
-    },
-    {
-        id: 'real-14',
-        title: 'Packaging Series',
-        category: 'graphic',
-        image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0014.webp',
-        description: 'Retail packaging design series.'
-    },
-
-    // Batch 4: Mix / Portfolio Highlighs
-    { id: 'real-15', title: 'Concept Space A', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0015.webp' },
-    { id: 'real-16', title: 'Concept Space B', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0016.webp' },
-    { id: 'real-17', title: 'Concept Space C', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0017.webp' },
-    { id: 'real-18', title: 'Concept Space D', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0018.webp' },
-    { id: 'real-19', title: 'Concept Space E', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0019.webp' },
-    { id: 'real-20', title: 'Concept Space F', category: 'space', image: '/allrange.tw/images/RealPic/de203caf-cb54-40ba-9054-84825b5299e1-0020.webp' },
 ];
 
 export const heroImages = [
     realProjects[0].image,
-    realProjects[5].image,
-    realProjects[10].image,
-    realProjects[15].image,
     realProjects[1].image,
-    realProjects[6].image,
+    realProjects[2].image,
+    realProjects[3].image,
+    realProjects[4].image,
 ];
 
-// Subset of "RealPic" images (0012-0020) selected by user for Hero sections
-export const heroSubset = realProjects.slice(12, 21);
+// Subset of images for Hero sections / Menu
+export const heroSubset = realProjects.slice(0, 11);

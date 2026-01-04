@@ -64,10 +64,9 @@ const About = () => {
                             商業策略 + 設計思維
                         </h4>
                         <p className="text-gray-400 leading-relaxed mb-8">
-                            我們不只是設計師，更是快樂的橙子。擁有豐富的展場專案設計、3D繪圖與多媒體影音經驗。<br /><br />
-                            <strong className="text-white">觀察需求 (Observe)</strong>，滿足要求。<br />
-                            <strong className="text-white">掌握底線 (Master)</strong>，耐心溝通。<br /><br />
-                            我們出得了公司機關簡報，也上得了工地現場監工。目標是在2034年建立「雲端設計團隊」，匯聚各方設計與商業人才。
+                            全方位設計師經驗，2004年以來，在平面設計師 / 3D繪圖師 / 室內設計 /多媒體影音 / 展場專案設計 都累積許多工作經驗。<br /><br />
+                            <strong className="text-white">成功的祕訣：</strong>觀察需求;滿足要求，掌握底線;耐心溝通。<br /><br />
+                            <strong className="text-white">一句話解釋：</strong>出得了公司機關，上得了工地現場。
                         </p>
 
                         {/* Services Grid */}

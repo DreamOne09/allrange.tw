@@ -10,14 +10,21 @@ const categories = [
     { id: 'graphic', label: '平面視覺' },
 ];
 
+import { realProjects } from '@/data/real_projects';
+
+// Selected 5 projects for Home Page:
+// 1. 文建會 101 (real-01)
+// 2. 勤美鑄鐵 (real-02)
+// 3. 裕隆汽車 (real-10)
+// 4. 渴望會館 (real-11)
+// 5. 吉寶托嬰 (real-04)
 const projects = [
-    { id: 1, title: '台北 101 觀景台博覽會', category: 'exhibition', image: '' },
-    { id: 2, title: '渴望會館 - 遊戲室', category: 'space', image: '' },
-    { id: 3, title: '勤美鑄鐵', category: 'space', image: '' },
-    { id: 4, title: '裕隆汽車 - 育苗', category: 'exhibition', image: '' },
-    { id: 5, title: '品牌視覺識別', category: 'graphic', image: '' },
-    { id: 6, title: '蕭如松藝術節', category: 'exhibition', image: '' },
-];
+    realProjects.find(p => p.id === 'real-01'),
+    realProjects.find(p => p.id === 'real-02'),
+    realProjects.find(p => p.id === 'real-10'),
+    realProjects.find(p => p.id === 'real-11'),
+    realProjects.find(p => p.id === 'real-04'),
+].filter(Boolean) as typeof realProjects;
 
 const PortfolioGrid = () => {
     const [activeCategory, setActiveCategory] = useState('all');

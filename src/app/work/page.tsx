@@ -2,16 +2,29 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { heroSubset } from '@/data/real_projects';
+import { realProjects } from '@/data/real_projects';
 
-const items = Array.from({ length: 20 }).map((_, i) => ({
+// The 9 requested projects + fillers if needed
+const selectedProjects = [
+    realProjects.find(p => p.id === 'real-10'), // Yulon
+    realProjects.find(p => p.id === 'real-02'), // CMP
+    realProjects.find(p => p.id === 'real-03'), // Broadsims
+    realProjects.find(p => p.id === 'real-04'), // Ji-Bao
+    realProjects.find(p => p.id === 'real-05'), // Shui-She
+    realProjects.find(p => p.id === 'real-06'), // Lydia
+    realProjects.find(p => p.id === 'real-07'), // Yi-Hong
+    realProjects.find(p => p.id === 'real-08'), // You-Cheng
+    realProjects.find(p => p.id === 'real-09'), // Hsinchu EPA
+].filter(Boolean) as typeof realProjects;
+
+const items = selectedProjects.map((project, i) => ({
     id: i,
     // varied sizes for "masonry" feel
-    span: i % 4 === 0 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1',
-    height: i % 4 === 0 ? 'h-[500px]' : 'h-[240px]',
-    image: heroSubset[i % heroSubset.length].image,
-    title: heroSubset[i % heroSubset.length].title,
-    category: heroSubset[i % heroSubset.length].category
+    span: i === 0 || i === 3 ? 'col-span-2 row-span-2' : 'col-span-1 row-span-1',
+    height: i === 0 || i === 3 ? 'h-[500px]' : 'h-[240px]',
+    image: project.image,
+    title: project.title,
+    category: project.category
 }));
 
 export default function WorkPage() {

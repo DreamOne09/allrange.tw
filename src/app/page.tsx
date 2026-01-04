@@ -4,6 +4,8 @@ import PortfolioGrid from "@/components/sections/PortfolioGrid";
 import Contact from "@/components/sections/Contact";
 import HeroParticle from "@/components/sections/HeroParticle";
 import HeroLiquid from "@/components/sections/HeroLiquid";
+import HeroRive from "@/components/sections/HeroRive"; // Option 3
+import HeroPro from "@/components/sections/HeroPro";   // Option 4
 
 export default function Home() {
   return (
@@ -11,16 +13,21 @@ export default function Home() {
       {/* Existing Hero (keeping as reference or backup) */}
       {/* <HeroV2 /> */}
 
-      {/* New Option 1 */}
-      <HeroParticle />
+      {/* Rive Animation (Option 3 - Requested) */}
+      <HeroRive />
+
+      {/* Pro Code Fallback (Option 4 - Requested) */}
+      <HeroPro />
+
+      {/* Previous Options (Hidden but kept) */}
+      {/* <HeroParticle /> */}
+      {/* <HeroLiquid /> */}
 
       {/* Divider */}
-      <div className="h-10 bg-brand-gray flex items-center justify-center border-y border-brand-gold/20">
+      {/* <div className="h-10 bg-brand-gray flex items-center justify-center border-y border-brand-gold/20">
         <span className="text-brand-orange text-xs tracking-widest">OPTION 2 BELOW</span>
-      </div>
+      </div> */}
 
-      {/* New Option 2 */}
-      <HeroLiquid />
 
       <div className="h-20 bg-black border-t border-brand-gray flex items-center justify-center">
         <p className="text-gray-600 text-[10px] uppercase tracking-widest">Scroll Down</p>
