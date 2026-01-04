@@ -1,37 +1,18 @@
-import HeroV2 from "@/components/sections/HeroV2";
+import HeroPro from "@/components/sections/HeroPro";
+import SelectedBlock from "@/components/sections/SelectedBlock";
 import About from "@/components/sections/About";
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
 import Contact from "@/components/sections/Contact";
-import HeroParticle from "@/components/sections/HeroParticle";
-import HeroLiquid from "@/components/sections/HeroLiquid";
-import HeroRive from "@/components/sections/HeroRive"; // Option 3
-import HeroPro from "@/components/sections/HeroPro";   // Option 4
-import SelectedBlock from "@/components/sections/SelectedBlock"; // Restored HeroV2
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-0">
-      {/* Existing Hero (keeping as reference or backup) */}
-      {/* <HeroV2 /> */}
 
-      {/* Rive Animation (Option 3 - Requested) */}
-      <HeroRive />
-
-      {/* Pro Code Fallback (Option 4 - Requested) */}
+      {/* 1. Main Animation: Fluid Convergence (Option 4 Refined) */}
       <HeroPro />
 
-      {/* Selected Block (Restored HeroV2) */}
+      {/* 2. Featured Projects (Selected Block - Repurposed HeroV2) */}
       <SelectedBlock />
-
-      {/* Previous Options (Hidden but kept) */}
-      {/* <HeroParticle /> */}
-      {/* <HeroLiquid /> */}
-
-      {/* Divider */}
-      {/* <div className="h-10 bg-brand-gray flex items-center justify-center border-y border-brand-gold/20">
-        <span className="text-brand-orange text-xs tracking-widest">OPTION 2 BELOW</span>
-      </div> */}
-
 
       <div className="h-20 bg-black border-t border-brand-gray flex items-center justify-center">
         <p className="text-gray-600 text-[10px] uppercase tracking-widest">Scroll Down</p>
