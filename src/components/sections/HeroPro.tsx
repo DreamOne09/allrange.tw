@@ -4,12 +4,12 @@ import { motion, useMotionValue, useTransform, useSpring } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function HeroPro() {
-    const [phase, setPhase] = useState<'singularity' | 'bigbang' | 'formation' | 'branding'>('singularity');
+    const [phase, setPhase] = useState<'invasion' | 'climax' | 'branding'>('invasion');
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smooth mouse tracking
-    const springConfig = { damping: 25, stiffness: 150 };
+    // Mouse tracking for 3D parallax
+    const springConfig = { damping: 20, stiffness: 200 };
     const springX = useSpring(mouseX, springConfig);
     const springY = useSpring(mouseY, springConfig);
 
@@ -23,188 +23,207 @@ export default function HeroPro() {
         return () => window.removeEventListener('mousemove', handleMouseMove);
     }, [mouseX, mouseY]);
 
-    const rotateX = useTransform(springY, [-1, 1], [25, -25]); // More dramatic rotation
-    const rotateY = useTransform(springX, [-1, 1], [-25, 25]);
-    const glowX = useTransform(springX, [-1, 1], [-20, 20]);
-    const glowY = useTransform(springY, [-1, 1], [-20, 20]);
+    // Parallax transforms
+    const rotateX = useTransform(springY, [-1, 1], [30, -30]);
+    const rotateY = useTransform(springX, [-1, 1], [-30, 30]);
+    const highlightX = useTransform(springX, [-1, 1], [-30, 30]);
+    const highlightY = useTransform(springY, [-1, 1], [-30, 30]);
 
     // Sequence
     useEffect(() => {
         const sequence = async () => {
-            // 0.0s: Singularity
-            await new Promise(r => setTimeout(r, 500));
-            setPhase('bigbang'); // BOOM
+            // 0s: Invasion starts (Oranges roll in)
+            setPhase('invasion');
 
-            // 1.0s: Debris & Chaos
-            await new Promise(r => setTimeout(r, 800));
-            setPhase('formation'); // Converge
+            // 2.0s: The Center is Crowded -> Main Orange Pops
+            await new Promise(r => setTimeout(r, 2000));
+            setPhase('climax');
 
-            // 2.0s: Reveal
-            await new Promise(r => setTimeout(r, 1500));
-            setPhase('branding'); // Title
+            // 3.0s: Reveal Text
+            await new Promise(r => setTimeout(r, 1000));
+            setPhase('branding');
         };
         sequence();
     }, []);
 
-    // Chaos Particles
-    const particles = Array.from({ length: 60 }).map((_, i) => ({
-        id: i,
-        angle: Math.random() * Math.PI * 2,
-        distance: 400 + Math.random() * 1000,
-        size: 5 + Math.random() * 20,
-        color: Math.random() > 0.6 ? '#ffffff' : '#f8b62d', // Mix of white/orange sparks
-        delay: Math.random() * 0.2
-    }));
+    // Generate "Decoy" Oranges
+    const decoys = Array.from({ length: 30 }).map((_, i) => {
+        // Random start positions off-screen
+        const edge = Math.floor(Math.random() * 4); // 0:top, 1:right, 2:bottom, 3:left
+        let startX = 0, startY = 0;
+        const offset = 800; // Distance off screen
+
+        switch (edge) {
+            case 0: startX = (Math.random() - 0.5) * 1000; startY = -offset; break;
+            case 1: startX = offset; startY = (Math.random() - 0.5) * 1000; break;
+            case 2: startX = (Math.random() - 0.5) * 1000; startY = offset; break;
+            case 3: startX = -offset; startY = (Math.random() - 0.5) * 1000; break;
+        }
+
+        return {
+            id: i,
+            startX,
+            startY,
+            endX: (Math.random() - 0.5) * 400, // Clump near center
+            endY: (Math.random() - 0.5) * 400,
+            size: 40 + Math.random() * 80, // Varied sizes
+            delay: Math.random() * 0.5,
+            rotation: Math.random() * 720 - 360, // Roll rotation
+        };
+    });
 
     return (
-        <div className="relative w-full h-[100vh] bg-[#0F0F0F] overflow-hidden flex items-center justify-center perspective-[2000px]">
+        <div className="relative w-full h-[100vh] bg-[#0F0F0F] overflow-hidden flex items-center justify-center perspective-[1500px]">
 
-            {/* Dynamic Background Fog/Light */}
+            {/* Dynamic Background Light */}
             <motion.div
-                animate={{ opacity: [0, 0.3, 0.1] }}
-                transition={{ duration: 4, repeat: Infinity, repeatType: "mirror" }}
-                className="absolute inset-0 bg-radial-gradient from-[#f8b62d]/10 to-transparent pointer-events-none"
+                animate={{ opacity: [0.1, 0.2, 0.1] }}
+                transition={{ duration: 5, repeat: Infinity }}
+                className="absolute inset-0 bg-radial-gradient from-[#f8b62d]/20 to-transparent pointer-events-none"
             />
 
-            {/* SVG Liquid Filter (Subtle for cleanup) */}
-            <svg style={{ position: 'absolute', width: 0, height: 0 }}>
-                <defs>
-                    <filter id="goo3d">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="15" result="blur" />
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -9" result="goo" />
-                    </filter>
-                </defs>
-            </svg>
-
-            {/* 1. Singularity */}
-            {phase === 'singularity' && (
-                <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: [0, 3, 0.2], opacity: 1, rotate: 180 }}
-                    transition={{ duration: 0.5, times: [0, 0.6, 1], ease: "easeInOut" }}
-                    className="w-4 h-4 bg-[#fff] rounded-full blur-[2px] shadow-[0_0_50px_#fff]"
-                />
-            )}
-
-            {/* 2. Big Bang Explosion & Implosion */}
-            {(phase === 'bigbang' || phase === 'formation') && (
-                <div className="absolute inset-0 flex items-center justify-center w-full h-full" style={{ filter: 'url(#goo3d)' }}>
-                    {particles.map((p) => (
+            {/* PHASE 1: INVASION & CLIMAX (Decoys) */}
+            {(phase === 'invasion' || phase === 'climax') && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                    {decoys.map((d) => (
                         <motion.div
-                            key={p.id}
-                            initial={{ x: 0, y: 0, scale: 0 }}
-                            animate={phase === 'bigbang'
-                                ? {
-                                    x: Math.cos(p.angle) * p.distance,
-                                    y: Math.sin(p.angle) * p.distance,
-                                    scale: [0, 1.5, 0],
-                                    opacity: [1, 1, 0]
-                                }
-                                : { // Implode for formation state? 
-                                    // Actually, let's keep them exploded and fade out, while core grows
-                                    opacity: 0
-                                }
+                            key={d.id}
+                            initial={{ x: d.startX, y: d.startY, rotate: 0, scale: 0.5, opacity: 0 }}
+                            animate={
+                                phase === 'invasion'
+                                    ? {
+                                        x: d.endX,
+                                        y: d.endY,
+                                        rotate: d.rotation,
+                                        scale: 1,
+                                        opacity: 1
+                                    }
+                                    : { // Climax: Scatter/Explode away (optional) or Fade out
+                                        x: d.startX * 1.5, // Fly back out?
+                                        y: d.startY * 1.5,
+                                        opacity: 0,
+                                        scale: 0
+                                    }
                             }
-                            transition={{ duration: 1.5, ease: "circOut" }}
-                            style={{
-                                width: p.size,
-                                height: p.size,
-                                backgroundColor: p.color
+                            transition={{
+                                duration: phase === 'invasion' ? 1.5 : 0.8,
+                                ease: phase === 'invasion' ? "backOut" : "circIn"
                             }}
-                            className="absolute rounded-full"
+                            className="absolute rounded-full shadow-lg"
+                            style={{
+                                width: d.size,
+                                height: d.size,
+                                background: 'radial-gradient(circle at 30% 30%, #ffcf70, #f8b62d, #a85d00)',
+                                boxShadow: 'inset -5px -5px 10px rgba(0,0,0,0.3)',
+                                zIndex: Math.floor(Math.random() * 10)
+                            }}
                         />
                     ))}
                 </div>
             )}
 
-            {/* 3. The 3D Orange (Formation + Branding) */}
-            {(phase === 'formation' || phase === 'branding') && (
+            {/* PHASE 2 & 3: THE ONE TRUE ORANGE */}
+            {(phase === 'climax' || phase === 'branding') && (
                 <motion.div
-                    className="relative z-10 flex flex-col items-center justify-center"
+                    className="relative z-50 flex flex-col items-center justify-center"
                     style={{
                         transformStyle: "preserve-3d",
-                        perspective: 1200
+                        perspective: 1500
                     }}
                 >
-                    {/* THE SPHERE */}
+                    {/* THE SUPER SPHERE */}
                     <motion.div
-                        layoutId="main-orange"
-                        initial={{ scale: 0, rotateZ: 180 }}
+                        layoutId="main-hero-orange"
+                        initial={{ scale: 0, y: 100 }}
                         animate={{
-                            scale: phase === 'branding' ? 1 : 0.8,
-                            rotateZ: 0,
-                            y: phase === 'branding' ? 0 : 20
+                            scale: phase === 'branding' ? 1 : 1.1, // Popping in
+                            y: phase === 'branding' ? 0 : 0
                         }}
+                        // Apply 3D Rotation to the CONTAINER, so internal elements rotate with it properly
                         style={{
                             rotateX: phase === 'branding' ? rotateX : 0,
                             rotateY: phase === 'branding' ? rotateY : 0
                         }}
-                        transition={{ type: "spring", stiffness: 100, damping: 15 }}
-                        className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]"
+                        transition={{ type: "spring", stiffness: 120, damping: 12 }}
+                        className="relative w-[320px] h-[320px] md:w-[480px] md:h-[480px] cursor-pointer"
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
                     >
-                        {/* 3D Body Construction */}
-                        <div className="absolute inset-0 rounded-full bg-[#faad14] shadow-[inset_-20px_-20px_60px_rgba(168,85,0,0.8),inset_20px_20px_60px_rgba(255,255,255,0.4),0_0_50px_rgba(248,182,45,0.3)]">
-
-                            {/* Surface Texture (Pores) */}
-                            <div className="absolute inset-0 rounded-full opacity-60 mix-blend-overlay"
+                        {/* 1. Base 3D Sphere Rendering (CSS Gradients) */}
+                        <div className="absolute inset-0 rounded-full"
+                            style={{
+                                background: 'radial-gradient(circle at 35% 35%, #fff0d1 0%, #ffc845 20%, #f8b62d 50%, #d48200 80%, #753b00 100%)',
+                                boxShadow: '0 30px 60px -15px rgba(0,0,0,0.6), inset -10px -10px 40px rgba(0,0,0,0.4), inset 10px 10px 40px rgba(255,255,255,0.2)'
+                            }}
+                        >
+                            {/* 2. Texture (Skin Pores) */}
+                            <div className="absolute inset-0 rounded-full opacity-40 mix-blend-overlay"
                                 style={{
-                                    backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px)',
-                                    backgroundSize: '4px 4px'
+                                    backgroundImage: 'radial-gradient(circle, rgba(0,0,0,0.2) 1px, transparent 1px)',
+                                    backgroundSize: '8px 8px',
+                                    filter: 'contrast(1.2)'
                                 }}
                             />
 
-                            {/* Dynamic High-Gloss Reflection */}
-                            <motion.div
-                                style={{ x: glowX, y: glowY }}
-                                className="absolute top-[10%] left-[10%] w-[40%] h-[30%] bg-gradient-to-br from-white to-transparent opacity-40 blur-xl rounded-full"
-                            />
-
-                            {/* Rim Light */}
-                            <div className="absolute inset-0 rounded-full border border-white/10" />
+                            {/* 3. Rim Light (Backlight) */}
+                            <div className="absolute inset-0 rounded-full border-[2px] border-white/20 blur-[1px]" />
                         </div>
 
-                        {/* The Green Leaf (Dancing) */}
+                        {/* 4. Specular Movement (Follows Mouse Inverse) */}
+                        <motion.div
+                            style={{ x: highlightX, y: highlightY }}
+                            className="absolute top-[20%] left-[20%] w-[25%] h-[20%] bg-white opacity-60 blur-[20px] rounded-full mix-blend-screen"
+                        />
+
+                        {/* 5. The Green Leaf (Bouncing/Waving) */}
                         <motion.div
                             initial={{ scale: 0, rotate: -45 }}
-                            animate={{ scale: 1, rotate: [0, 5, -5, 0] }}
+                            animate={{ scale: 1, rotate: [0, 8, -5, 0] }}
                             transition={{
-                                delay: 0.5,
-                                duration: 4,
+                                delay: 0.2,
+                                duration: 3,
                                 repeat: Infinity,
+                                repeatType: "mirror",
                                 ease: "easeInOut"
                             }}
-                            className="absolute -top-10 left-1/2 w-24 h-32 bg-[#4B6F44] rounded-tr-[100%] rounded-bl-[100%] origin-bottom-left shadow-2xl skew-y-6"
+                            className="absolute -top-12 left-1/2 w-28 h-36 bg-gradient-to-br from-[#6aa354] to-[#2f4a25] rounded-tr-[100%] rounded-bl-[100%] origin-bottom-left shadow-2xl skew-y-3 border-l border-[#ffffff44]"
                         >
-                            <div className="w-full h-full bg-gradient-to-tr from-black/20 to-transparent rounded-tr-[100%] rounded-bl-[100%]" />
-                            {/* Leaf Veins */}
-                            <div className="absolute inset-0 border-r border-[#ffffff33] rounded-tr-[100%]" />
+                            {/* Leaf Detail */}
+                            <div className="absolute inset-0 border-r-2 border-[#ffffff22] rounded-tr-[100%] mix-blend-overlay" />
                         </motion.div>
                     </motion.div>
 
-                    {/* TEXT REVEAL: ALLRANGE STUDIO */}
+                    {/* TEXT REVEAL */}
                     {phase === 'branding' && (
-                        <div className="absolute flex flex-col items-center justify-center mix-blend-screen pointer-events-none mt-12 md:mt-0">
+                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full text-center z-[100] pointer-events-none mix-blend-hard-light">
+                            {/* Using Hard Light or Difference to make text pop over the orange if it overlaps, though standard placement below is safer */}
+                        </div>
+                    )}
+
+                    {/* Standard Text Placement (Below) */}
+                    {phase === 'branding' && (
+                        <div className="mt-12 text-center z-[60]">
                             <motion.h1
-                                initial={{ opacity: 0, z: -500, scale: 3 }}
-                                animate={{ opacity: 1, z: 50, scale: 1 }}
-                                transition={{ duration: 0.8, ease: "circOut" }}
-                                className="text-5xl md:text-9xl font-black text-white tracking-tighter drop-shadow-[0_0_30px_rgba(248,182,45,0.5)] text-center whitespace-nowrap"
+                                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                                animate={{ opacity: 1, y: 0, scale: 1 }}
+                                transition={{ duration: 0.8, ease: "backOut" }}
+                                className="text-6xl md:text-[8rem] leading-none font-black text-white tracking-tighter drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)]"
                             >
                                 ALLRANGE STUDIO
                             </motion.h1>
 
                             <motion.div
                                 initial={{ width: 0 }}
-                                animate={{ width: 200 }}
-                                transition={{ delay: 0.5, duration: 1 }}
-                                className="h-1 bg-[#f8b62d] my-6 shadow-[0_0_20px_#f8b62d]"
+                                animate={{ width: 120 }}
+                                transition={{ delay: 0.4, duration: 0.8 }}
+                                className="h-1 bg-[#f8b62d] mx-auto my-6"
                             />
 
                             <motion.h2
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: 0.8, duration: 0.8 }}
-                                className="text-white text-xl md:text-3xl font-bold tracking-[0.5em]"
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                transition={{ delay: 0.6, duration: 0.8 }}
+                                className="text-white/90 text-2xl md:text-3xl font-bold tracking-[0.2em]"
                             >
                                 樂橙設計工作室
                             </motion.h2>
