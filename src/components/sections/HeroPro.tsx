@@ -4,7 +4,7 @@ import { motion, useMotionValue, useTransform } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function HeroPro() {
-    const [phase, setPhase] = useState<'spark' | 'storm' | 'formation' | 'branding'>('spark');
+    const [phase, setPhase] = useState<'storm' | 'formation' | 'branding'>('storm');
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
@@ -25,12 +25,11 @@ export default function HeroPro() {
     // Sequence Timer
     useEffect(() => {
         const sequence = async () => {
-            // 0.5s Spark
-            await new Promise(r => setTimeout(r, 500));
+            // Start directly with Storm
             setPhase('storm');
 
             // 2.5s Storm (Wild Lines)
-            await new Promise(r => setTimeout(r, 2200));
+            await new Promise(r => setTimeout(r, 2500));
             setPhase('formation');
 
             // 1.0s Formation
@@ -41,9 +40,8 @@ export default function HeroPro() {
     }, []);
 
     // Generate random starting positions for the "Storm" lines
-    // We want them coming from OUTSIDE the screen (approx +/- 100vw/vh)
-    const streamlines = Array.from({ length: 12 }).map((_, i) => {
-        const angle = (i / 12) * Math.PI * 2; // Radial distribution
+    const streamlines = Array.from({ length: 14 }).map((_, i) => {
+        const angle = (i / 14) * Math.PI * 2; // Radial distribution
         const distance = 1500; // Far off screen
         return {
             id: i,
@@ -51,17 +49,12 @@ export default function HeroPro() {
             y: Math.sin(angle) * distance,
             delay: Math.random() * 0.5,
             duration: 1.5 + Math.random(),
-            width: 20 + Math.random() * 40, // Varied thickness
+            width: 25 + Math.random() * 40, // Varied thickness
         };
     });
 
     return (
         <div className="relative w-full h-[100vh] bg-[#1A1918] overflow-hidden flex items-center justify-center">
-            {/* Debug Label (Optional, removing for 'Wild' feel or keeping subtle) 
-       <div className="absolute top-4 left-4 z-40 text-brand-orange/20 text-xs pointer-events-none">
-            Hero: Fluid Convergence
-        </div>
-        */}
 
             {/* SVG Liquid Filter (Stronger Goo) */}
             <svg style={{ position: 'absolute', width: 0, height: 0 }}>
@@ -77,41 +70,31 @@ export default function HeroPro() {
             {/* Animation Container with Filter */}
             <div className="absolute inset-0 flex items-center justify-center w-full h-full" style={{ filter: 'url(#fluidGoo)' }}>
 
-                {/* PHASE 1: SPARK */}
-                {phase === 'spark' && (
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: [0, 1.2, 0] }}
-                        transition={{ duration: 0.6, ease: "circOut" }}
-                        className="w-8 h-8 rounded-full bg-[#f8b62d]"
-                    />
-                )}
-
-                {/* PHASE 2 & 3: STORM - Lines rushing in */}
+                {/* PHASE 1 & 2: STORM - Lines rushing in */}
                 {(phase === 'storm' || phase === 'formation') && (
                     <>
                         {streamlines.map((line) => (
                             <motion.div
                                 key={line.id}
-                                initial={{ x: line.x, y: line.y, opacity: 0, scale: 0.5 }} // Start far away
+                                initial={{ x: line.x, y: line.y, opacity: 0, scale: 0.5 }}
                                 animate={
                                     phase === 'storm'
                                         ? {
                                             x: 0,
                                             y: 0,
                                             opacity: 1,
-                                            scale: [0.5, 1.5, 1], // Stretch effect
+                                            scale: [0.5, 1.5, 1],
                                             transition: {
                                                 duration: line.duration,
                                                 delay: line.delay,
-                                                ease: [0.22, 1, 0.36, 1] // Custom ease for "rush"
+                                                ease: [0.22, 1, 0.36, 1]
                                             }
                                         }
                                         : { // Formation state (all merge to center)
                                             x: 0, y: 0, scale: 1, opacity: 1
                                         }
                                 }
-                                style={{ width: line.width, height: line.width }} // Circle/Blob size
+                                style={{ width: line.width, height: line.width }}
                                 className="absolute rounded-full bg-[#f8b62d]"
                             />
                         ))}
@@ -123,7 +106,7 @@ export default function HeroPro() {
                     <motion.div
                         layoutId="main-orange"
                         initial={{ scale: 0.5 }}
-                        animate={{ scale: 1 }} // Grows as lines merge
+                        animate={{ scale: 1 }}
                         transition={{ duration: 0.8, ease: "backOut" }}
                         className="w-[300px] h-[300px] bg-[#f8b62d] rounded-full"
                     />
@@ -139,9 +122,9 @@ export default function HeroPro() {
                     {/* The Perfect Orange (Gradient & Texture) */}
                     <motion.div
                         layoutId="main-orange"
-                        initial={{ scale: 0.9 }} // Slight pop from formation
+                        initial={{ scale: 0.9 }}
                         animate={{ scale: 1, rotate: 0 }}
-                        style={{ rotateX, rotateY }} // Mouse Parallax
+                        style={{ rotateX, rotateY }}
                         transition={{ type: "spring", stiffness: 100, damping: 20 }}
                         className="relative w-[320px] h-[320px] md:w-[420px] md:h-[420px]"
                     >
@@ -173,9 +156,9 @@ export default function HeroPro() {
                             initial={{ y: 50, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
                             transition={{ delay: 0.3, duration: 0.8 }}
-                            className="text-6xl md:text-9xl font-black text-white tracking-tighter"
+                            className="text-5xl md:text-8xl font-black text-white tracking-tighter"
                         >
-                            LE CHENG
+                            ALLRANGE STUDIO
                         </motion.h1>
                         <motion.div
                             initial={{ scaleX: 0 }}
@@ -189,7 +172,7 @@ export default function HeroPro() {
                             transition={{ delay: 0.8, duration: 0.8 }}
                             className="text-white/80 text-lg tracking-[0.5em] font-light"
                         >
-                            DESIGN DIRECTOR
+                            MOTION & DESIGN
                         </motion.h2>
                     </div>
                 </motion.div>
