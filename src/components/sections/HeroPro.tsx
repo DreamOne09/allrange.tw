@@ -136,15 +136,23 @@ export default function HeroPro() {
                         layoutId="main-hero-orange"
                         initial={{ scale: 0, y: 100 }}
                         animate={{
-                            scale: phase === 'branding' ? 1 : 1.1, // Popping in
-                            y: phase === 'branding' ? 0 : 0
+                            scale: phase === 'branding' ? 1 : 1.1,
+                            y: 0, // No vertical bounce
+                            x: [0, 60, -60, 0], // Roll right, then left, then center
+                            rotateZ: [0, 20, -20, 0] // Rotate with the roll
                         }}
                         // Apply 3D Rotation to the CONTAINER, so internal elements rotate with it properly
                         style={{
                             rotateX: phase === 'branding' ? rotateX : 0,
                             rotateY: phase === 'branding' ? rotateY : 0
                         }}
-                        transition={{ type: "spring", stiffness: 120, damping: 12 }}
+                        transition={{
+                            // Main entry
+                            scale: { duration: 0.8, ease: "backOut" },
+                            // Rolling loop
+                            x: { duration: 8, repeat: Infinity, ease: "easeInOut" },
+                            rotateZ: { duration: 8, repeat: Infinity, ease: "easeInOut" }
+                        }}
                         className="relative w-[320px] h-[320px] md:w-[480px] md:h-[480px] cursor-pointer"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}

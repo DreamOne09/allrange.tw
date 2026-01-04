@@ -20,7 +20,7 @@ export default function Home() {
 
       <About />
       <PortfolioGrid />
-      <Contact />
+      {/* Contact is now integrated into Footer */}
     </div>
   );
 }

@@ -1,53 +1,66 @@
-import { Facebook, Mail, MapPin } from 'lucide-react';
+import { Facebook, Mail, MapPin, ArrowRight } from 'lucide-react';
 
 const Footer = () => {
     return (
-        <footer className="bg-brand-gray py-12 border-t border-white/5">
-            <div className="container mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12">
-                {/* Brand */}
-                <div className="space-y-4">
-                    <h3 className="text-2xl font-bold text-white">
-                        AllRange<span className="text-brand-orange">.</span>
-                    </h3>
-                    <p className="text-gray-400 text-sm leading-relaxed">
-                        我們是快樂的橙子。<br />
-                        用策展思維打造空間，專注於細節與使用者體驗。
-                    </p>
-                </div>
+        <footer className="bg-brand-gray pt-24 pb-8 border-t border-white/5">
+            <div className="container mx-auto px-6">
 
-                {/* Contact */}
-                <div className="space-y-4">
-                    <h4 className="text-lg font-bold text-white">聯絡我們</h4>
-                    <ul className="space-y-3 text-sm text-gray-400">
-                        <li className="flex items-center hover:text-brand-orange transition-colors">
-                            <Mail size={18} className="mr-3 text-brand-orange" />
-                            <a href="mailto:claire@allrange.tw">claire@allrange.tw</a>
-                        </li>
-                        <li className="flex items-center hover:text-brand-orange transition-colors">
-                            <MapPin size={18} className="mr-3 text-brand-orange" />
-                            <span>新竹市金竹路109號</span>
-                        </li>
-                    </ul>
-                </div>
+                {/* CTA Section (Merged from Contact) */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-16">
+                    <div>
+                        <h2 className="text-sm font-bold text-brand-orange uppercase tracking-widest mb-2">聯絡我們</h2>
+                        <h3 className="text-4xl md:text-6xl font-black text-white leading-tight">
+                            讓我們一起<br />創造 <span className="text-transparent bg-clip-text bg-gradient-to-r from-brand-orange to-brand-yellow">不凡體驗</span>
+                        </h3>
+                    </div>
 
-                {/* Social */}
-                <div className="space-y-4">
-                    <h4 className="text-lg font-bold text-white">關注我們</h4>
-                    <div className="flex space-x-4">
+                    <div className="mt-8 md:mt-0">
                         <a
-                            href="https://www.facebook.com/allrangeslife"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center hover:bg-brand-orange hover:text-black transition-all duration-300"
+                            href="mailto:claire@allrange.tw"
+                            className="group flex items-center space-x-4 bg-white/5 hover:bg-brand-orange px-8 py-4 rounded-full transition-all duration-300"
                         >
-                            <Facebook size={20} />
+                            <span className="text-xl font-bold text-white group-hover:text-black">開始專案</span>
+                            <ArrowRight className="text-brand-orange group-hover:text-black transition-colors" />
                         </a>
                     </div>
                 </div>
-            </div>
 
-            <div className="container mx-auto px-6 mt-12 pt-8 border-t border-white/5 text-center text-xs text-gray-600">
-                &copy; {new Date().getFullYear()} AllRange Design. 版權所有.
+                {/* Info Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12 border-t border-white/10">
+                    <div className="space-y-2">
+                        <h4 className="text-gray-500 text-sm font-medium uppercase">電子郵件</h4>
+                        <a href="mailto:claire@allrange.tw" className="text-xl text-white font-bold hover:text-brand-orange transition-colors block">
+                            claire@allrange.tw
+                        </a>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h4 className="text-gray-500 text-sm font-medium uppercase">地址</h4>
+                        <p className="text-xl text-white font-bold">
+                            新竹市金竹路109號
+                        </p>
+                    </div>
+
+                    <div className="space-y-2">
+                        <h4 className="text-gray-500 text-sm font-medium uppercase">社群媒體</h4>
+                        <div className="flex space-x-4">
+                            <a
+                                href="https://www.facebook.com/allrangeslife"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-white hover:text-brand-orange transition-colors flex items-center gap-2 font-bold"
+                            >
+                                <Facebook size={24} />
+                                <span>AllRange 粉絲專頁</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Copyright */}
+                <div className="text-center text-xs text-gray-600 mt-8 pt-8 border-t border-white/5">
+                    &copy; {new Date().getFullYear()} AllRange Design. 版權所有.
+                </div>
             </div>
         </footer>
     );

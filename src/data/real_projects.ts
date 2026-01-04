@@ -15,7 +15,7 @@ export const realProjects: Project[] = [
         id: 'real-01',
         title: '文建會於 101-89F 觀景台站高高看台灣地方文物展',
         category: 'exhibition',
-        image: '/101-main.png',
+        image: '/images/projects/101/101-main.png',
         description: 'Exhibition of local artifacts at Taipei 101 Observatory (89F).'
     },
     // 2. 裕隆汽車 - 裕苗山丘
@@ -23,7 +23,7 @@ export const realProjects: Project[] = [
         id: 'real-10',
         title: '裕隆汽車 - 裕苗山丘 台灣原生林復育中心暨活動園區',
         category: 'space',
-        image: '/yulon-main.jpg',
+        image: '/images/projects/yulon/yulon-main.jpg', // Assuming yulon folder exists from previous
         description: 'Design plan for Yulon Miao Hill Taiwan Native Forest Restoration Center and Event Park.'
     },
     // 3. 工研院生醫與醫材研究所
@@ -31,7 +31,7 @@ export const realProjects: Project[] = [
         id: 'real-03',
         title: '工研院生醫與醫材研究所 ： 竹北生醫園區',
         category: 'space',
-        image: '/itri-main.png',
+        image: '/images/projects/itri/itri-main.png',
         description: 'Design for ITRI Biomedical Technology and Device Research Laboratories at Zhubei Biomedical Science Park.'
     },
 ];
