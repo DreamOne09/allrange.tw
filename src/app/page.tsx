@@ -1,15 +1,17 @@
-import HeroPro from "@/components/sections/HeroPro";
+// import HeroPro from "@/components/sections/HeroPro";
 import SelectedBlock from "@/components/sections/SelectedBlock";
 import About from "@/components/sections/About";
 import PortfolioGrid from "@/components/sections/PortfolioGrid";
 import Contact from "@/components/sections/Contact";
+import HeroBigBang from "@/components/sections/HeroBigBang"; // Added import
 
 export default function Home() {
   return (
     <div className="flex flex-col gap-0">
 
       {/* 1. Main Animation: Fluid Convergence (Option 4 Refined) */}
-      <HeroPro />
+      {/* <HeroPro /> */} {/* Commented out HeroPro */}
+      <HeroBigBang /> {/* New Creative Concept: Juice Universe */}
 
       {/* 2. Featured Projects (Selected Block - Repurposed HeroV2) */}
       <SelectedBlock />
