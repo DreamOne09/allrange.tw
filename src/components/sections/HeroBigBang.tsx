@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 
 export default function HeroBigBang() {
-    const [phase, setPhase] = useState<'orange' | 'explosion' | 'separation' | 'overlap' | 'reform'>('orange');
+    const [phase, setPhase] = useState<'orange' | 'explosion' | 'brushStrokes' | 'merge' | 'splash'>('orange');
     const [loopCount, setLoopCount] = useState(0);
 
     useEffect(() => {
@@ -17,16 +17,16 @@ export default function HeroBigBang() {
             setPhase('explosion');
             await new Promise(r => setTimeout(r, 800));
 
-            // 3. Color blocks separate
-            setPhase('separation');
-            await new Promise(r => setTimeout(r, 2000));
+            // 3. Paint brush strokes from 5 directions
+            setPhase('brushStrokes');
+            await new Promise(r => setTimeout(r, 2500));
 
-            // 4. Blocks overlap
-            setPhase('overlap');
+            // 4. Merge into orange
+            setPhase('merge');
             await new Promise(r => setTimeout(r, 1500));
 
-            // 5. Reform into orange
-            setPhase('reform');
+            // 5. Color splash
+            setPhase('splash');
             await new Promise(r => setTimeout(r, 1200));
 
             // Loop
@@ -54,6 +54,15 @@ export default function HeroBigBang() {
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
 
+    // Paint brush strokes - 5 directions
+    const brushStrokes = [
+        { from: { x: -400, y: -300 }, to: { x: 0, y: 0 }, angle: 45, color: colors[0], delay: 0 },      // Top-left
+        { from: { x: 400, y: -300 }, to: { x: 0, y: 0 }, angle: -45, color: colors[1], delay: 0.1 },    // Top-right
+        { from: { x: -400, y: 300 }, to: { x: 0, y: 0 }, angle: -45, color: colors[2], delay: 0.2 },    // Bottom-left
+        { from: { x: 400, y: 300 }, to: { x: 0, y: 0 }, angle: 45, color: colors[3], delay: 0.3 },      // Bottom-right
+        { from: { x: 0, y: -400 }, to: { x: 0, y: 0 }, angle: 0, color: colors[4], delay: 0.15 },       // Top-center
+    ];
+
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
 
@@ -62,7 +71,6 @@ export default function HeroBigBang() {
                 <motion.div
                     initial={{ scale: 0, rotate: -180 }}
                     animate={{ scale: 1, rotate: 0 }}
-                    exit={{ scale: 1.3 }}
                     transition={{
                         type: "spring",
                         stiffness: 200,
@@ -154,317 +162,287 @@ export default function HeroBigBang() {
                 </div>
             )}
 
-            {/* PHASE 3: COLOR BLOCKS SEPARATION */}
-            {phase === 'separation' && (
+            {/* PHASE 3: PAINT BRUSH STROKES */}
+            {phase === 'brushStrokes' && (
                 <div className="absolute w-full h-full flex items-center justify-center">
-                    {/* Layer 1 - Top Left */}
-                    <motion.div
-                        initial={{ x: 0, y: 0, rotate: 0, scale: 0, opacity: 0 }}
-                        animate={{
-                            x: -180,
-                            y: -120,
-                            rotate: -15,
-                            scale: 0.9,
-                            opacity: 1
-                        }}
-                        transition={{
-                            duration: 1.2,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[280px] h-[280px] rounded-[35px]"
-                        style={{
-                            background: colors[4],
-                            boxShadow: `0 20px 60px rgba(255,140,66,0.5)`,
-                        }}
-                    />
-
-                    {/* Layer 2 - Top Right */}
-                    <motion.div
-                        initial={{ x: 0, y: 0, rotate: 0, scale: 0, opacity: 0 }}
-                        animate={{
-                            x: 150,
-                            y: -80,
-                            rotate: 25,
-                            scale: 1.1,
-                            opacity: 1
-                        }}
-                        transition={{
-                            duration: 1.2,
-                            delay: 0.1,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[260px] h-[260px] rounded-[32px]"
-                        style={{
-                            background: colors[1],
-                            boxShadow: `0 25px 70px rgba(255,182,46,0.5)`,
-                        }}
-                    />
-
-                    {/* Layer 3 - Center */}
-                    <motion.div
-                        initial={{ x: 0, y: 0, rotate: 0, scale: 0, opacity: 0 }}
-                        animate={{
-                            x: 0,
-                            y: 100,
-                            rotate: 8,
-                            scale: 1.15,
-                            opacity: 1
-                        }}
-                        transition={{
-                            duration: 1.2,
-                            delay: 0.2,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[300px] h-[300px] rounded-[40px]"
-                        style={{
-                            background: `linear-gradient(135deg, ${colors[0]}, ${colors[3]})`,
-                            boxShadow: `0 30px 80px rgba(255,154,0,0.6)`,
-                            zIndex: 10
-                        }}
-                    />
-
-                    {/* Layer 4 - Bottom Left */}
-                    <motion.div
-                        initial={{ x: 0, y: 0, rotate: 0, scale: 0, opacity: 0 }}
-                        animate={{
-                            x: -120,
-                            y: 90,
-                            rotate: -20,
-                            scale: 0.85,
-                            opacity: 1
-                        }}
-                        transition={{
-                            duration: 1.2,
-                            delay: 0.15,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[240px] h-[240px] rounded-[28px]"
-                        style={{
-                            background: colors[2],
-                            boxShadow: `0 20px 60px rgba(255,215,0,0.5)`,
-                        }}
-                    />
-
-                    {/* Layer 5 - Bottom Right */}
-                    <motion.div
-                        initial={{ x: 0, y: 0, rotate: 0, scale: 0, opacity: 0 }}
-                        animate={{
-                            x: 140,
-                            y: 110,
-                            rotate: 35,
-                            scale: 0.75,
-                            opacity: 1
-                        }}
-                        transition={{
-                            duration: 1.2,
-                            delay: 0.25,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[220px] h-[220px] rounded-[25px]"
-                        style={{
-                            background: colors[3],
-                            boxShadow: `0 15px 50px rgba(255,107,0,0.5)`,
-                            zIndex: 15
-                        }}
-                    />
-
-                    {/* Floating particles */}
-                    {Array.from({ length: 20 }).map((_, i) => (
+                    {brushStrokes.map((stroke, i) => (
                         <motion.div
                             key={i}
                             initial={{
-                                x: 0,
-                                y: 0,
-                                scale: 0,
+                                x: stroke.from.x,
+                                y: stroke.from.y,
+                                scaleX: 0,
                                 opacity: 0
                             }}
                             animate={{
-                                x: (Math.random() - 0.5) * 600,
-                                y: (Math.random() - 0.5) * 400,
-                                scale: [0, 1, 0.8],
-                                opacity: [0, 0.8, 0]
+                                x: stroke.to.x,
+                                y: stroke.to.y,
+                                scaleX: 1,
+                                opacity: 1
                             }}
                             transition={{
-                                duration: 1.5,
-                                delay: i * 0.05,
-                                ease: "easeOut"
+                                duration: 1.2,
+                                delay: stroke.delay,
+                                ease: [0.34, 1.56, 0.64, 1]
                             }}
-                            className="absolute w-2 h-2 rounded-full"
+                            className="absolute"
                             style={{
-                                background: colors[i % colors.length],
-                                boxShadow: `0 0 20px ${colors[i % colors.length]}`
+                                transformOrigin: 'left center',
+                                rotate: `${stroke.angle}deg`
                             }}
-                        />
+                        >
+                            {/* Main brush stroke */}
+                            <div
+                                className="relative"
+                                style={{
+                                    width: '400px',
+                                    height: '80px',
+                                    background: `linear-gradient(90deg, 
+                                        transparent 0%, 
+                                        ${stroke.color}40 10%, 
+                                        ${stroke.color} 50%, 
+                                        ${stroke.color}40 90%, 
+                                        transparent 100%)`,
+                                    filter: 'blur(2px)',
+                                    boxShadow: `0 0 40px ${stroke.color}80`
+                                }}
+                            />
+
+                            {/* Brush texture overlay */}
+                            <motion.div
+                                className="absolute inset-0"
+                                style={{
+                                    background: `repeating-linear-gradient(
+                                        ${stroke.angle}deg,
+                                        transparent,
+                                        transparent 3px,
+                                        ${stroke.color}20 3px,
+                                        ${stroke.color}20 6px
+                                    )`,
+                                    mixBlendMode: 'overlay'
+                                }}
+                            />
+
+                            {/* Paint drips */}
+                            {Array.from({ length: 8 }).map((_, j) => (
+                                <motion.div
+                                    key={`drip-${j}`}
+                                    initial={{ scaleY: 0, opacity: 0 }}
+                                    animate={{
+                                        scaleY: [0, 1, 0.8],
+                                        opacity: [0, 1, 0]
+                                    }}
+                                    transition={{
+                                        duration: 0.8,
+                                        delay: stroke.delay + 0.3 + j * 0.05,
+                                        ease: "easeOut"
+                                    }}
+                                    className="absolute rounded-full"
+                                    style={{
+                                        left: `${20 + j * 50}px`,
+                                        top: '70px',
+                                        width: '8px',
+                                        height: '40px',
+                                        background: `linear-gradient(180deg, ${stroke.color}, transparent)`,
+                                        transformOrigin: 'top center'
+                                    }}
+                                />
+                            ))}
+
+                            {/* Splatter particles */}
+                            {Array.from({ length: 15 }).map((_, j) => (
+                                <motion.div
+                                    key={`splatter-${j}`}
+                                    initial={{
+                                        x: 0,
+                                        y: 0,
+                                        scale: 0,
+                                        opacity: 0
+                                    }}
+                                    animate={{
+                                        x: (Math.random() - 0.5) * 200,
+                                        y: (Math.random() - 0.5) * 150,
+                                        scale: [0, 1, 0.5],
+                                        opacity: [0, 1, 0]
+                                    }}
+                                    transition={{
+                                        duration: 1,
+                                        delay: stroke.delay + 0.5 + j * 0.03,
+                                        ease: "easeOut"
+                                    }}
+                                    className="absolute rounded-full"
+                                    style={{
+                                        left: `${100 + Math.random() * 200}px`,
+                                        top: `${20 + Math.random() * 40}px`,
+                                        width: `${4 + Math.random() * 8}px`,
+                                        height: `${4 + Math.random() * 8}px`,
+                                        background: stroke.color,
+                                        boxShadow: `0 0 15px ${stroke.color}`
+                                    }}
+                                />
+                            ))}
+                        </motion.div>
                     ))}
                 </div>
             )}
 
-            {/* PHASE 4: OVERLAP */}
-            {phase === 'overlap' && (
+            {/* PHASE 4: MERGE INTO ORANGE */}
+            {phase === 'merge' && (
                 <div className="absolute w-full h-full flex items-center justify-center">
-                    {/* Base layer */}
-                    <motion.div
-                        initial={{ x: -180, y: -120, rotate: -15, scale: 0.9 }}
-                        animate={{
-                            x: -60,
-                            y: -40,
-                            rotate: -8,
-                            scale: 1.2,
-                            opacity: 0.4
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[350px] h-[350px] rounded-[45px]"
-                        style={{
-                            background: colors[4],
-                            filter: 'blur(2px)',
-                            mixBlendMode: 'multiply'
-                        }}
-                    />
+                    {/* Merging paint strokes */}
+                    {brushStrokes.map((stroke, i) => (
+                        <motion.div
+                            key={i}
+                            initial={{
+                                x: stroke.to.x,
+                                y: stroke.to.y,
+                                scale: 1,
+                                opacity: 1,
+                                rotate: stroke.angle
+                            }}
+                            animate={{
+                                x: 0,
+                                y: 0,
+                                scale: 0.3,
+                                opacity: 0.8,
+                                rotate: 0
+                            }}
+                            transition={{
+                                duration: 1.5,
+                                delay: i * 0.05,
+                                ease: [0.34, 1.56, 0.64, 1]
+                            }}
+                            className="absolute w-[300px] h-[300px] rounded-full"
+                            style={{
+                                background: `radial-gradient(circle, ${stroke.color}, transparent)`,
+                                filter: 'blur(30px)',
+                                mixBlendMode: 'screen'
+                            }}
+                        />
+                    ))}
 
-                    {/* Layer 2 */}
+                    {/* Forming orange */}
                     <motion.div
-                        initial={{ x: 150, y: -80, rotate: 25, scale: 1.1 }}
-                        animate={{
-                            x: 40,
-                            y: -30,
-                            rotate: 12,
-                            scale: 1.15,
-                            opacity: 0.6
-                        }}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
                         transition={{
                             duration: 1.5,
-                            delay: 0.1,
+                            delay: 0.5,
                             ease: [0.34, 1.56, 0.64, 1]
                         }}
-                        className="absolute w-[320px] h-[320px] rounded-[42px]"
-                        style={{
-                            background: colors[1],
-                            mixBlendMode: 'screen',
-                            opacity: 0.5
-                        }}
-                    />
+                        className="relative w-[300px] h-[300px] z-10"
+                    >
+                        <div
+                            className="w-full h-full rounded-full"
+                            style={{
+                                background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)',
+                                boxShadow: '0 30px 80px rgba(255,154,0,0.7), 0 0 60px rgba(255,154,0,0.5)'
+                            }}
+                        >
+                            <div
+                                className="absolute inset-0 opacity-20 mix-blend-overlay rounded-full"
+                                style={{
+                                    backgroundImage: 'radial-gradient(black 1.5px, transparent 1.5px)',
+                                    backgroundSize: '6px 6px'
+                                }}
+                            />
+                            <div className="absolute top-[20%] left-[30%] w-20 h-20 rounded-full bg-white/40 blur-2xl" />
+                        </div>
 
-                    {/* Main center */}
-                    <motion.div
-                        initial={{ x: 0, y: 100, rotate: 8, scale: 1.15 }}
-                        animate={{
-                            x: 0,
-                            y: 0,
-                            rotate: 0,
-                            scale: 1.3
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            delay: 0.2,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[300px] h-[300px] rounded-[40px]"
-                        style={{
-                            background: `linear-gradient(135deg, ${colors[0]}, ${colors[3]})`,
-                            boxShadow: `0 40px 100px rgba(255,154,0,0.7), 0 0 80px rgba(255,154,0,0.5)`,
-                            zIndex: 20
-                        }}
-                    />
-
-                    {/* Front overlap */}
-                    <motion.div
-                        initial={{ x: -120, y: 90, rotate: -20, scale: 0.85 }}
-                        animate={{
-                            x: -50,
-                            y: 35,
-                            rotate: -10,
-                            scale: 0.9,
-                            opacity: 0.7
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            delay: 0.15,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[240px] h-[240px] rounded-[30px]"
-                        style={{
-                            background: colors[2],
-                            mixBlendMode: 'overlay',
-                            zIndex: 25
-                        }}
-                    />
-
-                    {/* Top accent */}
-                    <motion.div
-                        initial={{ x: 140, y: 110, rotate: 35, scale: 0.75 }}
-                        animate={{
-                            x: 55,
-                            y: 40,
-                            rotate: 18,
-                            scale: 0.8,
-                            opacity: 0.8
-                        }}
-                        transition={{
-                            duration: 1.5,
-                            delay: 0.25,
-                            ease: [0.34, 1.56, 0.64, 1]
-                        }}
-                        className="absolute w-[200px] h-[200px] rounded-[25px]"
-                        style={{
-                            background: colors[3],
-                            boxShadow: `0 20px 60px rgba(255,107,0,0.6)`,
-                            zIndex: 30
-                        }}
-                    />
+                        <motion.div
+                            initial={{ scale: 0 }}
+                            animate={{ scale: 1 }}
+                            transition={{ delay: 0.8, type: "spring" }}
+                            className="absolute -top-8 left-1/2 w-20 h-28 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900"
+                            style={{
+                                filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.3))',
+                                transform: 'translateX(-50%) rotateZ(-12deg)',
+                                transformOrigin: 'bottom center'
+                            }}
+                        />
+                    </motion.div>
                 </div>
             )}
 
-            {/* PHASE 5: REFORM INTO ORANGE */}
-            {phase === 'reform' && (
-                <motion.div
-                    initial={{ scale: 1.5, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{
-                        duration: 1.2,
-                        ease: [0.34, 1.56, 0.64, 1]
-                    }}
-                    className="relative w-[300px] h-[300px]"
-                >
+            {/* PHASE 5: COLOR SPLASH */}
+            {phase === 'splash' && (
+                <div className="absolute w-full h-full flex items-center justify-center">
+                    {/* Orange */}
                     <motion.div
-                        className="w-full h-full rounded-full"
-                        animate={{
-                            boxShadow: [
-                                '0 20px 60px rgba(255,154,0,0.6)',
-                                '0 25px 80px rgba(255,154,0,0.8)',
-                                '0 20px 60px rgba(255,154,0,0.6)'
-                            ]
-                        }}
-                        transition={{ duration: 2, repeat: Infinity }}
-                        style={{
-                            background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)'
-                        }}
+                        initial={{ scale: 1 }}
+                        animate={{ scale: 1 }}
+                        className="relative w-[300px] h-[300px] z-10"
                     >
-                        <div
-                            className="absolute inset-0 opacity-20 mix-blend-overlay rounded-full"
+                        <motion.div
+                            className="w-full h-full rounded-full"
+                            animate={{
+                                boxShadow: [
+                                    '0 20px 60px rgba(255,154,0,0.6)',
+                                    '0 25px 80px rgba(255,154,0,0.8)',
+                                    '0 20px 60px rgba(255,154,0,0.6)'
+                                ]
+                            }}
+                            transition={{ duration: 2, repeat: Infinity }}
                             style={{
-                                backgroundImage: 'radial-gradient(black 1.5px, transparent 1.5px)',
-                                backgroundSize: '6px 6px'
+                                background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)'
+                            }}
+                        >
+                            <div
+                                className="absolute inset-0 opacity-20 mix-blend-overlay rounded-full"
+                                style={{
+                                    backgroundImage: 'radial-gradient(black 1.5px, transparent 1.5px)',
+                                    backgroundSize: '6px 6px'
+                                }}
+                            />
+                            <div className="absolute top-[20%] left-[30%] w-20 h-20 rounded-full bg-white/40 blur-2xl" />
+                        </motion.div>
+
+                        <div
+                            className="absolute -top-8 left-1/2 w-20 h-28 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900"
+                            style={{
+                                filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.3))',
+                                transform: 'translateX(-50%) rotateZ(-12deg)',
+                                transformOrigin: 'bottom center'
                             }}
                         />
-                        <div className="absolute top-[20%] left-[30%] w-20 h-20 rounded-full bg-white/40 blur-2xl" />
                     </motion.div>
 
-                    <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
-                        transition={{ delay: 0.3, type: "spring" }}
-                        className="absolute -top-8 left-1/2 w-20 h-28 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900"
-                        style={{
-                            filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.3))',
-                            transform: 'translateX(-50%) rotateZ(-12deg)',
-                            transformOrigin: 'bottom center'
-                        }}
-                    />
+                    {/* Splash particles around orange */}
+                    {Array.from({ length: 30 }).map((_, i) => {
+                        const angle = (i / 30) * 360;
+                        const distance = 180 + Math.random() * 80;
+                        return (
+                            <motion.div
+                                key={`splash-${i}`}
+                                initial={{
+                                    x: Math.cos(angle * Math.PI / 180) * 150,
+                                    y: Math.sin(angle * Math.PI / 180) * 150,
+                                    scale: 0,
+                                    opacity: 0
+                                }}
+                                animate={{
+                                    x: Math.cos(angle * Math.PI / 180) * distance,
+                                    y: Math.sin(angle * Math.PI / 180) * distance,
+                                    scale: [0, 1.5, 0.8],
+                                    opacity: [0, 1, 0]
+                                }}
+                                transition={{
+                                    duration: 1.2,
+                                    delay: i * 0.02,
+                                    ease: "easeOut"
+                                }}
+                                className="absolute rounded-full"
+                                style={{
+                                    width: `${6 + Math.random() * 12}px`,
+                                    height: `${6 + Math.random() * 12}px`,
+                                    background: colors[i % colors.length],
+                                    boxShadow: `0 0 20px ${colors[i % colors.length]}`
+                                }}
+                            />
+                        );
+                    })}
 
-                    {/* Text overlay during reform */}
+                    {/* Text */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -475,7 +453,7 @@ export default function HeroBigBang() {
                             ALL<span className="text-brand-gold">RANGE</span>
                         </h1>
                     </motion.div>
-                </motion.div>
+                </div>
             )}
 
         </div>
