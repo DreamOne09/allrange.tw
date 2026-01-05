@@ -17,12 +17,13 @@ export const realProjects: Project[] = [
         id: 'real-cmp',
         title: '勤美鑄鐵廠：展示區域設計規畫建置',
         category: 'space',
-        image: '/allrange.tw/images/placeholders/exhibition_design_1.png',
+        image: '/allrange.tw/images/projects/cmp/cmp-main.png',
         description: 'Exhibition area design planning and construction for CMP Cast Iron Factory.',
         videoUrl: 'ho8GsEHTTN4',
         gallery: [
-            '/allrange.tw/images/placeholders/museum_display_1.png',
-            '/allrange.tw/images/placeholders/retail_space_1.png'
+            '/allrange.tw/images/projects/cmp/cmp-1.png',
+            '/allrange.tw/images/projects/cmp/cmp-2.png',
+            '/allrange.tw/images/projects/cmp/cmp-3.png'
         ]
     },
     // 1. 文建會於 101-89F 觀景台站高高看台灣地方文物展

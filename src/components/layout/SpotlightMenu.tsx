@@ -125,9 +125,9 @@ const SpotlightMenu = ({ isOpen, onClose }: SpotlightMenuProps) => {
                         <div className="space-y-6">
                             <div>
                                 <h4 className="text-brand-orange text-xs font-bold uppercase tracking-widest mb-2">Location</h4>
-                                <p className="text-white/60 leading-relaxed">
-                                    台北市松山區<br />
-                                    民生東路三段
+                                <p className="text-white/60 leading-relaxed text-xs">
+                                    台北市大安區<br />
+                                    四維路 100-2 號 3 樓
                                 </p>
                             </div>
                             <div>

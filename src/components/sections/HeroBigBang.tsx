@@ -71,12 +71,12 @@ export default function HeroBigBang() {
             {phase === 'mobius' && (
                 <motion.div
                     initial={{ scale: 0, opacity: 0, rotate: -45 }}
-                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                    animate={{ scale: 1.5, opacity: 1, rotate: 0 }}
                     exit={{ scale: 0.8, opacity: 0 }}
-                    transition={{ duration: 1.2, ease: "easeOut" }}
-                    className="relative w-[400px] h-[300px] flex items-center justify-center"
+                    transition={{ duration: 1.5, ease: "easeOut" }}
+                    className="relative w-[800px] h-[500px] flex items-center justify-center p-20"
                 >
-                    <svg width="400" height="200" viewBox="0 0 400 200" style={{ overflow: 'visible' }}>
+                    <svg width="800" height="400" viewBox="0 0 400 200" style={{ overflow: 'visible' }}>
                         <defs>
                             <linearGradient id="mobiusGrad" x1="0%" y1="0%" x2="100%" y2="0%">
                                 <stop offset="0%" stopColor="#ff9a00" />
@@ -84,7 +84,7 @@ export default function HeroBigBang() {
                                 <stop offset="100%" stopColor="#ff6b00" />
                             </linearGradient>
                             <filter id="glow">
-                                <feGaussianBlur stdDeviation="5" result="coloredBlur" />
+                                <feGaussianBlur stdDeviation="8" result="coloredBlur" />
                                 <feMerge>
                                     <feMergeNode in="coloredBlur" />
                                     <feMergeNode in="SourceGraphic" />
@@ -97,33 +97,56 @@ export default function HeroBigBang() {
                             d="M 100 100 C 100 0, 300 200, 300 100 C 300 0, 100 200, 100 100"
                             fill="none"
                             stroke="url(#mobiusGrad)"
-                            strokeWidth="30"
+                            strokeWidth="35"
                             strokeLinecap="round"
                             filter="url(#glow)"
                             initial={{ pathLength: 0, opacity: 0 }}
                             animate={{
                                 pathLength: [0, 1],
                                 opacity: 1,
-                                rotate: [0, 5, -5, 0]
+                                rotate: [0, 2, -2, 0]
                             }}
                             transition={{
                                 pathLength: { duration: 2, ease: "easeInOut" },
-                                rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" }
+                                rotate: { duration: 8, repeat: Infinity, ease: "easeInOut" }
                             }}
                         />
 
-                        {/* Particle traveling along the strip */}
-                        <motion.circle
-                            r="8"
-                            fill="#fff"
-                            filter="url(#glow)"
-                        >
-                            <animateMotion
-                                dur="3s"
-                                repeatCount="indefinite"
-                                path="M 100 100 C 100 0, 300 200, 300 100 C 300 0, 100 200, 100 100"
-                            />
-                        </motion.circle>
+                        {/* Leaping Arrow Effect */}
+                        <motion.g filter="url(#glow)">
+                            {/* The "Arrow" Head */}
+                            <motion.path
+                                d="M -15 0 L -5 -8 L 15 0 L -5 8 Z"
+                                fill="#ffffff"
+                                style={{ transformOrigin: 'center' }}
+                                animate={{ scale: [1, 1.3, 1] }}
+                                transition={{ duration: 0.5, repeat: Infinity, ease: "easeInOut" }}
+                            >
+                                <animateMotion
+                                    dur="2s"
+                                    repeatCount="indefinite"
+                                    path="M 100 100 C 100 0, 300 200, 300 100 C 300 0, 100 200, 100 100"
+                                    rotate="auto"
+                                />
+                            </motion.path>
+
+                            {/* Dynamic Trail / Sparkles to give "leaping" feel */}
+                            {[0, 0.05, 0.1, 0.15].map((delay, i) => (
+                                <motion.circle
+                                    key={i}
+                                    r={8 - i * 1.5}
+                                    fill={i === 0 ? "#fff" : "#ffb62e"}
+                                    opacity={1 - i * 0.2}
+                                >
+                                    <animateMotion
+                                        dur="2s"
+                                        begin={`${delay}s`}
+                                        repeatCount="indefinite"
+                                        path="M 100 100 C 100 0, 300 200, 300 100 C 300 0, 100 200, 100 100"
+                                    />
+                                </motion.circle>
+                            ))}
+                        </motion.g>
 
                         {/* Second layer for 3D overlap effect */}
                         <motion.path
@@ -139,9 +162,9 @@ export default function HeroBigBang() {
                     </svg>
 
                     <motion.div
-                        className="absolute text-brand-gold text-lg tracking-[0.8em] mt-32"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                        className="absolute text-brand-gold text-2xl tracking-[1em] mt-80 font-black italic"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 1 }}
                     >
                         INFINITE DESIGN

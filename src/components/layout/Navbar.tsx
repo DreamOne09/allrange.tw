@@ -32,18 +32,28 @@ const Navbar = () => {
                     </Link>
 
                     <div className="flex items-center gap-8">
-                        <Link href="/work" className="hidden md:block text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                            Work
-                        </Link>
-                        {/* Menu Trigger */}
+                        {/* Desktop Direct Links */}
+                        <div className="hidden md:flex items-center gap-8">
+                            <Link href="/work" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                                Work
+                            </Link>
+                            <Link href="/about" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                                About
+                            </Link>
+                            <Link href="/services" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                                Services
+                            </Link>
+                            <Link href="/contact" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                                Contact
+                            </Link>
+                        </div>
+
+                        {/* Mobile Menu Trigger */}
                         <button
                             onClick={() => setIsOpen(true)}
                             aria-label="Open Menu"
-                            className="flex items-center gap-3 text-white hover:text-brand-gold transition-colors group"
+                            className="md:hidden flex items-center gap-3 text-white hover:text-brand-gold transition-colors group"
                         >
-                            <span className="hidden md:block text-xs font-bold uppercase tracking-[0.3em] opacity-80 group-hover:opacity-100">
-                                Menu
-                            </span>
                             <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center bg-white/5 group-hover:bg-brand-gold/10 group-hover:border-brand-gold/50 transition-all">
                                 <Menu size={20} />
                             </div>
