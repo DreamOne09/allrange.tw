@@ -68,5 +68,6 @@ export const realProjects: Project[] = [
 
 export const heroImages = realProjects.map(p => p.image);
 
-// Subset is now just all of them since we filtered the main list
-export const heroSubset = realProjects;
+// Subset excludes CMP since images don't exist yet
+export const heroSubset = realProjects.filter(p => p.id !== 'real-cmp');
+

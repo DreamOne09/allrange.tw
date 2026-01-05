@@ -9,38 +9,30 @@ export default function HeroBigBang() {
 
     useEffect(() => {
         const runStory = async () => {
-            // 1. Orange Splash
             setPhase('splash');
             await new Promise(r => setTimeout(r, 1200));
 
-            // 2. Fish Swimming
             setPhase('fish');
-            await new Promise(r => setTimeout(r, 3000));
+            await new Promise(r => setTimeout(r, 3500));
 
-            // 3. Watercolor Transform
             setPhase('transform');
             await new Promise(r => setTimeout(r, 1500));
 
-            // 4. Rocket Launch
             setPhase('rocket');
-            await new Promise(r => setTimeout(r, 2500));
+            await new Promise(r => setTimeout(r, 3000));
 
-            // 5. Explosion
             setPhase('explosion');
             await new Promise(r => setTimeout(r, 1000));
 
-            // 6. Branding
             setPhase('branding');
             await new Promise(r => setTimeout(r, 3000));
 
-            // Loop
             setLoopCount(prev => prev + 1);
         };
 
         runStory();
     }, [loopCount]);
 
-    // Splash particles
     const splashParticles = Array.from({ length: 20 }).map((_, i) => ({
         id: i,
         angle: (i / 20) * 360,
@@ -48,7 +40,6 @@ export default function HeroBigBang() {
         size: 15 + Math.random() * 25,
     }));
 
-    // Explosion particles
     const explosionParticles = Array.from({ length: 40 }).map((_, i) => ({
         id: i,
         angle: (i / 40) * 360,
@@ -59,10 +50,9 @@ export default function HeroBigBang() {
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
 
-            {/* 1. ORANGE SPLASH */}
+            {/* SPLASH */}
             {phase === 'splash' && (
                 <>
-                    {/* Central Orange */}
                     <motion.div
                         initial={{ scale: 1 }}
                         animate={{ scale: [1, 1.3, 0] }}
@@ -74,7 +64,6 @@ export default function HeroBigBang() {
                         }}
                     />
 
-                    {/* Splash Droplets */}
                     {splashParticles.map((p) => (
                         <motion.div
                             key={p.id}
@@ -98,97 +87,153 @@ export default function HeroBigBang() {
                 </>
             )}
 
-            {/* 2. FISH SWIMMING IN CIRCLE */}
+            {/* FISH SWIMMING - Enhanced with fluid motion */}
             {phase === 'fish' && (
-                <motion.div
-                    className="absolute"
-                    animate={{
-                        rotate: 360
-                    }}
-                    transition={{ duration: 3, ease: "linear" }}
-                >
+                <div className="absolute w-full h-full flex items-center justify-center">
+                    {/* Swimming path - figure 8 */}
                     <motion.div
-                        className="relative"
-                        style={{
-                            x: 150,
-                            filter: 'drop-shadow(0 10px 30px rgba(255,154,0,0.6))'
-                        }}
+                        className="absolute"
                         animate={{
-                            scaleX: [1, -1, 1],
+                            x: [0, 200, 200, 0, -200, -200, 0],
+                            y: [0, -100, 100, 0, 100, -100, 0],
                         }}
                         transition={{
-                            duration: 3,
-                            times: [0, 0.5, 1]
+                            duration: 3.5,
+                            ease: "easeInOut",
+                            times: [0, 0.16, 0.33, 0.5, 0.66, 0.83, 1]
                         }}
                     >
-                        {/* Fish Body */}
-                        <svg width="120" height="80" viewBox="0 0 120 80" className="relative">
-                            <defs>
-                                <linearGradient id="fishBody" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#ffd700" />
-                                    <stop offset="50%" stopColor="#ff9a00" />
-                                    <stop offset="100%" stopColor="#ff6b00" />
-                                </linearGradient>
-                                <radialGradient id="fishShine">
-                                    <stop offset="0%" stopColor="#ffffff" stopOpacity="0.8" />
-                                    <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
-                                </radialGradient>
-                            </defs>
+                        <motion.div
+                            animate={{
+                                rotateY: [0, 0, 180, 180, 360, 360, 360],
+                            }}
+                            transition={{
+                                duration: 3.5,
+                                times: [0, 0.24, 0.26, 0.74, 0.76, 0.99, 1]
+                            }}
+                            style={{
+                                filter: 'drop-shadow(0 15px 40px rgba(255,154,0,0.7))'
+                            }}
+                        >
+                            <svg width="180" height="120" viewBox="0 0 180 120" className="relative">
+                                <defs>
+                                    <linearGradient id="fishBody" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stopColor="#ffd700" />
+                                        <stop offset="50%" stopColor="#ff9a00" />
+                                        <stop offset="100%" stopColor="#ff6b00" />
+                                    </linearGradient>
+                                    <radialGradient id="fishShine">
+                                        <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
+                                        <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                                    </radialGradient>
+                                    <linearGradient id="finGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" stopColor="#ff9a00" stopOpacity="0.3" />
+                                        <stop offset="100%" stopColor="#ffd700" stopOpacity="0.8" />
+                                    </linearGradient>
+                                </defs>
 
-                            {/* Body */}
-                            <ellipse cx="50" cy="40" rx="40" ry="25" fill="url(#fishBody)" />
+                                {/* Body with wave animation */}
+                                <motion.path
+                                    d="M 30 60 Q 60 55, 90 60 Q 120 65, 140 60"
+                                    stroke="url(#fishBody)"
+                                    strokeWidth="45"
+                                    fill="none"
+                                    strokeLinecap="round"
+                                    animate={{
+                                        d: [
+                                            "M 30 60 Q 60 55, 90 60 Q 120 65, 140 60",
+                                            "M 30 60 Q 60 65, 90 60 Q 120 55, 140 60",
+                                            "M 30 60 Q 60 55, 90 60 Q 120 65, 140 60"
+                                        ]
+                                    }}
+                                    transition={{ duration: 0.6, repeat: Infinity }}
+                                />
 
-                            {/* Shine */}
-                            <ellipse cx="35" cy="30" rx="15" ry="10" fill="url(#fishShine)" />
+                                {/* Shine overlay */}
+                                <ellipse cx="70" cy="50" rx="25" ry="18" fill="url(#fishShine)" />
 
-                            {/* Tail */}
-                            <path d="M 10 40 Q 0 25, 5 15 Q 0 40, 5 65 Q 0 55, 10 40 Z" fill="url(#fishBody)" opacity="0.9" />
+                                {/* Animated Tail */}
+                                <motion.g
+                                    animate={{
+                                        rotate: [-8, 8, -8],
+                                        x: [0, -3, 0]
+                                    }}
+                                    transition={{ duration: 0.6, repeat: Infinity }}
+                                    style={{ transformOrigin: '20px 60px' }}
+                                >
+                                    <path
+                                        d="M 20 60 Q 5 40, 10 25 Q 0 60, 10 95 Q 5 80, 20 60 Z"
+                                        fill="url(#fishBody)"
+                                        opacity="0.95"
+                                    />
+                                    <path
+                                        d="M 20 60 Q 8 50, 12 35 Q 5 60, 12 85 Q 8 70, 20 60 Z"
+                                        fill="url(#finGradient)"
+                                    />
+                                </motion.g>
 
-                            {/* Fins */}
-                            <ellipse cx="50" cy="60" rx="20" ry="8" fill="url(#fishBody)" opacity="0.7" />
-                            <ellipse cx="50" cy="20" rx="20" ry="8" fill="url(#fishBody)" opacity="0.7" />
+                                {/* Top Fin */}
+                                <motion.path
+                                    d="M 80 38 Q 85 20, 75 15 Q 90 30, 80 38 Z"
+                                    fill="url(#fishBody)"
+                                    opacity="0.8"
+                                    animate={{ y: [-2, 2, -2] }}
+                                    transition={{ duration: 0.8, repeat: Infinity }}
+                                />
 
-                            {/* Eye */}
-                            <circle cx="70" cy="35" r="5" fill="#000" />
-                            <circle cx="72" cy="33" r="2" fill="#fff" />
-                        </svg>
+                                {/* Bottom Fin */}
+                                <motion.path
+                                    d="M 80 82 Q 85 100, 75 105 Q 90 90, 80 82 Z"
+                                    fill="url(#fishBody)"
+                                    opacity="0.8"
+                                    animate={{ y: [2, -2, 2] }}
+                                    transition={{ duration: 0.8, repeat: Infinity, delay: 0.4 }}
+                                />
 
-                        {/* Bubbles */}
-                        {[0, 1, 2].map((i) => (
-                            <motion.div
-                                key={i}
-                                className="absolute rounded-full bg-white/30 border border-white/50"
-                                style={{
-                                    width: 8 + i * 3,
-                                    height: 8 + i * 3,
-                                    left: -20 - i * 15,
-                                    top: 30 + i * 10
-                                }}
-                                animate={{
-                                    y: [-10, -30],
-                                    opacity: [0.6, 0],
-                                    scale: [1, 1.5]
-                                }}
-                                transition={{
-                                    duration: 1.5,
-                                    delay: i * 0.3,
-                                    repeat: Infinity
-                                }}
-                            />
-                        ))}
+                                {/* Eye */}
+                                <circle cx="120" cy="55" r="7" fill="#1a1a1a" />
+                                <circle cx="123" cy="52" r="3" fill="#fff" />
+
+                                {/* Scales detail */}
+                                <g opacity="0.3">
+                                    {[0, 1, 2, 3].map((i) => (
+                                        <circle key={i} cx={50 + i * 20} cy={60} r="8" fill="none" stroke="#fff" strokeWidth="1" />
+                                    ))}
+                                </g>
+                            </svg>
+
+                            {/* Animated Bubbles */}
+                            {[0, 1, 2, 3].map((i) => (
+                                <motion.div
+                                    key={i}
+                                    className="absolute rounded-full bg-white/40 border border-white/60"
+                                    style={{
+                                        width: 6 + i * 2,
+                                        height: 6 + i * 2,
+                                        left: -30 - i * 20,
+                                        top: 50 + Math.sin(i) * 15
+                                    }}
+                                    animate={{
+                                        y: [-5, -40],
+                                        x: [0, (i % 2 ? 10 : -10)],
+                                        opacity: [0.7, 0],
+                                        scale: [1, 1.3]
+                                    }}
+                                    transition={{
+                                        duration: 1.5,
+                                        delay: i * 0.4,
+                                        repeat: Infinity
+                                    }}
+                                />
+                            ))}
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+                </div>
             )}
 
-            {/* 3. WATERCOLOR TRANSFORMATION */}
+            {/* WATERCOLOR TRANSFORMATION */}
             {phase === 'transform' && (
-                <motion.div
-                    className="absolute"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                >
-                    {/* Watercolor Splashes */}
+                <motion.div className="absolute" initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}>
                     {[0, 1, 2, 3].map((i) => (
                         <motion.div
                             key={i}
@@ -207,49 +252,29 @@ export default function HeroBigBang() {
                             transition={{ duration: 1.5, delay: i * 0.1 }}
                         />
                     ))}
-
-                    {/* Morphing Shape */}
-                    <motion.div
-                        animate={{
-                            scale: [1, 1.2, 1],
-                            rotate: [0, 180, 360]
-                        }}
-                        transition={{ duration: 1.5 }}
-                        className="relative"
-                    >
-                        <svg width="150" height="150" viewBox="0 0 150 150">
-                            <defs>
-                                <linearGradient id="morphGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" stopColor="#ffd700" />
-                                    <stop offset="50%" stopColor="#ff9a00" />
-                                    <stop offset="100%" stopColor="#ff6b00" />
-                                </linearGradient>
-                            </defs>
-                            <path
-                                d="M 75 10 Q 100 40, 90 75 Q 75 100, 60 75 Q 50 40, 75 10 Z"
-                                fill="url(#morphGradient)"
-                                opacity="0.8"
-                            />
-                        </svg>
-                    </motion.div>
                 </motion.div>
             )}
 
-            {/* 4. ROCKET LAUNCH */}
+            {/* ROCKET LAUNCH - Enhanced with dynamic flames */}
             {phase === 'rocket' && (
                 <motion.div
                     className="absolute"
-                    initial={{ y: 0, scale: 0.8 }}
+                    initial={{ y: 50, scale: 0.9, rotate: 0 }}
                     animate={{
-                        y: [-50, -400],
-                        scale: [0.8, 1.2]
+                        y: [-50, -500],
+                        scale: [0.9, 1.3],
+                        rotate: [0, -3, 3, 0]
                     }}
-                    transition={{ duration: 2.5, ease: "easeIn" }}
+                    transition={{
+                        duration: 3,
+                        ease: [0.4, 0, 0.2, 1],
+                        rotate: { duration: 0.5, repeat: 5 }
+                    }}
                     style={{
-                        filter: 'drop-shadow(0 10px 30px rgba(255,154,0,0.8))'
+                        filter: 'drop-shadow(0 15px 40px rgba(255,154,0,0.9))'
                     }}
                 >
-                    <svg width="100" height="150" viewBox="0 0 100 150">
+                    <svg width="120" height="180" viewBox="0 0 120 180">
                         <defs>
                             <linearGradient id="rocketBody" x1="0%" y1="0%" x2="0%" y2="100%">
                                 <stop offset="0%" stopColor="#ffd700" />
@@ -260,64 +285,99 @@ export default function HeroBigBang() {
                                 <stop offset="0%" stopColor="#ffffff" stopOpacity="0.9" />
                                 <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
                             </radialGradient>
+                            <linearGradient id="flame1" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="#ffff00" />
+                                <stop offset="40%" stopColor="#ff9a00" />
+                                <stop offset="100%" stopColor="#ff0000" />
+                            </linearGradient>
+                            <linearGradient id="flame2" x1="0%" y1="0%" x2="0%" y2="100%">
+                                <stop offset="0%" stopColor="#ffffff" />
+                                <stop offset="50%" stopColor="#ffff00" />
+                                <stop offset="100%" stopColor="#ff9a00" />
+                            </linearGradient>
                         </defs>
 
                         {/* Rocket Body */}
-                        <path d="M 50 10 L 70 50 L 70 100 L 30 100 L 30 50 Z" fill="url(#rocketBody)" />
+                        <path d="M 35 60 L 35 120 L 85 120 L 85 60 Z" fill="url(#rocketBody)" />
 
                         {/* Nose Cone */}
-                        <path d="M 50 10 L 70 50 L 30 50 Z" fill="url(#rocketBody)" />
-                        <ellipse cx="45" cy="30" rx="10" ry="15" fill="url(#rocketShine)" />
+                        <path d="M 60 15 L 85 60 L 35 60 Z" fill="url(#rocketBody)" />
+                        <ellipse cx="55" cy="35" rx="12" ry="18" fill="url(#rocketShine)" />
 
                         {/* Fins */}
-                        <path d="M 30 80 L 10 120 L 30 100 Z" fill="url(#rocketBody)" opacity="0.9" />
-                        <path d="M 70 80 L 90 120 L 70 100 Z" fill="url(#rocketBody)" opacity="0.9" />
+                        <path d="M 35 90 L 15 140 L 35 120 Z" fill="url(#rocketBody)" opacity="0.95" />
+                        <path d="M 85 90 L 105 140 L 85 120 Z" fill="url(#rocketBody)" opacity="0.95" />
 
                         {/* Window */}
-                        <circle cx="50" cy="60" r="12" fill="#1a1a1a" opacity="0.8" />
-                        <circle cx="50" cy="60" r="10" fill="#4a9eff" opacity="0.6" />
+                        <circle cx="60" cy="75" r="15" fill="#1a1a1a" opacity="0.8" />
+                        <circle cx="60" cy="75" r="12" fill="#4a9eff" opacity="0.7" />
+                        <ellipse cx="55" cy="70" rx="5" ry="6" fill="#fff" opacity="0.6" />
+
+                        {/* Details */}
+                        <rect x="38" y="95" width="44" height="3" fill="#ff6b00" opacity="0.6" />
+                        <rect x="38" y="105" width="44" height="3" fill="#ff6b00" opacity="0.6" />
                     </svg>
 
-                    {/* Exhaust Fire */}
-                    <motion.div
-                        className="absolute left-1/2 -translate-x-1/2"
-                        style={{ top: 140 }}
-                        animate={{
-                            scaleY: [1, 1.5, 1],
-                            opacity: [0.9, 1, 0.9]
-                        }}
-                        transition={{ duration: 0.3, repeat: Infinity }}
-                    >
-                        <svg width="60" height="80" viewBox="0 0 60 80">
-                            <defs>
-                                <linearGradient id="fire" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stopColor="#ffff00" />
-                                    <stop offset="50%" stopColor="#ff9a00" />
-                                    <stop offset="100%" stopColor="#ff0000" />
-                                </linearGradient>
-                            </defs>
-                            <path d="M 30 0 Q 10 30, 15 60 Q 30 80, 45 60 Q 50 30, 30 0 Z" fill="url(#fire)" opacity="0.9" />
-                        </svg>
-                    </motion.div>
+                    {/* Dynamic Exhaust Flames */}
+                    <div className="absolute left-1/2 -translate-x-1/2" style={{ top: 165 }}>
+                        {/* Main Flame */}
+                        <motion.svg
+                            width="80"
+                            height="120"
+                            viewBox="0 0 80 120"
+                            animate={{
+                                scaleY: [1, 1.4, 1.1, 1.3, 1],
+                                scaleX: [1, 0.9, 1.1, 0.95, 1]
+                            }}
+                            transition={{ duration: 0.15, repeat: Infinity }}
+                        >
+                            <path
+                                d="M 40 0 Q 15 40, 20 80 Q 40 110, 60 80 Q 65 40, 40 0 Z"
+                                fill="url(#flame1)"
+                                opacity="0.95"
+                            />
+                        </motion.svg>
+
+                        {/* Inner Bright Flame */}
+                        <motion.svg
+                            width="50"
+                            height="80"
+                            viewBox="0 0 50 80"
+                            className="absolute top-0 left-1/2 -translate-x-1/2"
+                            animate={{
+                                scaleY: [1, 1.3, 1.2, 1.4, 1],
+                                scaleX: [1, 0.95, 1.05, 0.9, 1]
+                            }}
+                            transition={{ duration: 0.12, repeat: Infinity }}
+                        >
+                            <path
+                                d="M 25 0 Q 10 25, 12 50 Q 25 70, 38 50 Q 40 25, 25 0 Z"
+                                fill="url(#flame2)"
+                                opacity="0.9"
+                            />
+                        </motion.svg>
+                    </div>
 
                     {/* Smoke Trail */}
-                    {[0, 1, 2, 3].map((i) => (
+                    {[0, 1, 2, 3, 4].map((i) => (
                         <motion.div
                             key={i}
-                            className="absolute left-1/2 -translate-x-1/2 rounded-full bg-gray-400/30"
+                            className="absolute left-1/2 -translate-x-1/2 rounded-full"
                             style={{
-                                width: 30 + i * 10,
-                                height: 30 + i * 10,
-                                top: 150 + i * 40,
-                                filter: 'blur(10px)'
+                                width: 25 + i * 8,
+                                height: 25 + i * 8,
+                                top: 180 + i * 50,
+                                background: `radial-gradient(circle, rgba(150,150,150,${0.4 - i * 0.08}), transparent)`,
+                                filter: 'blur(8px)'
                             }}
                             animate={{
                                 opacity: [0.5, 0],
-                                scale: [1, 1.5]
+                                scale: [1, 1.8],
+                                x: [0, (i % 2 ? 15 : -15)]
                             }}
                             transition={{
-                                duration: 1,
-                                delay: i * 0.2,
+                                duration: 1.2,
+                                delay: i * 0.15,
                                 repeat: Infinity
                             }}
                         />
@@ -325,10 +385,9 @@ export default function HeroBigBang() {
                 </motion.div>
             )}
 
-            {/* 5. EXPLOSION */}
+            {/* EXPLOSION */}
             {phase === 'explosion' && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                    {/* Flash */}
                     <motion.div
                         initial={{ scale: 0, opacity: 1 }}
                         animate={{ scale: 3, opacity: 0 }}
@@ -336,7 +395,6 @@ export default function HeroBigBang() {
                         className="absolute w-[300px] h-[300px] rounded-full bg-white"
                     />
 
-                    {/* Explosion Particles */}
                     {explosionParticles.map((p) => (
                         <motion.div
                             key={p.id}
@@ -358,7 +416,6 @@ export default function HeroBigBang() {
                         />
                     ))}
 
-                    {/* Shockwave */}
                     {[0, 0.15, 0.3].map((delay, i) => (
                         <motion.div
                             key={i}
@@ -371,17 +428,13 @@ export default function HeroBigBang() {
                 </div>
             )}
 
-            {/* 6. BRANDING - 3D ORANGE */}
+            {/* BRANDING */}
             {phase === 'branding' && (
                 <div className="relative flex flex-col items-center z-50">
                     <motion.div
                         initial={{ scale: 0, rotate: -180 }}
                         animate={{ scale: 1, rotate: 0 }}
-                        transition={{
-                            type: "spring",
-                            stiffness: 200,
-                            damping: 15
-                        }}
+                        transition={{ type: "spring", stiffness: 200, damping: 15 }}
                         whileHover={{ scale: 1.1, rotate: 5 }}
                         whileTap={{ scale: 0.9, rotate: -5 }}
                         className="relative w-[300px] h-[300px] cursor-pointer"
@@ -410,10 +463,11 @@ export default function HeroBigBang() {
                             initial={{ scale: 0 }}
                             animate={{ scale: 1 }}
                             transition={{ delay: 0.3, type: "spring" }}
-                            className="absolute -top-8 left-1/2 w-20 h-28 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] origin-bottom-left border-2 border-green-900"
+                            className="absolute -top-8 left-1/2 w-20 h-28 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900"
                             style={{
                                 filter: 'drop-shadow(0 5px 10px rgba(0,0,0,0.3))',
-                                transform: 'translateX(-50%) rotateZ(-12deg)'
+                                transform: 'translateX(-50%) rotateZ(-12deg)',
+                                transformOrigin: 'bottom center'
                             }}
                         />
                     </motion.div>
