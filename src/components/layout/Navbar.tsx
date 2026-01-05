@@ -34,6 +34,9 @@ const Navbar = () => {
                     <div className="flex items-center gap-8">
                         {/* Desktop Direct Links */}
                         <div className="hidden md:flex items-center gap-8">
+                            <Link href="/" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
+                                Home
+                            </Link>
                             <Link href="/work" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
                                 Work
                             </Link>

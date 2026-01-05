@@ -13,10 +13,6 @@ export default function Home() {
       {/* 2. Featured Projects */}
       <SelectedBlock />
 
-      <div className="h-20 bg-black border-t border-brand-gray flex items-center justify-center">
-        <p className="text-gray-600 text-[10px] uppercase tracking-widest">Scroll Down</p>
-      </div>
-
       <About />
       {/* Contact is now integrated into Footer */}
     </div>
