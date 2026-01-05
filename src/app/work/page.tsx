@@ -2,9 +2,34 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import { realProjects } from '@/data/real_projects';
+import { useState, useEffect } from 'react';
 
 export default function WorkPage() {
+    const [activeSection, setActiveSection] = useState('');
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const sections = realProjects.map(p => document.getElementById(p.id));
+            const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+            for (const section of sections) {
+                if (section) {
+                    const { offsetTop, offsetHeight } = section;
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        setActiveSection(section.id);
+                        break;
+                    }
+                }
+            }
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, []);
+
     return (
         <div className="min-h-screen bg-black pt-24 pb-20">
             {/* Page Header */}
@@ -24,6 +49,67 @@ export default function WorkPage() {
                         探索我們的設計作品，從展場設計到空間規劃，每個專案都展現獨特的創意與專業。
                     </p>
                 </motion.div>
+            </div>
+
+            {/* Project Index - Sticky Sidebar */}
+            <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-50"
+            >
+                <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-2xl p-4 max-w-[280px]">
+                    <h3 className="text-brand-gold text-xs font-bold uppercase tracking-widest mb-4 px-2">
+                        專案索引
+                    </h3>
+                    <nav className="space-y-2">
+                        {realProjects.map((project, index) => (
+                            <Link
+                                key={project.id}
+                                href={`#${project.id}`}
+                                className={`block px-3 py-2 rounded-lg transition-all duration-300 group ${activeSection === project.id
+                                        ? 'bg-brand-orange text-white'
+                                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                    }`}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <span className={`text-xs font-bold ${activeSection === project.id ? 'text-white' : 'text-brand-orange'
+                                        }`}>
+                                        {String(index + 1).padStart(2, '0')}
+                                    </span>
+                                    <div className="flex-1 min-w-0">
+                                        <p className="text-xs font-medium truncate">
+                                            {project.title}
+                                        </p>
+                                        <p className="text-[10px] uppercase tracking-wider opacity-60">
+                                            {project.category}
+                                        </p>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </nav>
+                </div>
+            </motion.div>
+
+            {/* Mobile Project Index - Top Bar */}
+            <div className="lg:hidden sticky top-20 z-40 bg-black/95 backdrop-blur-sm border-b border-white/10 mb-8">
+                <div className="container mx-auto px-6 py-4">
+                    <div className="flex gap-2 overflow-x-auto scrollbar-hide">
+                        {realProjects.map((project, index) => (
+                            <Link
+                                key={project.id}
+                                href={`#${project.id}`}
+                                className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all ${activeSection === project.id
+                                        ? 'bg-brand-orange text-white'
+                                        : 'bg-white/5 text-gray-400 hover:text-white'
+                                    }`}
+                            >
+                                {String(index + 1).padStart(2, '0')}
+                            </Link>
+                        ))}
+                    </div>
+                </div>
             </div>
 
             {/* Projects List */}
