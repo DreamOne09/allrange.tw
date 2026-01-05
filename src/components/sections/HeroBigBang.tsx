@@ -10,7 +10,7 @@ export default function HeroBigBang() {
     useEffect(() => {
         const runSequence = async () => {
             setPhase('mobius');
-            await new Promise(r => setTimeout(r, 4500)); // Time for arrow to fly and hit
+            await new Promise(r => setTimeout(r, 6000)); // Longer cinematic duration
 
             setPhase('orange');
             await new Promise(r => setTimeout(r, 1500));
@@ -25,7 +25,7 @@ export default function HeroBigBang() {
             await new Promise(r => setTimeout(r, 1500));
 
             setPhase('splash');
-            await new Promise(r => setTimeout(r, 3000)); // Show text longer
+            await new Promise(r => setTimeout(r, 3000));
 
             setLoopCount(prev => prev + 1);
         };
@@ -34,278 +34,228 @@ export default function HeroBigBang() {
     }, [loopCount]);
 
     const colors = [
-        '#ff9a00', // Primary orange
-        '#ffb62e', // Light orange
-        '#ffd700', // Gold
-        '#ff6b00', // Dark orange
-        '#ff8c42', // Mid orange
+        '#ff9a00', '#ffb62e', '#ffd700', '#ff6b00', '#ff8c42',
     ];
 
-    const explosionParticles = Array.from({ length: 40 }).map((_, i) => ({
+    const explosionParticles = Array.from({ length: 45 }).map((_, i) => ({
         id: i,
-        angle: (i / 40) * 360,
-        distance: 120 + Math.random() * 220,
-        size: 8 + Math.random() * 15,
+        angle: (i / 45) * 360,
+        distance: 130 + Math.random() * 250,
+        size: 10 + Math.random() * 18,
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
 
     const brushStrokes = [
-        { from: { x: -500, y: -300 }, to: { x: 0, y: 0 }, angle: 45, color: colors[0], delay: 0 },
-        { from: { x: 500, y: -300 }, to: { x: 0, y: 0 }, angle: -45, color: colors[1], delay: 0.1 },
-        { from: { x: -500, y: 300 }, to: { x: 0, y: 0 }, angle: -45, color: colors[2], delay: 0.2 },
-        { from: { x: 500, y: 300 }, to: { x: 0, y: 0 }, angle: 45, color: colors[3], delay: 0.3 },
-        { from: { x: 0, y: -500 }, to: { x: 0, y: 0 }, angle: 0, color: colors[4], delay: 0.15 },
+        { from: { x: -600, y: -400 }, to: { x: 0, y: 0 }, angle: 45, color: colors[0], delay: 0 },
+        { from: { x: 600, y: -400 }, to: { x: 0, y: 0 }, angle: -45, color: colors[1], delay: 0.1 },
+        { from: { x: -600, y: 400 }, to: { x: 0, y: 0 }, angle: -45, color: colors[2], delay: 0.2 },
+        { from: { x: 600, y: 400 }, to: { x: 0, y: 0 }, angle: 45, color: colors[3], delay: 0.3 },
+        { from: { x: 0, y: -600 }, to: { x: 0, y: 0 }, angle: 0, color: colors[4], delay: 0.15 },
     ];
 
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
 
-            {/* PHASE 0: 3D REALISTIC MOBIUS & LEAPING ARROW */}
+            {/* PHASE 0: 3D GOLDEN MOBIUS & RACING ORANGE SPIRIT */}
             <AnimatePresence>
                 {phase === 'mobius' && (
                     <motion.div
                         key="mobius-section"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 1.2, transition: { duration: 0.5 } }}
+                        exit={{ opacity: 0, scale: 1.5, filter: 'blur(20px)', transition: { duration: 0.8 } }}
                         className="relative w-full h-full flex flex-col items-center justify-center p-4"
                     >
-                        {/* 3D Container - Scale for Mobile */}
-                        <div className="relative w-full max-w-[1000px] aspect-[2/1] perspective-[2000px]">
+                        <div className="relative w-full max-w-[1200px] aspect-[2/1] perspective-[2500px]">
                             <motion.div
                                 className="w-full h-full"
-                                initial={{ rotateX: 20, rotateY: 0 }}
-                                animate={{ rotateY: [0, 5, -5, 0] }}
-                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                initial={{ rotateX: 25, rotateY: 0 }}
+                                animate={{ rotateY: [0, 8, -8, 0], rotateX: [25, 30, 20, 25] }}
+                                transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+                                style={{ transformStyle: 'preserve-3d' }}
                             >
                                 <svg viewBox="0 0 800 400" className="w-full h-full" style={{ overflow: 'visible' }}>
                                     <defs>
-                                        <linearGradient id="ribbonFront" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" stopColor="#ff9a00" />
-                                            <stop offset="50%" stopColor="#ffd700" />
-                                            <stop offset="100%" stopColor="#ffb62e" />
+                                        <linearGradient id="goldRibbonFront" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stopColor="#ffb62e" />
+                                            <stop offset="50%" stopColor="#fff" />
+                                            <stop offset="100%" stopColor="#ffd700" />
                                         </linearGradient>
-                                        <linearGradient id="ribbonBack" x1="0%" y1="0%" x2="100%" y2="0%">
-                                            <stop offset="0%" stopColor="#8a5200" />
-                                            <stop offset="50%" stopColor="#cc7a00" />
-                                            <stop offset="100%" stopColor="#8a5200" />
+                                        <linearGradient id="goldRibbonBack" x1="0%" y1="0%" x2="100%" y2="0%">
+                                            <stop offset="0%" stopColor="#664400" />
+                                            <stop offset="50%" stopColor="#aa7700" />
+                                            <stop offset="100%" stopColor="#664400" />
                                         </linearGradient>
-                                        <filter id="beautyGlow" x="-50%" y="-50%" width="200%" height="200%">
-                                            <feGaussianBlur stdDeviation="10" result="blur" />
-                                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                                        <filter id="hyperGlow" x="-50%" y="-50%" width="200%" height="200%">
+                                            <feGaussianBlur stdDeviation="20" result="blur" />
+                                            <feColorMatrix in="blur" type="matrix" values="0 0 0 0 1  0 0 0 0 0.8  0 0 0 0 0  0 0 0 18 -7" result="glow" />
+                                            <feComposite in="SourceGraphic" in2="glow" operator="over" />
                                         </filter>
-                                        <radialGradient id="arrowShade">
+                                        <radialGradient id="spiritOrange">
                                             <stop offset="0%" stopColor="#fff" />
-                                            <stop offset="100%" stopColor="#ffb62e" />
+                                            <stop offset="40%" stopColor="#ffd700" />
+                                            <stop offset="100%" stopColor="#ff6b00" />
                                         </radialGradient>
                                     </defs>
 
-                                    {/* MOBIUS GEOMETRY - MULTI-LAYERED FOR DEPTH */}
-                                    <g filter="url(#beautyGlow)">
-                                        {/* Back loops - Slightly darker */}
+                                    {/* MOBIUS - ADVANCED LAYERED GEOMETRY */}
+                                    <g filter="url(#hyperGlow)">
+                                        {/* Back Path */}
                                         <motion.path
-                                            d="M 150 200 C 150 0, 400 300, 400 200"
+                                            d="M 150 200 C 150 -50, 400 350, 400 200 C 400 50, 650 450, 650 200"
                                             fill="none"
-                                            stroke="url(#ribbonBack)"
-                                            strokeWidth="60"
+                                            stroke="url(#goldRibbonBack)"
+                                            strokeWidth="70"
                                             strokeLinecap="round"
                                             initial={{ pathLength: 0 }}
                                             animate={{ pathLength: 1 }}
-                                            transition={{ duration: 1.5, ease: "easeOut" }}
-                                        />
-                                        <motion.path
-                                            d="M 400 200 C 400 100, 650 400, 650 200"
-                                            fill="none"
-                                            stroke="url(#ribbonBack)"
-                                            strokeWidth="60"
-                                            strokeLinecap="round"
-                                            initial={{ pathLength: 0 }}
-                                            animate={{ pathLength: 1 }}
-                                            transition={{ duration: 1.5, delay: 0.2, ease: "easeOut" }}
+                                            transition={{ duration: 2, ease: "easeInOut" }}
                                         />
 
-                                        {/* Front Section - Crossing Over to create the Mobius twist */}
+                                        {/* Front Overlapping Path for Twist */}
                                         <motion.path
-                                            d="M 400 200 C 400 300, 150 0, 150 200"
+                                            d="M 650 200 C 650 -50, 400 450, 400 200 C 400 -50, 150 450, 150 200"
                                             fill="none"
-                                            stroke="url(#ribbonFront)"
-                                            strokeWidth="65"
+                                            stroke="url(#goldRibbonFront)"
+                                            strokeWidth="75"
                                             strokeLinecap="round"
                                             initial={{ pathLength: 0, opacity: 0 }}
                                             animate={{ pathLength: 1, opacity: 1 }}
-                                            transition={{ duration: 1.5, delay: 0.4, ease: "easeInOut" }}
-                                        />
-                                        <motion.path
-                                            d="M 650 200 C 650 0, 400 300, 400 200"
-                                            fill="none"
-                                            stroke="url(#ribbonFront)"
-                                            strokeWidth="65"
-                                            strokeLinecap="round"
-                                            initial={{ pathLength: 0, opacity: 0 }}
-                                            animate={{ pathLength: 1, opacity: 1 }}
-                                            transition={{ duration: 1.5, delay: 0.6, ease: "easeInOut" }}
+                                            transition={{ duration: 2, delay: 0.5, ease: "easeInOut" }}
                                         />
 
-                                        {/* Edge Highlights */}
+                                        {/* Light Streaks following the loop */}
                                         <motion.path
-                                            d="M 150 200 C 150 0, 400 300, 400 200 C 400 100, 650 400, 650 200 C 650 0, 400 300, 400 200 C 400 300, 150 0, 150 200"
+                                            d="M 150 200 C 150 -50, 400 350, 400 200 C 400 50, 650 450, 650 200 C 650 -50, 400 450, 400 200 C 400 -50, 150 450, 150 200"
                                             fill="none"
                                             stroke="white"
-                                            strokeWidth="2"
-                                            strokeDasharray="4, 10"
-                                            opacity="0.3"
-                                            animate={{ strokeDashoffset: -200 }}
-                                            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+                                            strokeWidth="3"
+                                            strokeDasharray="2, 50"
+                                            opacity="0.6"
+                                            animate={{ strokeDashoffset: -1000 }}
+                                            transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
                                         />
                                     </g>
 
-                                    {/* LEAPING ARROW - FROM RIGHT TO LEFT, LEADING THE EYE */}
-                                    <motion.g
-                                        initial={{ x: 1000, y: 100, opacity: 0 }}
-                                        animate={{ x: 0, y: 0, opacity: 1 }}
-                                        transition={{ duration: 1.5, ease: "easeOut" }}
-                                    >
-                                        <motion.g filter="url(#beautyGlow)">
-                                            {/* THE 3D ARROW BODY */}
-                                            <motion.g>
-                                                {/* Shadow for depth */}
-                                                <motion.path
-                                                    d="M -35 5 L -10 -18 L 35 5 L -10 22 Z"
-                                                    fill="black"
-                                                    opacity="0.2"
-                                                    style={{ transform: 'translate(4px, 4px)' }}
-                                                />
-                                                {/* Main Shaded Arrow */}
-                                                <motion.path
-                                                    d="M -35 0 L -10 -20 L 35 0 L -10 20 Z"
-                                                    fill="url(#arrowShade)"
-                                                    animate={{ scale: [1, 1.15, 1], rotate: [0, 2, -2, 0] }}
-                                                    transition={{ duration: 0.6, repeat: Infinity }}
-                                                />
-                                                {/* Top Glow Edge */}
-                                                <motion.path
-                                                    d="M -30 -2 L -10 -15 L 20 -2"
-                                                    fill="none"
-                                                    stroke="white"
-                                                    strokeWidth="3"
-                                                    opacity="0.8"
-                                                />
-                                            </motion.g>
+                                    {/* RACING ORANGE SPIRIT - REPLACING ARROW */}
+                                    <motion.g filter="url(#hyperGlow)">
+                                        <motion.g>
+                                            {/* Mini 3D Orange Object */}
+                                            <circle r="22" fill="url(#spiritOrange)" />
+                                            {/* Leaf */}
+                                            <path d="M 0 -22 C 10 -35, 25 -30, 5 -20 Z" fill="#2d5a27" />
+                                            {/* Glow Ring */}
+                                            <circle r="26" fill="none" stroke="#fff" strokeWidth="2" opacity="0.4" />
 
                                             <animateMotion
-                                                dur="3.5s"
+                                                dur="4s"
                                                 begin="1s"
-                                                keyPoints="0;0.5;1"
-                                                keyTimes="0;0.6;1"
-                                                calcMode="spline"
-                                                keySplines="0.42, 0, 0.58, 1; 0.42, 0, 0.58, 1"
-                                                path="M 750 200 C 650 0, 400 300, 400 200 C 400 100, 150 400, 150 200 C 150 0, 400 300, 400 200"
+                                                path="M 850 200 C 700 -50, 400 450, 400 200 C 400 -50, 100 450, 100 200 C 100 -50, 400 450, 400 200"
                                                 rotate="auto"
                                                 fill="freeze"
+                                                calcMode="spline"
+                                                keySplines="0.4, 0, 0.2, 1; 0.4, 0, 0.2, 1; 0.4, 0, 0.2, 1"
+                                                keyTimes="0; 0.35; 0.7; 1"
                                             />
 
-                                            {/* Comet Trail */}
-                                            {[0, 0.03, 0.06, 0.09, 0.12].map((delay, i) => (
+                                            {/* Dynamic Trail of miniature oranges/particles */}
+                                            {[0, 0.05, 0.1, 0.15, 0.2].map((delay, i) => (
                                                 <motion.circle
                                                     key={i}
-                                                    r={15 - i * 2.5}
-                                                    fill={i === 0 ? "#fff" : colors[i % colors.length]}
-                                                    opacity={1 - i * 0.18}
+                                                    r={18 - i * 3}
+                                                    fill={colors[i % colors.length]}
+                                                    opacity={0.8 - i * 0.15}
                                                 >
                                                     <animateMotion
-                                                        dur="3.5s"
+                                                        dur="4s"
                                                         begin={`${1 + delay}s`}
-                                                        path="M 750 200 C 650 0, 400 300, 400 200 C 400 100, 150 400, 150 200 C 150 0, 400 300, 400 200"
+                                                        path="M 850 200 C 700 -50, 400 450, 400 200 C 400 -50, 100 450, 100 200 C 100 -50, 400 450, 400 200"
                                                         fill="freeze"
                                                     />
                                                 </motion.circle>
                                             ))}
-
-                                            {/* Exploding sparks on impact (end of path) */}
-                                            <motion.g
-                                                initial={{ opacity: 0 }}
-                                                animate={{ opacity: [0, 1, 0] }}
-                                                transition={{ delay: 4.3, duration: 0.2 }}
-                                            >
-                                                <circle cx="400" cy="200" r="100" fill="white" />
-                                            </motion.g>
                                         </motion.g>
+
+                                        {/* IMPACT FLASH */}
+                                        <motion.circle
+                                            cx="400" cy="200" r="0"
+                                            fill="#fff"
+                                            animate={{ r: [0, 300, 0], opacity: [0, 1, 0] }}
+                                            transition={{ delay: 5.5, duration: 0.8 }}
+                                        />
                                     </motion.g>
                                 </svg>
                             </motion.div>
                         </div>
 
                         <motion.div
-                            className="mt-6 md:mt-12 text-center"
-                            initial={{ opacity: 0, y: 30 }}
+                            className="mt-16 text-center"
+                            initial={{ opacity: 0, y: 50 }}
                             animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 2 }}
+                            transition={{ delay: 3 }}
                         >
-                            <h2 className="text-brand-gold text-2xl md:text-5xl font-black italic tracking-[0.6em] md:tracking-[1.2em] uppercase">
-                                Infinite <span className="text-white">Flow</span>
+                            <h2 className="text-white text-3xl md:text-6xl font-black tracking-[0.8em] md:tracking-[1.5em] uppercase">
+                                SPIRIT OF <span className="text-brand-orange">ORANGE</span>
                             </h2>
                         </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
 
-            {/* PHASE 1: ORANGE EMERGES FROM EXPLOSION */}
+            {/* PHASE 1: BRAND ORANGE EMERGES */}
             {phase === 'orange' && (
                 <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ type: "spring", stiffness: 150, damping: 10 }}
-                    className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px]"
+                    initial={{ scale: 0, opacity: 0, rotate: 180 }}
+                    animate={{ scale: 1, opacity: 1, rotate: 0 }}
+                    transition={{ type: "spring", stiffness: 120, damping: 12 }}
+                    className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px]"
                 >
                     <motion.div
                         className="w-full h-full rounded-full"
                         animate={{
                             boxShadow: [
-                                '0 30px 90px rgba(255,154,0,0.6)',
-                                '0 40px 120px rgba(255,154,0,0.9)',
-                                '0 30px 90px rgba(255,154,0,0.6)'
+                                '0 40px 100px rgba(255,154,0,0.5)',
+                                '0 60px 150px rgba(255,154,0,0.8)',
+                                '0 40px 100px rgba(255,154,0,0.5)'
                             ]
                         }}
-                        transition={{ duration: 2, repeat: Infinity }}
+                        transition={{ duration: 3, repeat: Infinity }}
                         style={{
                             background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)'
                         }}
                     >
-                        <div className="absolute inset-0 opacity-20 mix-blend-overlay rounded-full" style={{ backgroundImage: 'radial-gradient(black 1.5px, transparent 1.5px)', backgroundSize: '6px 6px' }} />
-                        <div className="absolute top-[20%] left-[30%] w-20 h-20 md:w-28 md:h-28 rounded-full bg-white/40 blur-3xl" />
+                        <div className="absolute inset-0 opacity-25 mix-blend-overlay rounded-full" style={{ backgroundImage: 'radial-gradient(black 1.5px, transparent 1.5px)', backgroundSize: '7px 7px' }} />
+                        <div className="absolute top-[20%] left-[30%] w-32 h-32 rounded-full bg-white/40 blur-3xl" />
                     </motion.div>
 
                     <motion.div
-                        initial={{ scale: 0, rotate: 30 }}
-                        animate={{ scale: 1, rotate: -12 }}
-                        transition={{ delay: 0.3, type: "spring" }}
-                        className="absolute -top-10 md:-top-12 left-1/2 w-20 h-28 md:w-28 md:h-36 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900 -translate-x-1/2"
-                        style={{ filter: 'drop-shadow(0 8px 20px rgba(0,0,0,0.4))', transformOrigin: 'bottom center' }}
+                        initial={{ y: 50, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.5 }}
+                        className="absolute -top-16 left-1/2 w-24 h-36 md:w-32 md:h-48 bg-gradient-to-br from-green-400 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/20 -translate-x-1/2 -rotate-15"
+                        style={{ perspective: 1000, transformStyle: 'preserve-3d' }}
                     />
                 </motion.div>
             )}
 
-            {/* PHASE 2: BIG BANG EXPLOSION */}
+            {/* PHASE 2: EXPLOSION (Same as before but refined) */}
             {phase === 'explosion' && (
                 <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div initial={{ scale: 0, opacity: 1 }} animate={{ scale: 5, opacity: 0 }} transition={{ duration: 0.6 }} className="absolute w-[300px] h-[300px] md:w-[400px] md:h-[400px] rounded-full bg-white" />
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 10, opacity: 0 }} transition={{ duration: 0.8 }} className="absolute w-[300px] h-[300px] rounded-full bg-brand-gold" />
                     {explosionParticles.map((p) => (
                         <motion.div
                             key={p.id}
-                            initial={{ x: 0, y: 0, scale: 0, opacity: 1 }}
-                            animate={{ x: Math.cos(p.angle * Math.PI / 180) * p.distance, y: Math.sin(p.angle * Math.PI / 180) * p.distance, scale: [0, 2, 0], opacity: [1, 1, 0] }}
-                            transition={{ duration: 0.9, ease: "easeOut" }}
+                            initial={{ x: 0, y: 0, scale: 0 }}
+                            animate={{ x: Math.cos(p.angle * Math.PI / 180) * p.distance, y: Math.sin(p.angle * Math.PI / 180) * p.distance, scale: [0, 2.5, 0], opacity: [1, 1, 0] }}
+                            transition={{ duration: 1, ease: "easeOut" }}
                             className="absolute rounded-full"
-                            style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 30px ${p.color}` }}
+                            style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 40px ${p.color}` }}
                         />
-                    ))}
-                    {[0, 0.1, 0.2, 0.3].map((delay, i) => (
-                        <motion.div key={i} initial={{ scale: 0, opacity: 1 }} animate={{ scale: 8, opacity: 0 }} transition={{ duration: 1, delay }} className="absolute w-[150px] h-[150px] md:w-[200px] md:h-[200px] rounded-full border-[6px] border-orange-500/50" />
                     ))}
                 </div>
             )}
 
-            {/* PHASE 3: THE BRUSH STROKES - FROM 5 DIRECTIONS */}
+            {/* PHASE 3: PAINT BRUSH STROKES (Responsive) */}
             {phase === 'brushStrokes' && (
                 <div className="absolute w-full h-full flex items-center justify-center">
                     {brushStrokes.map((stroke, i) => (
@@ -313,11 +263,11 @@ export default function HeroBigBang() {
                             key={i}
                             initial={{ x: stroke.from.x, y: stroke.from.y, scaleX: 0, opacity: 0 }}
                             animate={{ x: stroke.to.x, y: stroke.to.y, scaleX: 1, opacity: 1 }}
-                            transition={{ duration: 1.2, delay: stroke.delay, ease: [0.34, 1.56, 0.64, 1] }}
+                            transition={{ duration: 1.5, delay: stroke.delay, ease: "circOut" }}
                             className="absolute"
                             style={{ transformOrigin: 'left center', rotate: `${stroke.angle}deg` }}
                         >
-                            <div className="relative h-[80px] md:h-[120px]" style={{ width: '100vw', maxWidth: '500px', background: `linear-gradient(90deg, transparent 0%, ${stroke.color}80 20%, ${stroke.color} 50%, ${stroke.color}80 80%, transparent 100%)`, filter: 'blur(4px)', boxShadow: `0 0 60px ${stroke.color}40`, borderRadius: '60px' }} />
+                            <div className="relative h-[80px] md:h-[150px]" style={{ width: '100vw', maxWidth: '600px', background: `linear-gradient(90deg, transparent 0%, ${stroke.color} 50%, transparent 100%)`, filter: 'blur(3px)', borderRadius: '100px', opacity: 0.9 }} />
                         </motion.div>
                     ))}
                 </div>
@@ -327,31 +277,31 @@ export default function HeroBigBang() {
             {phase === 'merge' && (
                 <div className="absolute w-full h-full flex items-center justify-center">
                     {colors.map((color, i) => (
-                        <motion.div key={i} initial={{ scale: 2.5, opacity: 0 }} animate={{ scale: 0.2, opacity: 1 }} transition={{ duration: 1.5, delay: i * 0.1, ease: "anticipate" }} className="absolute w-[300px] h-[300px] md:w-[500px] md:h-[500px] rounded-full" style={{ background: `radial-gradient(circle, ${color}, transparent)`, filter: 'blur(60px)', mixBlendMode: 'screen' }} />
+                        <motion.div key={i} initial={{ scale: 3, opacity: 0 }} animate={{ scale: 0.1, opacity: 1 }} transition={{ duration: 1.8, delay: i * 0.1 }} className="absolute w-[600px] h-[600px] rounded-full shadow-2xl" style={{ background: color, filter: 'blur(80px)', mixBlendMode: 'screen' }} />
                     ))}
-                    <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1, delay: 0.8 }} className="relative w-[280px] h-[280px] md:w-[380px] md:h-[380px] z-10">
-                        <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 40px 120px rgba(255,154,0,0.8)' }} />
+                    <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 1, delay: 1 }} className="relative w-[320px] h-[320px] md:w-[450px] md:h-[450px] z-10">
+                        <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 50px 150px rgba(255,154,0,0.8)' }} />
                     </motion.div>
                 </div>
             )}
 
-            {/* PHASE 5: FINAL BRANDING & SPLASH */}
+            {/* PHASE 5: FINAL BRANDING */}
             {phase === 'splash' && (
-                <div className="absolute w-full h-full flex items-center justify-center text-center px-4">
-                    <motion.div initial={{ opacity: 0, scale: 0.85 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 1 }}>
-                        <div className="relative w-[200px] h-[200px] md:w-[320px] md:h-[320px] mx-auto mb-12 md:mb-20">
-                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -10, 0], scale: [1, 1.05, 1] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 20px 70px rgba(255,154,0,0.7)' }} />
-                            <div className="absolute -top-6 md:-top-10 left-1/2 w-16 h-24 md:w-24 md:h-32 bg-gradient-to-br from-green-400 to-green-700 rounded-tr-[100%] rounded-bl-[100%] border-2 border-green-900 -translate-x-1/2 -rotate-12" />
+                <div className="absolute w-full h-full flex items-center justify-center text-center px-6">
+                    <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.2 }}>
+                        <div className="relative w-[220px] h-[220px] md:w-[380px] md:h-[380px] mx-auto mb-16">
+                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -20, 0], scale: [1, 1.03, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 40px 120px rgba(255,154,0,0.6)' }} />
+                            <div className="absolute -top-10 md:-top-16 left-1/2 w-20 h-32 md:w-32 md:h-48 bg-gradient-to-br from-green-400 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12" />
                         </div>
-                        <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-[0.1em] md:tracking-[0.2em] mb-4 md:mb-8 select-none">
+                        <h1 className="text-6xl md:text-[12rem] font-black text-white tracking-widest md:tracking-[0.1em] mb-10 select-none drop-shadow-2xl">
                             ALL<span className="text-brand-gold">RANGE</span>
                         </h1>
-                        <div className="flex flex-col gap-2 md:gap-4">
-                            <p className="text-brand-gold text-lg md:text-4xl tracking-[0.4em] md:tracking-[0.8em] font-light italic uppercase">
+                        <div className="space-y-4">
+                            <p className="text-brand-gold text-2xl md:text-5xl tracking-[0.5em] md:tracking-[1em] font-light italic uppercase">
                                 Infinite Design
                             </p>
-                            <p className="text-white/40 text-[10px] md:text-sm tracking-[0.8em] md:tracking-[1.5em] font-light uppercase">
-                                Creative Dynamics • Space Mastery
+                            <p className="text-white/30 text-xs md:text-lg tracking-[1.5em] font-light uppercase">
+                                Space • Brand • Exhibition
                             </p>
                         </div>
                     </motion.div>

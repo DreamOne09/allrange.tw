@@ -9,6 +9,13 @@ import { heroSubset } from '@/data/real_projects';
 // Define menu items with associated background images from our RealPic subset
 const menuItems = [
     {
+        id: 0,
+        label: '返回首頁',
+        eng: 'Home',
+        href: '/',
+        image: heroSubset[4]?.image || '/allrange.tw/images/placeholders/brand_identity_1.png'
+    },
+    {
         id: 1,
         label: '關於我們',
         eng: 'About',
