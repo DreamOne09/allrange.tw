@@ -20,7 +20,23 @@ const notoSansTC = Noto_Sans_TC({
 export const metadata: Metadata = {
   title: "AllRange Design | 樂橙創作設計",
   description: "用策展思維打造空間。劉懿德(Claire)與樂橙設計團隊，專注於展場設計、各類空間規劃與平面設計。",
-  keywords: ["展場設計", "空間規劃", "平面設計", "AllRange", "樂橙創作", "劉懿德"],
+  keywords: ["展場設計", "空間規劃", "平面設計", "AllRange", "樂橙創作", "劉懿德", "Exhibition Design", "Interior Design"],
+  openGraph: {
+    title: "AllRange Design | 樂橙創作設計",
+    description: "用策展思維打造空間。劉懿德(Claire)與樂橙設計團隊，專注於展場設計、各類空間規劃與平面設計。",
+    url: "https://dreamone09.github.io/allrange.tw/",
+    siteName: "AllRange Design",
+    images: [
+      {
+        url: "/allrange.tw/images/projects/cmp/cmp-main.png", // Use a representative image
+        width: 1200,
+        height: 630,
+        alt: "AllRange Design Portfolio",
+      },
+    ],
+    locale: "zh_TW",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

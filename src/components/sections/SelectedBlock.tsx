@@ -33,7 +33,25 @@ const SelectedBlock = () => {
     const [activeProject, setActiveProject] = useState(projects[0]);
 
     return (
-        <section className="relative h-screen bg-brand-black flex items-center overflow-hidden border-b border-white/10">
+        <section className="relative min-h-screen bg-brand-black flex flex-col overflow-hidden border-b border-white/10">
+            {/* Section Title */}
+            <div className="container mx-auto px-6 pt-20 pb-8 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="text-center"
+                >
+                    <h2 className="text-5xl md:text-7xl font-black text-white mb-4">
+                        精選作品
+                    </h2>
+                    <p className="text-brand-gold text-xl md:text-2xl tracking-[0.3em] uppercase font-light">
+                        Selected Works
+                    </p>
+                </motion.div>
+            </div>
+
             {/* Dynamic Background with Vivid Images */}
             <div className="absolute inset-0 transition-colors duration-700 ease-in-out bg-black">
                 {projects.map((project, index) => (
@@ -57,10 +75,10 @@ const SelectedBlock = () => {
                 ))}
             </div>
 
-            <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="container mx-auto px-6 relative z-10 grid grid-cols-1 md:grid-cols-2 gap-12 items-center flex-1">
 
                 {/* Left: Dynamic MAIN Visual (3D & Vivid) OR Video */}
-                <Link href={`/work/${activeProject.id}`} className="w-full">
+                <Link href={`/work#${activeProject.id}`} className="w-full">
                     <motion.div
                         className="relative h-[40vh] md:h-[60vh] w-full rounded-2xl overflow-hidden bg-zinc-900 border border-brand-gold/30 shadow-[0_0_30px_rgba(248,182,45,0.15)] group cursor-pointer"
                         initial={{ opacity: 0, x: -50 }}
@@ -148,11 +166,11 @@ const SelectedBlock = () => {
 
                                     {/* View Button (Visible when active) */}
                                     <Link
-                                        href={`/work/${project.id}`}
+                                        href={`/work#${project.id}`}
                                         className={`ml-4 flex items-center text-brand-orange text-sm font-bold uppercase tracking-wider transition-opacity duration-300 ${activeProject.id === project.id ? 'opacity-100' : 'opacity-0'}`}
                                         onClick={(e) => e.stopPropagation()} // Prevent parent click from interfering
                                     >
-                                        View Case <ArrowRight size={16} className="ml-1" />
+                                        View in Gallery <ArrowRight size={16} className="ml-1" />
                                     </Link>
                                 </div>
 
