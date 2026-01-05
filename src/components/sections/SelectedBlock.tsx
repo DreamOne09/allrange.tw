@@ -18,14 +18,15 @@ import { realProjects, heroSubset } from '@/data/real_projects';
 
 // using heroSubset which now contains [101, Yulon, ITRI]
 const projects = heroSubset.map((project, index) => ({
-    id: index + 1,
+    id: project.id,
     title: project.title,
     category: project.category,
     year: "2023", // Placeholder year or add to data
     color: index === 0 ? "from-brand-orange to-red-900" :
         index === 1 ? "from-emerald-900 to-black" :
             "from-blue-900 to-black",
-    image: project.image
+    image: project.image,
+    videoUrl: project.videoUrl
 }));
 
 const SelectedBlock = () => {
@@ -35,7 +36,7 @@ const SelectedBlock = () => {
         <section className="relative h-screen bg-brand-black flex items-center overflow-hidden border-b border-white/10">
             {/* Dynamic Background with Vivid Images */}
             <div className="absolute inset-0 transition-colors duration-700 ease-in-out bg-black">
-                {projects.map((project) => (
+                {projects.map((project, index) => (
                     <div
                         key={project.id}
                         className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${activeProject.id === project.id ? 'opacity-100' : 'opacity-0'
@@ -48,7 +49,7 @@ const SelectedBlock = () => {
                                 alt={project.title}
                                 fill
                                 className="object-cover opacity-30 blur-sm" // Blurred background
-                                priority={project.id === 1}
+                                priority={index === 0}
                             />
                         )}
                         <div className="absolute inset-0 bg-black/50" />
