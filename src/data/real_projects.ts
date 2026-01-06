@@ -130,5 +130,5 @@ export const realProjects: Project[] = [
 
 export const heroImages = realProjects.map(p => p.image);
 
-// Include select projects in hero subset
-export const heroSubset = realProjects;
+// Include select projects in hero subset (First 4 flagship projects)
+export const heroSubset = realProjects.slice(0, 4);
