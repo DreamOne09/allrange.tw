@@ -10,7 +10,7 @@ export default function HeroBigBang() {
     useEffect(() => {
         const runSequence = async () => {
             setPhase('cosmic');
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 4800));
 
             setPhase('orange');
             await new Promise(r => setTimeout(r, 1200));
@@ -25,7 +25,7 @@ export default function HeroBigBang() {
             await new Promise(r => setTimeout(r, 1200));
 
             setPhase('splash');
-            await new Promise(r => setTimeout(r, 4500));
+            await new Promise(r => setTimeout(r, 5000));
 
             setPhase('collapse');
             await new Promise(r => setTimeout(r, 1200));
@@ -40,7 +40,6 @@ export default function HeroBigBang() {
         '#ff9a00', '#ffb62e', '#ffd700', '#ff6b00', '#ff8c42',
     ];
 
-    // Refined Radiation Rays (Citrus Segment Style)
     const radiationRays = Array.from({ length: 12 }).map((_, i) => ({
         id: i,
         angle: (i / 12) * 360,
@@ -56,8 +55,6 @@ export default function HeroBigBang() {
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
 
-    // Unified Orange Core Size
-    const coreSize = "w-[260px] h-[260px] md:w-[400px] md:h-[400px]";
 
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
@@ -65,16 +62,17 @@ export default function HeroBigBang() {
             {/* BACKGROUND: COSMIC VOID */}
             <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#1a1000_0%,_#000_80%)] opacity-30" />
 
-            <AnimatePresence mode="popLayout">
+            <AnimatePresence mode="wait">
                 {/* PHASE 0: THE COSMIC SINGULARITY */}
                 {phase === 'cosmic' && (
                     <motion.div
                         key="cosmic"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.1, filter: 'blur(40px)' }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, scale: 0.1, filter: 'blur(40px)', transition: { duration: 0.8 } }}
                         className="absolute inset-0 flex items-center justify-center z-10"
                     >
+                        {/* Singularity Core */}
                         <motion.div
                             initial={{ scale: 0 }}
                             animate={{ scale: [0, 1.1, 1], opacity: [0, 1] }}
@@ -82,6 +80,7 @@ export default function HeroBigBang() {
                             className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_40px_white,0_0_100px_#ff9a00]"
                         />
 
+                        {/* Nebula Whirl */}
                         <motion.div
                             animate={{ rotate: 360 }}
                             transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
@@ -92,12 +91,13 @@ export default function HeroBigBang() {
                             }}
                         />
 
-                        {/* Birth of Sun */}
+                        {/* Birth of Sun - MORPHABLE START */}
                         <motion.div
+                            layoutId="orange-core"
                             initial={{ scale: 0, opacity: 0 }}
-                            animate={{ scale: [0, 1], opacity: [0, 1] }}
-                            transition={{ delay: 2.2, duration: 2, ease: "circOut" }}
-                            className={`relative ${coreSize} rounded-full`}
+                            animate={{ scale: 1, opacity: 1 }}
+                            transition={{ delay: 2.2, duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full"
                             style={{
                                 background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 20%, #ff9a00 50%, #cc7a00 85%, #8a5200 100%)',
                                 boxShadow: '0 0 50px rgba(255,154,0,0.3)'
@@ -106,30 +106,41 @@ export default function HeroBigBang() {
                     </motion.div>
                 )}
 
-                {/* PHASE 1: BRAND ORANGE CORE - FIXED POSITION */}
+                {/* PHASE 1: BRAND ORANGE CORE */}
                 {phase === 'orange' && (
                     <motion.div
                         key="orange"
-                        initial={{ scale: 0.8, opacity: 0 }}
-                        animate={{ scale: 1, opacity: 1 }}
-                        exit={{ opacity: 0 }}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0, transition: { duration: 0.4 } }}
                         className="absolute inset-0 flex items-center justify-center z-20"
                     >
-                        <div className={`relative ${coreSize}`}>
+                        <motion.div
+                            layoutId="orange-core"
+                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px]"
+                        >
                             <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 80px rgba(255,154,0,0.5)' }} />
                             <motion.div
-                                initial={{ y: -10, opacity: 0 }}
-                                animate={{ y: 0, opacity: 1 }}
+                                initial={{ y: -10, opacity: 0, scale: 0.8 }}
+                                animate={{ y: 0, opacity: 1, scale: 1 }}
+                                transition={{ delay: 0.2, duration: 0.8 }}
                                 className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
                             />
-                        </div>
+                        </motion.div>
                     </motion.div>
                 )}
 
                 {/* PHASE 2: COSMIC EXPLOSION */}
                 {phase === 'explosion' && (
-                    <motion.div key="explosion" className="absolute inset-0 flex items-center justify-center z-30">
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 15, opacity: 0 }} transition={{ duration: 0.6 }} className="absolute w-[180px] h-[180px] rounded-full bg-white blur-sm" />
+                    <motion.div
+                        key="explosion"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 flex items-center justify-center z-30"
+                    >
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 15, opacity: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="absolute w-[180px] h-[180px] rounded-full bg-white blur-sm" />
                         {explosionParticles.map((p) => (
                             <motion.div
                                 key={p.id}
@@ -140,13 +151,25 @@ export default function HeroBigBang() {
                                 style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 20px ${p.color}` }}
                             />
                         ))}
+                        {/* THE CORE STAYS DURING EXPLOSION */}
+                        <motion.div
+                            layoutId="orange-core"
+                            transition={{ duration: 0.4 }}
+                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full opacity-50 blur-md"
+                            style={{ background: '#ff9a00' }}
+                        />
                     </motion.div>
                 )}
 
-                {/* PHASE 3: CITRUS RADIATION - THE BURST OPEN EFFECT */}
+                {/* PHASE 3: CITRUS RADIATION */}
                 {phase === 'radiation' && (
-                    <motion.div key="radiation" className="absolute inset-0 flex items-center justify-center z-40">
-                        {/* THE SPIRIT OF RADIATING ENERGY */}
+                    <motion.div
+                        key="radiation"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 flex items-center justify-center z-40"
+                    >
                         {radiationRays.map((ray) => (
                             <motion.div
                                 key={ray.id}
@@ -156,15 +179,7 @@ export default function HeroBigBang() {
                                 className="absolute origin-center"
                                 style={{ rotate: `${ray.angle}deg`, height: '100vh', width: '24px' }}
                             >
-                                <div
-                                    className="w-full h-full"
-                                    style={{
-                                        background: `linear-gradient(to top, transparent, ${ray.color} 50%, transparent)`,
-                                        filter: 'blur(8px)',
-                                        opacity: 0.5
-                                    }}
-                                />
-                                {/* Juice Droplets Radiating */}
+                                <div className="w-full h-full" style={{ background: `linear-gradient(to top, transparent, ${ray.color} 50%, transparent)`, filter: 'blur(8px)', opacity: 0.5 }} />
                                 <motion.div
                                     animate={{ y: [-100, -600], opacity: [0, 1, 0] }}
                                     transition={{ duration: 1.2, delay: ray.delay + 0.2 }}
@@ -173,64 +188,80 @@ export default function HeroBigBang() {
                                 />
                             </motion.div>
                         ))}
-                        {/* Inner Core Pulsing through radiation */}
+                        {/* MORPHING TRANSITION THROUGH RADIATION */}
                         <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: [0, 1], opacity: [0, 0.5] }}
-                            transition={{ duration: 0.8 }}
-                            className={`absolute ${coreSize} rounded-full bg-brand-orange-light blur-2xl opacity-30`}
+                            layoutId="orange-core"
+                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full blur-xl opacity-30"
+                            style={{ background: '#ff9a00' }}
                         />
                     </motion.div>
                 )}
 
-                {/* PHASE 4: THE MERGE TRANSITION - UNIFIED SCALE */}
+                {/* PHASE 4: THE MERGE TRANSITION */}
                 {phase === 'merge' && (
-                    <motion.div key="merge" className="absolute inset-0 flex items-center justify-center z-50">
+                    <motion.div
+                        key="merge"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        className="absolute inset-0 flex items-center justify-center z-50"
+                    >
                         {colors.map((color, i) => (
                             <motion.div key={i} initial={{ scale: 2.5, opacity: 0 }} animate={{ scale: 0.1, opacity: 1 }} transition={{ duration: 1.5, delay: i * 0.08 }} className="absolute w-[400px] h-[400px] rounded-full blur-[50px]" style={{ background: color, mixBlendMode: 'screen' }} />
                         ))}
-                        <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className={`relative ${coreSize}`}>
-                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 100px rgba(255,154,0,0.5)' }} />
-                        </motion.div>
+                        <motion.div
+                            layoutId="orange-core"
+                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full"
+                            style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 100px rgba(255,154,0,0.5)' }}
+                        />
                     </motion.div>
                 )}
 
-                {/* PHASE 5: FINAL BRANDING - REMOVED FLOAT UP */}
+                {/* PHASE 5: FINAL BRANDING */}
                 {phase === 'splash' && (
                     <motion.div
                         key="splash"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.9 }}
-                        transition={{ duration: 1.2 }}
+                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.8 } }}
                         className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-60"
                     >
-                        <div className={`relative ${coreSize} mx-auto mb-10 md:mb-14`}>
+                        <motion.div
+                            layoutId="orange-core"
+                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
+                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px] mx-auto mb-10 md:mb-14"
+                        >
                             <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -10, 0], scale: [1, 1.02, 1] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 80px rgba(255,154,0,0.4)' }} />
-                            <div className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12" />
-                        </div>
-                        <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-[0.1em] mb-6 md:mb-8 select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
-                            ALL<span className="text-brand-gold">RANGE</span>
-                        </h1>
-                        <p className="text-brand-gold text-2xl md:text-5xl tracking-[0.2em] md:tracking-[0.4em] font-medium uppercase">
-                            樂橙創作工作室
-                        </p>
+                            <motion.div
+                                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                                className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
+                            />
+                        </motion.div>
+                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 1 }}>
+                            <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-[0.1em] mb-6 md:mb-8 select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                                ALL<span className="text-brand-gold">RANGE</span>
+                            </h1>
+                            <p className="text-brand-gold text-2xl md:text-5xl tracking-[0.2em] md:tracking-[0.4em] font-medium uppercase">
+                                樂橙創作工作室
+                            </p>
+                        </motion.div>
                     </motion.div>
                 )}
 
-                {/* PHASE 6: COSMIC COLLAPSE - SEAMLESS RESET */}
+                {/* PHASE 6: COSMIC COLLAPSE */}
                 {phase === 'collapse' && (
                     <motion.div
                         key="collapse"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
                         className="absolute inset-0 z-[100] flex items-center justify-center bg-black/40"
                     >
                         <motion.div
                             initial={{ scale: 4, opacity: 0 }}
                             animate={{ scale: 0, opacity: 1 }}
-                            transition={{ duration: 1, ease: "anticipate" }}
+                            transition={{ duration: 1.2, ease: "anticipate" }}
                             className="w-[500px] h-[500px] bg-white rounded-full blur-[80px] flex items-center justify-center"
                         >
                             <div className="relative w-4 h-4 bg-black rounded-full" />
