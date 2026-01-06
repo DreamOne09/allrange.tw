@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { realProjects } from '@/data/real_projects';
 import { useState, useEffect } from 'react';
+import WorkHero from '@/components/sections/WorkHero';
 
 export default function WorkPage() {
     const [activeSection, setActiveSection] = useState('');
@@ -31,25 +32,9 @@ export default function WorkPage() {
     }, []);
 
     return (
-        <div className="min-h-screen bg-black pt-24 pb-20">
-            {/* Page Header */}
-            <div className="container mx-auto px-6 mb-16">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="text-center"
-                >
-                    <span className="text-brand-gold font-bold tracking-[0.4em] uppercase text-sm block mb-4">
-                        Portfolio
-                    </span>
-                    <h1 className="text-5xl md:text-7xl font-black text-white mb-6">
-                        作品集
-                    </h1>
-                    <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                        探索我們的設計作品，從展場設計到空間規劃，每個專案都展現獨特的創意與專業。
-                    </p>
-                </motion.div>
-            </div>
+        <div className="min-h-screen bg-black pb-20">
+            {/* 3D Isometric Wall Hero Section */}
+            <WorkHero />
 
             {/* Project Index - Sticky Sidebar */}
             <motion.div
@@ -68,8 +53,8 @@ export default function WorkPage() {
                                 key={project.id}
                                 href={`#${project.id}`}
                                 className={`block px-3 py-2 rounded-lg transition-all duration-300 group ${activeSection === project.id
-                                        ? 'bg-brand-orange text-white'
-                                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                                    ? 'bg-brand-orange text-white'
+                                    : 'text-gray-400 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
@@ -101,8 +86,8 @@ export default function WorkPage() {
                                 key={project.id}
                                 href={`#${project.id}`}
                                 className={`flex-shrink-0 px-4 py-2 rounded-full text-xs font-bold transition-all ${activeSection === project.id
-                                        ? 'bg-brand-orange text-white'
-                                        : 'bg-white/5 text-gray-400 hover:text-white'
+                                    ? 'bg-brand-orange text-white'
+                                    : 'bg-white/5 text-gray-400 hover:text-white'
                                     }`}
                             >
                                 {String(index + 1).padStart(2, '0')}
