@@ -10,25 +10,25 @@ export default function HeroBigBang() {
     useEffect(() => {
         const runSequence = async () => {
             setPhase('cosmic');
-            await new Promise(r => setTimeout(r, 6500));
+            await new Promise(r => setTimeout(r, 5000)); // Faster cosmic intro
 
             setPhase('orange');
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(r => setTimeout(r, 1200));
 
             setPhase('explosion');
-            await new Promise(r => setTimeout(r, 800));
+            await new Promise(r => setTimeout(r, 600));
 
             setPhase('brushStrokes');
-            await new Promise(r => setTimeout(r, 2200));
+            await new Promise(r => setTimeout(r, 1800));
 
             setPhase('merge');
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(r => setTimeout(r, 1200));
 
             setPhase('splash');
-            await new Promise(r => setTimeout(r, 4500));
+            await new Promise(r => setTimeout(r, 4000));
 
             setPhase('collapse');
-            await new Promise(r => setTimeout(r, 1500));
+            await new Promise(r => setTimeout(r, 1200));
 
             setLoopCount(prev => prev + 1);
         };
@@ -40,66 +40,66 @@ export default function HeroBigBang() {
         '#ff9a00', '#ffb62e', '#ffd700', '#ff6b00', '#ff8c42',
     ];
 
-    const explosionParticles = Array.from({ length: 40 }).map((_, i) => ({
+    const explosionParticles = Array.from({ length: 36 }).map((_, i) => ({
         id: i,
-        angle: (i / 40) * 360,
-        distance: 140 + Math.random() * 240,
-        size: 8 + Math.random() * 15,
+        angle: (i / 36) * 360,
+        distance: 120 + Math.random() * 200,
+        size: 8 + Math.random() * 12,
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
 
     const brushStrokes = [
-        { from: { x: -600, y: 0 }, to: { x: 0, y: 0 }, angle: 0, color: colors[0], delay: 0 },
-        { from: { x: 600, y: 0 }, to: { x: 0, y: 0 }, angle: 0, color: colors[1], delay: 0.1 },
-        { from: { x: 0, y: -600 }, to: { x: 0, y: 0 }, angle: 90, color: colors[2], delay: 0.2 },
-        { from: { x: 0, y: 600 }, to: { x: 0, y: 0 }, angle: 90, color: colors[3], delay: 0.3 },
+        { from: { x: -500, y: 0 }, to: { x: 0, y: 0 }, angle: 15, color: colors[0], delay: 0 },
+        { from: { x: 500, y: 0 }, to: { x: 0, y: 0 }, angle: -15, color: colors[1], delay: 0.1 },
+        { from: { x: 0, y: -500 }, to: { x: 0, y: 0 }, angle: 105, color: colors[2], delay: 0.2 },
+        { from: { x: 0, y: 500 }, to: { x: 0, y: 0 }, angle: -75, color: colors[3], delay: 0.3 },
     ];
 
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
 
-            {/* PERFORMANCE OPTIMIZED BACKGROUND */}
-            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#1a1000_0%,_#000_70%)] opacity-50" />
+            {/* BACKGROUND: GPU ACCELERATED GRADIENT */}
+            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#201500_0%,_#000_70%)] opacity-40 mix-blend-screen" />
 
-            <AnimatePresence>
+            <AnimatePresence mode="popLayout">
                 {/* PHASE 0: THE COSMIC BIG BANG */}
                 {phase === 'cosmic' && (
                     <motion.div
                         key="cosmic"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.5, filter: 'blur(20px)' }}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.2, filter: 'blur(30px)' }}
                         className="absolute inset-0 flex items-center justify-center z-10"
                     >
-                        {/* Singularity Core - Simple and fast */}
+                        {/* Singularity Core */}
                         <motion.div
                             initial={{ scale: 0 }}
-                            animate={{ scale: [0, 1.2, 0.9, 1] }}
-                            transition={{ duration: 3 }}
-                            className="absolute w-3 h-3 bg-white rounded-full shadow-[0_0_40px_white,0_0_80px_#ff9a00]"
+                            animate={{ scale: [0, 1.1, 0.9, 1], opacity: [0, 1] }}
+                            transition={{ duration: 2.5 }}
+                            className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_50px_white,0_0_100px_#ff9a00]"
                         />
 
-                        {/* Nebula - Using CSS Gradients for performance instead of heavy SVG filters */}
+                        {/* Nebula Whirl - Optimized */}
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                            className="absolute w-[600px] h-[600px] md:w-[800px] md:h-[800px] rounded-full opacity-30"
+                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+                            className="absolute w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full opacity-30"
                             style={{
-                                background: 'radial-gradient(circle, rgba(255,182,46,0.5) 0%, rgba(255,107,0,0.1) 40%, transparent 70%)',
-                                filter: 'blur(40px)',
+                                background: 'radial-gradient(circle, rgba(255,182,46,0.6) 0%, rgba(255,107,0,0.1) 50%, transparent 80%)',
+                                filter: 'blur(30px)',
                             }}
                         />
 
-                        {/* Ignition Core */}
+                        {/* Ignition Sun */}
                         <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: [0, 1] }}
-                            transition={{ delay: 2.5, duration: 2.5, ease: "circOut" }}
-                            className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px] rounded-full"
+                            initial={{ scale: 0, opacity: 0 }}
+                            animate={{ scale: [0, 1], opacity: [0, 1] }}
+                            transition={{ delay: 2, duration: 2, ease: "circOut" }}
+                            className="relative w-[260px] h-[260px] md:w-[380px] md:h-[380px] rounded-full"
                             style={{
-                                background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 20%, #ff9a00 50%, #cc7a00 85%, #000 100%)',
-                                boxShadow: '0 0 80px rgba(255,154,0,0.4)',
-                                willChange: 'transform'
+                                background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 20%, #ff9a00 50%, #cc7a00 85%, #8a5200 100%)',
+                                boxShadow: '0 0 60px rgba(255,154,0,0.3)',
+                                willChange: 'transform, opacity'
                             }}
                         />
                     </motion.div>
@@ -114,35 +114,35 @@ export default function HeroBigBang() {
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 flex items-center justify-center z-20"
                     >
-                        <div className="relative w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
-                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 40px 100px rgba(255,154,0,0.6)' }} />
+                        <div className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px]">
+                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 80px rgba(255,154,0,0.5)' }} />
                             <motion.div
                                 initial={{ y: -20, opacity: 0 }}
                                 animate={{ y: 0, opacity: 1 }}
-                                className="absolute -top-12 left-1/2 w-24 h-36 md:w-32 md:h-44 bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
+                                className="absolute -top-10 left-1/2 w-20 h-32 md:w-28 md:h-40 bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
                             />
                         </div>
                     </motion.div>
                 )}
 
-                {/* PHASE 2: EXPLOSION */}
+                {/* PHASE 2: EXPLOSION - IMPACTFUL & CLEAN */}
                 {phase === 'explosion' && (
                     <motion.div key="explosion" className="absolute inset-0 flex items-center justify-center z-30">
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 15, opacity: 0 }} transition={{ duration: 0.8 }} className="absolute w-[200px] h-[200px] rounded-full bg-white blur-md" />
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 12, opacity: 0 }} transition={{ duration: 0.6 }} className="absolute w-[150px] h-[150px] rounded-full bg-white blur-sm" />
                         {explosionParticles.map((p) => (
                             <motion.div
                                 key={p.id}
                                 initial={{ x: 0, y: 0, scale: 0 }}
-                                animate={{ x: Math.cos(p.angle * Math.PI / 180) * p.distance, y: Math.sin(p.angle * Math.PI / 180) * p.distance, scale: [0, 2.5, 0], opacity: [1, 1, 0] }}
-                                transition={{ duration: 1, ease: "easeOut" }}
+                                animate={{ x: Math.cos(p.angle * Math.PI / 180) * p.distance, y: Math.sin(p.angle * Math.PI / 180) * p.distance, scale: [0, 2, 0], opacity: [1, 1, 0] }}
+                                transition={{ duration: 0.8, ease: "easeOut" }}
                                 className="absolute rounded-full"
-                                style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 30px ${p.color}` }}
+                                style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 20px ${p.color}`, willChange: 'transform, opacity' }}
                             />
                         ))}
                     </motion.div>
                 )}
 
-                {/* PHASE 3: THE BRUSH SWEEPS */}
+                {/* PHASE 3: THE ENERGY BRUSH SWEEPS */}
                 {phase === 'brushStrokes' && (
                     <motion.div key="brush" className="absolute inset-0 flex items-center justify-center z-40">
                         {brushStrokes.map((stroke, i) => (
@@ -150,66 +150,68 @@ export default function HeroBigBang() {
                                 key={i}
                                 initial={{ x: stroke.from.x, y: stroke.from.y, scaleX: 0, opacity: 0 }}
                                 animate={{ x: stroke.to.x, y: stroke.to.y, scaleX: 1, opacity: 1 }}
-                                transition={{ duration: 1.2, delay: stroke.delay, ease: "circOut" }}
+                                transition={{ duration: 1, delay: stroke.delay, ease: "circOut" }}
                                 className="absolute"
                                 style={{ transformOrigin: 'center center', rotate: `${stroke.angle}deg` }}
                             >
-                                <div className="relative h-[80px] md:h-[120px]" style={{ width: '100vw', maxWidth: '600px', background: `linear-gradient(90deg, transparent 0%, ${stroke.color} 50%, transparent 100%)`, filter: 'blur(5px)', borderRadius: '100px', opacity: 0.6 }} />
+                                <div className="relative h-[60px] md:h-[100px]" style={{ width: '80vw', maxWidth: '500px', background: `linear-gradient(90deg, transparent 0%, ${stroke.color} 50%, transparent 100%)`, filter: 'blur(3px)', borderRadius: '80px', opacity: 0.5 }} />
                             </motion.div>
                         ))}
                     </motion.div>
                 )}
 
-                {/* PHASE 4: THE MERGE */}
+                {/* PHASE 4: THE MERGE TRANSITION */}
                 {phase === 'merge' && (
                     <motion.div key="merge" className="absolute inset-0 flex items-center justify-center z-50">
                         {colors.map((color, i) => (
-                            <motion.div key={i} initial={{ scale: 3, opacity: 0 }} animate={{ scale: 0.1, opacity: 1 }} transition={{ duration: 1.5, delay: i * 0.1 }} className="absolute w-[400px] h-[400px] rounded-full blur-[60px]" style={{ background: color, mixBlendMode: 'screen' }} />
+                            <motion.div key={i} initial={{ scale: 2.5, opacity: 0 }} animate={{ scale: 0.1, opacity: 1 }} transition={{ duration: 1.2, delay: i * 0.08 }} className="absolute w-[300px] h-[300px] rounded-full blur-[40px]" style={{ background: color, mixBlendMode: 'screen' }} />
                         ))}
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ duration: 1, delay: 0.5 }} className="relative w-[300px] h-[300px] md:w-[420px] md:h-[420px]">
-                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 40px 120px rgba(255,154,0,0.6)' }} />
+                        <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }} className="relative w-[280px] h-[280px] md:w-[400px] md:h-[400px]">
+                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 100px rgba(255,154,0,0.5)' }} />
                         </motion.div>
                     </motion.div>
                 )}
 
-                {/* PHASE 5: FINAL BRANDING */}
+                {/* PHASE 5: FINAL BRANDING - REFINED SCALE */}
                 {phase === 'splash' && (
                     <motion.div
                         key="splash"
-                        initial={{ opacity: 0, y: 100 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, scale: 0.8 }}
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
                         transition={{ duration: 1.2, ease: "easeOut" }}
-                        className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-60"
+                        className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-60"
                     >
-                        <div className="relative w-[240px] h-[240px] md:w-[360px] md:h-[360px] mx-auto mb-12 md:mb-16">
-                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -15, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 20px 70px rgba(255,154,0,0.5)' }} />
-                            <div className="absolute -top-10 md:-top-16 left-1/2 w-20 h-32 md:w-32 md:h-48 bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12" />
+                        <div className="relative w-[220px] h-[220px] md:w-[320px] md:h-[320px] mx-auto mb-10 md:mb-14">
+                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -10, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 20px 60px rgba(255,154,0,0.4)' }} />
+                            <div className="absolute -top-8 md:-top-14 left-1/2 w-18 h-28 md:w-28 md:h-40 bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12" />
                         </div>
-                        <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-widest md:tracking-[0.15em] mb-8 md:mb-10 select-none drop-shadow-2xl">
+                        <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-[0.1em] mb-6 md:mb-8 select-none drop-shadow-2xl">
                             ALL<span className="text-brand-gold">RANGE</span>
                         </h1>
-                        <p className="text-brand-gold text-lg md:text-5xl tracking-[0.4em] md:tracking-[1em] font-light italic uppercase">
+                        <p className="text-brand-gold text-base md:text-5xl tracking-[0.4em] md:tracking-[0.8em] font-light italic uppercase">
                             Infinite Design
                         </p>
                     </motion.div>
                 )}
 
-                {/* PHASE 6: COSMIC COLLAPSE */}
+                {/* PHASE 6: COSMIC COLLAPSE - SEAMLESS RESET */}
                 {phase === 'collapse' && (
                     <motion.div
                         key="collapse"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
-                        className="absolute inset-0 z-[100] flex items-center justify-center bg-black/50"
+                        className="absolute inset-0 z-[100] flex items-center justify-center bg-black/40"
                     >
                         <motion.div
-                            initial={{ scale: 5, opacity: 0 }}
+                            initial={{ scale: 3, opacity: 0 }}
                             animate={{ scale: 0, opacity: 1 }}
-                            transition={{ duration: 1.2, ease: "anticipate" }}
-                            className="w-[800px] h-[800px] bg-white rounded-full blur-[80px]"
-                        />
+                            transition={{ duration: 1, ease: "anticipate" }}
+                            className="w-[400px] h-[400px] bg-white rounded-full blur-[60px] flex items-center justify-center"
+                        >
+                            <div className="w-2 h-2 bg-black rounded-full" />
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>
