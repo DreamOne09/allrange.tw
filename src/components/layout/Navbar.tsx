@@ -33,21 +33,21 @@ const Navbar = () => {
 
                     <div className="flex items-center gap-8">
                         {/* Desktop Direct Links */}
-                        <div className="hidden md:flex items-center gap-8">
-                            <Link href="/" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                Home
+                        <div className="hidden md:flex items-center gap-10">
+                            <Link href="/" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
+                                首頁
                             </Link>
-                            <Link href="/work" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                Work
+                            <Link href="/work" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
+                                精選作品
                             </Link>
-                            <Link href="/about" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                About
+                            <Link href="/about" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
+                                關於我們
                             </Link>
-                            <Link href="/services" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                Services
+                            <Link href="/services" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
+                                服務項目
                             </Link>
-                            <Link href="/contact" className="text-xs font-bold uppercase tracking-[0.2em] text-white hover:text-brand-gold transition-colors">
-                                Contact
+                            <Link href="/contact" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
+                                聯絡我們
                             </Link>
                         </div>
 

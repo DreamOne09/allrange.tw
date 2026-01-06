@@ -19,16 +19,16 @@ export default function HeroBigBang() {
             await new Promise(r => setTimeout(r, 600));
 
             setPhase('radiation');
-            await new Promise(r => setTimeout(r, 2000));
+            await new Promise(r => setTimeout(r, 1800));
 
             setPhase('merge');
-            await new Promise(r => setTimeout(r, 1200));
+            await new Promise(r => setTimeout(r, 1000));
 
             setPhase('splash');
-            await new Promise(r => setTimeout(r, 5000));
+            await new Promise(r => setTimeout(r, 5500));
 
             setPhase('collapse');
-            await new Promise(r => setTimeout(r, 1200));
+            await new Promise(r => setTimeout(r, 1000));
 
             setLoopCount(prev => prev + 1);
         };
@@ -40,36 +40,40 @@ export default function HeroBigBang() {
         '#ff9a00', '#ffb62e', '#ffd700', '#ff6b00', '#ff8c42',
     ];
 
-    const radiationRays = Array.from({ length: 12 }).map((_, i) => ({
+    // MOBILE OPTIMIZED COUNTS
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+    const radiationCount = isMobile ? 8 : 12;
+    const particleCount = isMobile ? 24 : 40;
+
+    const radiationRays = Array.from({ length: radiationCount }).map((_, i) => ({
         id: i,
-        angle: (i / 12) * 360,
+        angle: (i / radiationCount) * 360,
         delay: i * 0.05,
         color: colors[i % colors.length]
     }));
 
-    const explosionParticles = Array.from({ length: 40 }).map((_, i) => ({
+    const explosionParticles = Array.from({ length: particleCount }).map((_, i) => ({
         id: i,
-        angle: (i / 40) * 360,
-        distance: 140 + Math.random() * 220,
-        size: 6 + Math.random() * 10,
+        angle: (i / particleCount) * 360,
+        distance: 120 + Math.random() * 200,
+        size: 5 + Math.random() * 8,
         color: colors[Math.floor(Math.random() * colors.length)]
     }));
-
 
     return (
         <div className="relative w-full h-[100vh] bg-black overflow-hidden flex items-center justify-center">
 
-            {/* BACKGROUND: COSMIC VOID */}
-            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#1a1000_0%,_#000_80%)] opacity-30" />
+            {/* BACKGROUND: GPU ACCELERATED VOID */}
+            <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_center,_#120a00_0%,_#000_85%)] opacity-40" />
 
-            <AnimatePresence mode="wait">
+            <AnimatePresence mode="popLayout">
                 {/* PHASE 0: THE COSMIC SINGULARITY */}
                 {phase === 'cosmic' && (
                     <motion.div
                         key="cosmic"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.1, filter: 'blur(40px)', transition: { duration: 0.8 } }}
+                        exit={{ opacity: 0, scale: 0.2, filter: 'blur(30px)', transition: { duration: 0.8 } }}
                         className="absolute inset-0 flex items-center justify-center z-10"
                     >
                         {/* Singularity Core */}
@@ -77,30 +81,32 @@ export default function HeroBigBang() {
                             initial={{ scale: 0 }}
                             animate={{ scale: [0, 1.1, 1], opacity: [0, 1] }}
                             transition={{ duration: 2.5 }}
-                            className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_40px_white,0_0_100px_#ff9a00]"
+                            className="absolute w-2 h-2 bg-white rounded-full shadow-[0_0_30px_white,0_0_80px_#ff9a00]"
                         />
 
-                        {/* Nebula Whirl */}
+                        {/* Nebula Whirl - Simplified for GPU */}
                         <motion.div
                             animate={{ rotate: 360 }}
-                            transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
-                            className="absolute w-[400px] h-[400px] md:w-[700px] md:h-[700px] rounded-full opacity-25"
+                            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                            className="absolute w-[350px] h-[350px] md:w-[650px] md:h-[650px] rounded-full opacity-20"
                             style={{
-                                background: 'radial-gradient(circle, rgba(255,182,46,0.5) 0%, rgba(255,107,0,0.1) 50%, transparent 80%)',
-                                filter: 'blur(40px)',
+                                background: 'radial-gradient(circle, rgba(255,182,46,0.4) 0%, transparent 70%)',
+                                filter: 'blur(35px)',
+                                willChange: 'transform'
                             }}
                         />
 
-                        {/* Birth of Sun - MORPHABLE START */}
+                        {/* Birth of Sun */}
                         <motion.div
                             layoutId="orange-core"
                             initial={{ scale: 0, opacity: 0 }}
                             animate={{ scale: 1, opacity: 1 }}
                             transition={{ delay: 2.2, duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full"
+                            className="w-[240px] h-[240px] md:w-[400px] md:h-[400px] rounded-full"
                             style={{
                                 background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 20%, #ff9a00 50%, #cc7a00 85%, #8a5200 100%)',
-                                boxShadow: '0 0 50px rgba(255,154,0,0.3)'
+                                boxShadow: '0 0 40px rgba(255,154,0,0.2)',
+                                willChange: 'transform'
                             }}
                         />
                     </motion.div>
@@ -118,9 +124,10 @@ export default function HeroBigBang() {
                         <motion.div
                             layoutId="orange-core"
                             transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px]"
+                            className="relative w-[240px] h-[240px] md:w-[400px] md:h-[400px]"
+                            style={{ willChange: 'transform' }}
                         >
-                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 80px rgba(255,154,0,0.5)' }} />
+                            <div className="w-full h-full rounded-full" style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 20px 60px rgba(255,154,0,0.4)' }} />
                             <motion.div
                                 initial={{ y: -10, opacity: 0, scale: 0.8 }}
                                 animate={{ y: 0, opacity: 1, scale: 1 }}
@@ -140,7 +147,7 @@ export default function HeroBigBang() {
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 flex items-center justify-center z-30"
                     >
-                        <motion.div initial={{ scale: 0 }} animate={{ scale: 15, opacity: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="absolute w-[180px] h-[180px] rounded-full bg-white blur-sm" />
+                        <motion.div initial={{ scale: 0 }} animate={{ scale: 15, opacity: 0 }} transition={{ duration: 0.8, ease: "easeOut" }} className="absolute w-[150px] h-[150px] rounded-full bg-white blur-sm" />
                         {explosionParticles.map((p) => (
                             <motion.div
                                 key={p.id}
@@ -148,16 +155,9 @@ export default function HeroBigBang() {
                                 animate={{ x: Math.cos(p.angle * Math.PI / 180) * p.distance, y: Math.sin(p.angle * Math.PI / 180) * p.distance, scale: [0, 2.5, 0], opacity: [1, 1, 0] }}
                                 transition={{ duration: 0.9, ease: "easeOut" }}
                                 className="absolute rounded-full"
-                                style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 20px ${p.color}` }}
+                                style={{ width: p.size, height: p.size, background: p.color, boxShadow: `0 0 15px ${p.color}`, willChange: 'transform' }}
                             />
                         ))}
-                        {/* THE CORE STAYS DURING EXPLOSION */}
-                        <motion.div
-                            layoutId="orange-core"
-                            transition={{ duration: 0.4 }}
-                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full opacity-50 blur-md"
-                            style={{ background: '#ff9a00' }}
-                        />
                     </motion.div>
                 )}
 
@@ -174,26 +174,19 @@ export default function HeroBigBang() {
                             <motion.div
                                 key={ray.id}
                                 initial={{ scaleY: 0, opacity: 0 }}
-                                animate={{ scaleY: [0, 1.2, 1], opacity: [0, 0.8, 0] }}
+                                animate={{ scaleY: [0, 1.2, 1], opacity: [0, 0.7, 0] }}
                                 transition={{ duration: 1.5, delay: ray.delay, ease: "circOut" }}
                                 className="absolute origin-center"
-                                style={{ rotate: `${ray.angle}deg`, height: '100vh', width: '24px' }}
+                                style={{ rotate: `${ray.angle}deg`, height: '100vh', width: isMobile ? '16px' : '24px', willChange: 'transform' }}
                             >
-                                <div className="w-full h-full" style={{ background: `linear-gradient(to top, transparent, ${ray.color} 50%, transparent)`, filter: 'blur(8px)', opacity: 0.5 }} />
-                                <motion.div
-                                    animate={{ y: [-100, -600], opacity: [0, 1, 0] }}
-                                    transition={{ duration: 1.2, delay: ray.delay + 0.2 }}
-                                    className="absolute top-1/2 left-1/2 -translate-x-1/2 w-3 h-10 rounded-full"
-                                    style={{ background: ray.color, boxShadow: `0 0 20px ${ray.color}` }}
-                                />
+                                <div className="w-full h-full" style={{ background: `linear-gradient(to top, transparent, ${ray.color} 50%, transparent)`, filter: 'blur(6px)', opacity: 0.4 }} />
                             </motion.div>
                         ))}
-                        {/* MORPHING TRANSITION THROUGH RADIATION */}
                         <motion.div
                             layoutId="orange-core"
                             transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                            className="w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full blur-xl opacity-30"
-                            style={{ background: '#ff9a00' }}
+                            className="w-[240px] h-[240px] md:w-[400px] md:h-[400px] rounded-full blur-xl opacity-20"
+                            style={{ background: '#ff9a00', willChange: 'transform' }}
                         />
                     </motion.div>
                 )}
@@ -207,14 +200,11 @@ export default function HeroBigBang() {
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 flex items-center justify-center z-50"
                     >
-                        {colors.map((color, i) => (
-                            <motion.div key={i} initial={{ scale: 2.5, opacity: 0 }} animate={{ scale: 0.1, opacity: 1 }} transition={{ duration: 1.5, delay: i * 0.08 }} className="absolute w-[400px] h-[400px] rounded-full blur-[50px]" style={{ background: color, mixBlendMode: 'screen' }} />
-                        ))}
                         <motion.div
                             layoutId="orange-core"
-                            transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px] rounded-full"
-                            style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 100px rgba(255,154,0,0.5)' }}
+                            transition={{ duration: 1, ease: [0.4, 0, 0.2, 1] }}
+                            className="relative w-[240px] h-[240px] md:w-[400px] md:h-[400px] rounded-full"
+                            style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 20px 80px rgba(255,154,0,0.4)', willChange: 'transform' }}
                         />
                     </motion.div>
                 )}
@@ -225,25 +215,27 @@ export default function HeroBigBang() {
                         key="splash"
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.8 } }}
+                        exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.6 } }}
                         className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-60"
+                        style={{ willChange: 'opacity' }}
                     >
                         <motion.div
                             layoutId="orange-core"
                             transition={{ duration: 1.2, ease: [0.4, 0, 0.2, 1] }}
-                            className="relative w-[260px] h-[260px] md:w-[400px] md:h-[400px] mx-auto mb-10 md:mb-14"
+                            className="relative w-[200px] h-[200px] md:w-[320px] md:h-[320px] mx-auto mb-8 md:mb-14"
+                            style={{ willChange: 'transform' }}
                         >
-                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -10, 0], scale: [1, 1.02, 1] }} transition={{ duration: 7, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 30px 80px rgba(255,154,0,0.4)' }} />
+                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 15px 50px rgba(255,154,0,0.3)' }} />
                             <motion.div
                                 initial={{ opacity: 0 }} animate={{ opacity: 1 }}
                                 className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
                             />
                         </motion.div>
-                        <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 1 }}>
-                            <h1 className="text-5xl md:text-[10rem] font-black text-white tracking-[0.1em] mb-6 md:mb-8 select-none drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)]">
+                        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.4, duration: 0.8 }}>
+                            <h1 className="text-4xl md:text-[10rem] font-black text-white tracking-[0.1em] mb-4 md:mb-8 select-none drop-shadow-[0_15px_40px_rgba(0,0,0,0.4)] leading-tight">
                                 ALL<span className="text-brand-gold">RANGE</span>
                             </h1>
-                            <p className="text-brand-gold text-2xl md:text-5xl tracking-[0.2em] md:tracking-[0.4em] font-medium uppercase">
+                            <p className="text-brand-gold text-xl md:text-5xl tracking-[0.2em] md:tracking-[0.4em] font-medium uppercase">
                                 樂橙創作工作室
                             </p>
                         </motion.div>
@@ -259,10 +251,11 @@ export default function HeroBigBang() {
                         className="absolute inset-0 z-[100] flex items-center justify-center bg-black/40"
                     >
                         <motion.div
-                            initial={{ scale: 4, opacity: 0 }}
+                            initial={{ scale: 3, opacity: 0 }}
                             animate={{ scale: 0, opacity: 1 }}
-                            transition={{ duration: 1.2, ease: "anticipate" }}
-                            className="w-[500px] h-[500px] bg-white rounded-full blur-[80px] flex items-center justify-center"
+                            transition={{ duration: 1, ease: "anticipate" }}
+                            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-white rounded-full blur-[60px] flex items-center justify-center"
+                            style={{ willChange: 'transform' }}
                         >
                             <div className="relative w-4 h-4 bg-black rounded-full" />
                         </motion.div>
