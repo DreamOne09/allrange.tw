@@ -14,26 +14,26 @@ const WorkHero = () => {
             <div className="absolute inset-0 flex items-center justify-center perspective-[1500px] overflow-hidden">
                 <motion.div
                     initial={{
-                        rotateX: 45,
-                        rotateZ: -45,
-                        scale: 1.5,
+                        rotateX: 25,
+                        rotateZ: -15,
+                        scale: 1.2,
                         opacity: 0
                     }}
                     animate={{
-                        rotateX: 45,
-                        rotateZ: -45,
-                        scale: 1.2,
-                        opacity: 0.6,
-                        x: [0, -50, 0],
-                        y: [0, 50, 0]
+                        rotateX: 25,
+                        rotateZ: -15,
+                        scale: 1,
+                        opacity: 0.8,
+                        x: [0, -30, 0],
+                        y: [0, 30, 0]
                     }}
                     transition={{
                         opacity: { duration: 1.5 },
                         scale: { duration: 1.5, ease: "easeOut" },
-                        x: { duration: 20, repeat: Infinity, ease: "linear" },
-                        y: { duration: 20, repeat: Infinity, ease: "linear" }
+                        x: { duration: 25, repeat: Infinity, ease: "linear" },
+                        y: { duration: 25, repeat: Infinity, ease: "linear" }
                     }}
-                    className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-6 w-[200vw] h-[200vh] pointer-events-none"
+                    className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-[160vw] h-[160vh] pointer-events-none"
                     style={{ transformStyle: 'preserve-3d', willChange: 'transform' }}
                 >
                     {displayProjects.map((project, index) => (
@@ -49,9 +49,9 @@ const WorkHero = () => {
                                 src={project.image}
                                 alt={project.title}
                                 fill
-                                className="object-cover grayscale hover:grayscale-0 transition-all duration-500 opacity-80"
+                                className="object-cover transition-transform duration-700 hover:scale-105 opacity-90"
                             />
-                            {/* Subtle Overlay */}
+                            {/* Subtle Brand Tint */}
                             <div className="absolute inset-0 bg-brand-orange/5 mix-blend-overlay" />
                         </div>
                     ))}
