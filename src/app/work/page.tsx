@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { realProjects } from '@/data/real_projects';
@@ -9,6 +9,8 @@ import WorkHero from '@/components/sections/WorkHero';
 
 export default function WorkPage() {
     const [selectedCategory, setSelectedCategory] = useState<'all' | 'space' | 'exhibition' | 'graphic'>('all');
+    const [activeSection, setActiveSection] = useState('');
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     const categories = [
         { id: 'all', label: 'All / 全部' },
@@ -56,8 +58,8 @@ export default function WorkPage() {
                                 key={cat.id}
                                 onClick={() => setSelectedCategory(cat.id)}
                                 className={`px-6 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all duration-300 border ${selectedCategory === cat.id
-                                        ? 'bg-brand-orange border-brand-orange text-white shadow-[0_0_20px_rgba(255,102,0,0.3)]'
-                                        : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10'
+                                    ? 'bg-brand-orange border-brand-orange text-white shadow-[0_0_20px_rgba(255,102,0,0.3)]'
+                                    : 'bg-white/5 border-white/10 text-gray-400 hover:text-white hover:bg-white/10'
                                     }`}
                             >
                                 {cat.label}
