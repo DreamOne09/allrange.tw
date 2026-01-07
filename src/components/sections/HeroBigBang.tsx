@@ -227,10 +227,22 @@ export default function HeroBigBang() {
                             className={`relative w-[180px] h-[180px] md:w-[320px] md:h-[320px] mx-auto mb-8 md:mb-12`}
                             style={{ willChange: 'transform' }}
                         >
-                            <motion.div className="w-full h-full rounded-full" animate={{ y: [0, -8, 0] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }} style={{ background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)', boxShadow: '0 15px 50px rgba(255,154,0,0.3)' }} />
+                            {/* The glow effect - use transparent to orange instead of white to avoid hard lines */}
+                            <div className="absolute inset-[-40%] bg-[radial-gradient(circle_at_center,_rgba(255,154,0,0.3)_0%,_transparent_70%)] blur-3xl pointer-events-none" />
+
                             <motion.div
-                                initial={{ opacity: 0 }} animate={{ opacity: 1 }}
-                                className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12"
+                                className="w-full h-full rounded-full relative z-10"
+                                animate={{ y: [0, -8, 0] }}
+                                transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+                                style={{
+                                    background: 'radial-gradient(circle at 35% 35%, #fff 0%, #ffd700 15%, #ffb62e 35%, #ff9a00 60%, #cc7a00 85%, #8a5200 100%)',
+                                    boxShadow: '0 15px 50px rgba(255,154,0,0.3), inset 0 0 20px rgba(255,255,255,0.2)'
+                                }}
+                            />
+                            <motion.div
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="absolute -top-[12%] left-1/2 w-[25%] h-[40%] bg-gradient-to-br from-green-300 to-green-800 rounded-tr-[100%] rounded-bl-[100%] border-4 border-black/10 -translate-x-1/2 -rotate-12 z-20"
                             />
                         </motion.div>
                         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 1 }}>
