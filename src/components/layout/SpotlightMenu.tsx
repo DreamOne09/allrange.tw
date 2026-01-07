@@ -30,13 +30,6 @@ const menuItems = [
         image: heroSubset[0]?.image || '/allrange.tw/images/placeholders/exhibition_design_1.png'
     },
     {
-        id: 3,
-        label: '服務項目',
-        eng: 'Services',
-        href: '/services',
-        image: heroSubset[8]?.image || '/allrange.tw/images/placeholders/brand_identity_1.png'
-    },
-    {
         id: 4,
         label: '聯絡我們',
         eng: 'Contact',

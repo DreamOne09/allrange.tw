@@ -9,6 +9,7 @@ import WorkHero from '@/components/sections/WorkHero';
 
 export default function WorkPage() {
     const [activeSection, setActiveSection] = useState('');
+    const [isCollapsed, setIsCollapsed] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -39,41 +40,80 @@ export default function WorkPage() {
             {/* Project Index - Sticky Sidebar */}
             <motion.div
                 initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.3 }}
-                className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-50"
+                animate={{
+                    opacity: 1,
+                    x: 0,
+                    width: isCollapsed ? '48px' : '280px'
+                }}
+                transition={{ duration: 0.5, ease: [0.4, 0, 0.2, 1] }}
+                className="hidden lg:block fixed left-8 top-1/2 -translate-y-1/2 z-50 group"
             >
-                <div className="bg-black/80 backdrop-blur-sm border border-white/10 rounded-2xl p-4 max-w-[280px]">
-                    <h3 className="text-brand-gold text-xs font-bold uppercase tracking-widest mb-4 px-2">
-                        專案索引
-                    </h3>
-                    <nav className="space-y-2">
+                <div className={`bg-black/80 backdrop-blur-md border border-white/10 rounded-2xl transition-all duration-500 overflow-hidden ${isCollapsed ? 'p-2' : 'p-4'}`}>
+                    <div className="flex items-center justify-between mb-4 border-b border-white/5 pb-2">
+                        {!isCollapsed && (
+                            <motion.h3
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                className="text-brand-gold text-[10px] font-bold uppercase tracking-[0.2em] px-2"
+                            >
+                                INDEX / 索引
+                            </motion.h3>
+                        )}
+                        <button
+                            onClick={() => setIsCollapsed(!isCollapsed)}
+                            className="p-1.5 hover:bg-white/10 rounded-lg transition-colors text-brand-orange group/btn"
+                            title={isCollapsed ? "展開索引" : "收縮索引"}
+                        >
+                            <motion.div
+                                animate={{ rotate: isCollapsed ? 180 : 0 }}
+                            >
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <path d="m15 18-6-6 6-6" />
+                                </svg>
+                            </motion.div>
+                        </button>
+                    </div>
+
+                    <nav className={`space-y-1 transition-opacity duration-300 ${isCollapsed ? 'opacity-0 h-0 pointer-events-none' : 'opacity-100'}`}>
                         {realProjects.map((project, index) => (
                             <Link
                                 key={project.id}
                                 href={`#${project.id}`}
                                 className={`block px-3 py-2 rounded-lg transition-all duration-300 group ${activeSection === project.id
-                                    ? 'bg-brand-orange text-white'
+                                    ? 'bg-brand-orange text-white shadow-[0_0_15px_rgba(255,102,0,0.3)]'
                                     : 'text-gray-400 hover:text-white hover:bg-white/5'
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
-                                    <span className={`text-xs font-bold ${activeSection === project.id ? 'text-white' : 'text-brand-orange'
+                                    <span className={`text-[10px] font-bold font-mono ${activeSection === project.id ? 'text-white' : 'text-brand-orange'
                                         }`}>
                                         {String(index + 1).padStart(2, '0')}
                                     </span>
                                     <div className="flex-1 min-w-0">
-                                        <p className="text-xs font-medium truncate">
-                                            {project.title}
+                                        <p className="text-[11px] font-bold truncate tracking-tight">
+                                            {project.title.split('：')[0]}
                                         </p>
-                                        <p className="text-[10px] uppercase tracking-wider opacity-60">
-                                            {project.category}
+                                        <p className="text-[9px] uppercase tracking-[0.1em] opacity-40 font-mono">
+                                            {project.categoryLabel || project.category}
                                         </p>
                                     </div>
                                 </div>
                             </Link>
                         ))}
                     </nav>
+
+                    {isCollapsed && (
+                        <div className="flex flex-col items-center gap-2 py-4">
+                            {realProjects.map((project, index) => (
+                                <Link
+                                    key={`dot-${project.id}`}
+                                    href={`#${project.id}`}
+                                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${activeSection === project.id ? 'bg-brand-orange h-4' : 'bg-white/20 hover:bg-white/40'}`}
+                                    title={project.title}
+                                />
+                            ))}
+                        </div>
+                    )}
                 </div>
             </motion.div>
 

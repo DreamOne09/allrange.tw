@@ -43,9 +43,6 @@ const Navbar = () => {
                             <Link href="/about" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
                                 關於我們
                             </Link>
-                            <Link href="/services" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
-                                服務項目
-                            </Link>
                             <Link href="/contact" className="text-sm font-bold tracking-[0.15em] text-white hover:text-brand-gold transition-colors">
                                 聯絡我們
                             </Link>
